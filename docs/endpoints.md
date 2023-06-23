@@ -62,6 +62,11 @@
 
 * Endpoint path: /users
 * Endpoint method: GET
+<<<<<<< HEAD
+=======
+* Query parameters:
+  * «name»: «purpose»
+>>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -88,6 +93,11 @@
 
 * Endpoint path: /user/{id}
 * Endpoint method: GET
+<<<<<<< HEAD
+=======
+* Query parameters:
+  * «name»: «purpose»
+>>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -113,6 +123,11 @@
 
 * Endpoint path: /user/{id}
 * Endpoint method: DELETE
+<<<<<<< HEAD
+=======
+* Query parameters:
+  * «name»: «purpose»
+>>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -128,6 +143,7 @@
 
 * Response shape (JSON):
     ```json
+<<<<<<< HEAD
   {
     "message": "user deleted"
   }
@@ -164,6 +180,17 @@
 
 * Endpoint path: /user/{id}/watchlist
 * Endpoint method: GET
+=======
+  true
+    ```
+
+### 
+
+* Endpoint path: «path to use»
+* Endpoint method: «HTTP method»
+* Query parameters:
+  * «name»: «purpose»
+>>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -180,6 +207,7 @@
     ```json
     «JSON-looking thing that has the
     keys and types in it»
+<<<<<<< HEAD
     ```
 
 ### Create User Watchlist
@@ -473,4 +501,6 @@
     {
       "message": "list deleted",
     }
+=======
+>>>>>>> ad974b7 (create endpoints)
     ```
