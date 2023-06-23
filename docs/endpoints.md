@@ -93,11 +93,6 @@
 
 * Endpoint path: /user/{id}
 * Endpoint method: GET
-<<<<<<< HEAD
-=======
-* Query parameters:
-  * «name»: «purpose»
->>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -123,11 +118,6 @@
 
 * Endpoint path: /user/{id}
 * Endpoint method: DELETE
-<<<<<<< HEAD
-=======
-* Query parameters:
-  * «name»: «purpose»
->>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -143,94 +133,7 @@
 
 * Response shape (JSON):
     ```json
-<<<<<<< HEAD
-  {
-    "message": "user deleted"
-  }
-    ```
-
-### Create User
-
-* Endpoint path: /user
-* Endpoint method: POST
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request shape (JSON):
-    ```json
-  {
-    "username": username,
-    "email": email,
-    "password": password,
-    "password_confirm": password
-  }
-    ```
-
-* Response: «Human-readable description
-            of response»
-* Response shape (JSON):
-    ```json
-  {
-    "message": "user created!"
-  }
-    ```
-
-### User Watchlist
-
-* Endpoint path: /user/{id}/watchlist
-* Endpoint method: GET
-=======
   true
-    ```
-
-### 
-
-* Endpoint path: «path to use»
-* Endpoint method: «HTTP method»
-* Query parameters:
-  * «name»: «purpose»
->>>>>>> ad974b7 (create endpoints)
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request shape (JSON):
-    ```json
-    «JSON-looking thing that has the
-    keys and types in it»
-    ```
-
-* Response: «Human-readable description
-            of response»
-* Response shape (JSON):
-    ```json
-    «JSON-looking thing that has the
-    keys and types in it»
-<<<<<<< HEAD
-    ```
-
-### Create User Watchlist
-
-* Endpoint path: /user/{id}/watchlist
-* Endpoint method: POST
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request shape (JSON):
-    ```json
-    «JSON-looking thing that has the
-    keys and types in it»
-    ```
-
-* Response: «Human-readable description
-            of response»
-* Response shape (JSON):
-    ```json
-    {
-      "message": "watchlist created!",
-    }
     ```
 
 
@@ -501,6 +404,4 @@
     {
       "message": "list deleted",
     }
-=======
->>>>>>> ad974b7 (create endpoints)
     ```
