@@ -6,6 +6,9 @@ Got situated and acquainted with Angelica, Rey, and Dan. We decided on a team na
 ### Day 2:
 Rey worked on completing wireframes for the rest of our future pages. We continued planning how our app will be structured, as well as discussed the lecture from earlier in the day. I did a lot of research on whether to choose PostreSQL or MongoDB. I have some experience with mongo, but my experience was with in relation to JavaScript, so that experience isn't really applicable. It mostly came down to choosing whether we do the one that will be easier or the one that will be more marketable in the job hunt.
 
+### Day 3:
+Rey has completed the wireframes, and we weren't given a ton of time to work on anything else project-related today, so we spent time studying our exploration in Learn today.
+
 
 
 Reelistr CORE functionality:
