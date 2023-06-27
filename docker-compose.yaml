@@ -1,7 +1,22 @@
-# volumes:
+volumes:
+  postgres-data:
+    external: true
+  pg-admin:
+    external: true
 services:
+  postgres:
+    image: postgres:14.5-bullseye
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+        POSTGRES_PASSWORD: secret
+        POSTGRES_USER: reelistr
+        POSTGRES_DB: reelistr_db
+    ports:
+        - 15432:5432
   fastapi:
     environment:
+      DATABASE_URL: postgresql://reelistr:secret@postgres/reelistr_db
       CORS_HOST: http://localhost:3000
     build:
       context: api
@@ -25,3 +40,14 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: reelistr@email.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_DISABLE_POSTFIX: 1
