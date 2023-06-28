@@ -1,7 +1,8 @@
 ## Journals
 
-Please keep all of your individual journals in this directory.
+6/27 -
 
-Each team member is required to keep a development journal, which should be a single markdown file with an entry for each day the project was worked on.
+We got postgresql working, we've been working on issues in gitlab. A good a-ha moment I had was when creating "user stories" and kind of understand how they really look and what their purpose is.
 
-Recommended naming convention is `first_last.md`.
+6/28 -
+
