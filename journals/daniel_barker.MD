@@ -6,3 +6,4 @@ We got postgresql working, we've been working on issues in gitlab. A good a-ha m
 
 6/28 -
 
+Working on authentication
