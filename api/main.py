@@ -33,3 +33,4 @@ def launch_details():
 
 
 app.include_router(authenticator.router)
+app.include_router(accounts.router)
