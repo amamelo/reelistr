@@ -7,7 +7,7 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-from routers import authenticator
+from routers.authenticator import authenticator
 
 from pydantic import BaseModel
 
@@ -19,6 +19,7 @@ from queries.accounts import (
 )
 
 class AccountForm(BaseModel):
+    # email: str
     username: str
     password: str
 
