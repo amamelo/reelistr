@@ -19,7 +19,7 @@ class MyAuthenticator(Authenticator):
         accounts: AccountRepo = Depends(),
     ):
         # Return the accounts. That's it.
-        return accounts
+        return users
 
     def get_hashed_password(self, account: AccountOutWithPassword):
         # Return the encrypted password value from your
