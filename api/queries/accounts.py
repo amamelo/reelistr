@@ -78,6 +78,11 @@ class AccountRepo(BaseModel):
                     """
                     SELECT id, email, username FROM accounts
                     """
+                    # [
+                    # account.email,
+                    # account.username,
+                    # hashed_password
+                    # ]
                 )
                 accts = []
                 for acct in result:
