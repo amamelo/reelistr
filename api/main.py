@@ -1,8 +1,7 @@
+import os
 from fastapi import FastAPI,APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from routers import accounts
-from routers import authenticator
-import os
+
 
 app = FastAPI()
 
@@ -29,5 +28,3 @@ def launch_details():
             "min": "00"
         }
     }
-
-app.include_router(authenticator.router)
