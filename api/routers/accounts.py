@@ -65,7 +65,7 @@ async def get_token(
             "account": account,
         }
 
-@router.get("/api/account/{username}", response_model=AccountOut)
+@router.get("/api/accounts/{username}", response_model=AccountOut)
 async def get_account(
     username: str,
     repo: AccountRepo = Depends(),
@@ -81,6 +81,24 @@ async def get_all_accounts(
 ):
     return repo.get_all_accounts()
 
+@router.put("/api/accounts/{username}", response_model=AccountOut)
+async def update_account(
+    username: str,
+    account: AccountIn,
+    repo: AccountRepo = Depends(),
+    # account_data: dict = Depends(authenticator.try_get_current_account_data)
+):
+
+    hashed_password = authenticator.hash_password(account.password)
+    form = AccountForm(email=account.email, username=account.username, password=account.password)
+    return repo.update(username, account, hashed_password)
+
+@router.delete('/api/accounts/{username}', response_model=bool)
+def delete_account(
+    username: str,
+    repo: AccountRepo = Depends(),
+) -> bool:
+    return repo.delete(username)
 
 
 # @router.get("/api/accounts", response_model=AccountOutWithPassword | None)
