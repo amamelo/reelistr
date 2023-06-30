@@ -26,7 +26,7 @@ class SessionOut(BaseModel):
 class UserIn(BaseModel):
     email: str
     password: str
-    full_name: str
+    username: str
 
 
 class User(UserIn):
@@ -37,5 +37,5 @@ class User(UserIn):
 class UserOut(BaseModel):
     id: str
     email: str
-    full_name: str
+    username: str
     roles: List[str]
