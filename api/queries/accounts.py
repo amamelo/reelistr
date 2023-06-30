@@ -20,6 +20,8 @@ class AccountOut(BaseModel):
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
+class AccountRepo(BaseModel):
+    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
 
 class AccountRepo(BaseModel):
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
