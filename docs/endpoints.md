@@ -62,11 +62,6 @@
 
 * Endpoint path: /users
 * Endpoint method: GET
-<<<<<<< HEAD
-=======
-* Query parameters:
-  * «name»: «purpose»
->>>>>>> ad974b7 (create endpoints)
 
 * Headers:
   * Authorization: Bearer token
@@ -133,7 +128,81 @@
 
 * Response shape (JSON):
     ```json
-  true
+  {
+    "message": "user deleted"
+  }
+    ```
+
+### Create User
+
+* Endpoint path: /user
+* Endpoint method: POST
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+    ```json
+  {
+    "username": username,
+    "email": email,
+    "password": password,
+    "password_confirm": password
+  }
+    ```
+
+* Response: «Human-readable description
+            of response»
+* Response shape (JSON):
+    ```json
+  {
+    "message": "user created!"
+  }
+    ```
+
+### User Watchlist
+
+* Endpoint path: /user/{id}/watchlist
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+    ```json
+    «JSON-looking thing that has the
+    keys and types in it»
+    ```
+
+* Response: «Human-readable description
+            of response»
+* Response shape (JSON):
+    ```json
+    «JSON-looking thing that has the
+    keys and types in it»
+    ```
+
+### Create User Watchlist
+
+* Endpoint path: /user/{id}/watchlist
+* Endpoint method: POST
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+    ```json
+    «JSON-looking thing that has the
+    keys and types in it»
+    ```
+
+* Response: «Human-readable description
+            of response»
+* Response shape (JSON):
+    ```json
+    {
+      "message": "watchlist created!",
+    }
     ```
 
 

@@ -23,9 +23,6 @@ class AccountOutWithPassword(AccountOut):
 
 class AccountRepo(BaseModel):
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
-
-class AccountRepo(BaseModel):
-    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -81,11 +78,6 @@ class AccountRepo(BaseModel):
                     """
                     SELECT id, email, username FROM accounts
                     """
-                    # [
-                    # account.email,
-                    # account.username,
-                    # hashed_password
-                    # ]
                 )
                 accts = []
                 for acct in result:
