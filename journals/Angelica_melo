@@ -1,5 +1,24 @@
 
-Tuesday, June 27
+Friday, June 27
+
+Today we completed authentication! We gained a better understanding of the jwtdown fastapi code. Came across a couple of errors and decided to start keeping a journal of errors for future reference. Accomplished our goal of completing Authentication by today.
+It felt like a slow start at the beginning of all this, but today it felt like things were moving along at a better pace, particularly in terms of how we work together. 
+We've established to not put pressure on each other about working over the break, but we are free to do research and share anything with the group on Slack. 
+ 
+
+Thursday, June 27
+
+Continued with authentication. Came across errors that really slowed us down. These errors have been helpful, however, in allowing us to get a better understanding of how things worked. We worked until we were able to fix the errors.
+
+
+
+Wednesday, June 29th
+Accomplishments:
+Log in/log out authentication
+Goals:
+Have authentication ready by Friday.
+
+Tuesday, June 28
 Today I designed a logo for our Reelistr app. Additionally, we set up the postgresql database and connected to pgAdmin. We were having some issues so we all attempted run the containers on our individual branches to make sure everything was working for everyone. 
 We set up goals for what is next. 
 

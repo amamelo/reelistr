@@ -65,3 +65,12 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+@router.get ("/accounts/{username")
+def get_user (email: str, repo: UserRepo = Depends (), account_data: dict = Depends (authenticator.try_get_current_account_data)) -> UserOut:
+    return repo.get_user (email)
+
+
+@router.get ("/accounts")
+def get_accounts(repo: UserRepo = Depends ()) :
+    return repo.get_all()

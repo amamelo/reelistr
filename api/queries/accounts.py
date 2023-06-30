@@ -12,12 +12,12 @@ class UserIn(BaseModel):
     username: str
     password: str
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: int
     email: str
     username: str
 
-class AccountOutWithPassword(UserOut):
+class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 class UserRepo(BaseModel):
