@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 from pydantic import BaseModel
 from psycopg_pool import ConnectionPool
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
@@ -6,27 +7,26 @@ pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 class DuplicateAccountError(BaseException):
     pass
 
-
-class UserIn(BaseModel):
+class AccountIn(BaseModel):
     email: str
     username: str
     password: str
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: int
     email: str
     username: str
 
-class AccountOutWithPassword(UserOut):
+class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
-class UserRepo(BaseModel):
-    def create(self, account: UserIn, hashed_password: str) -> AccountOutWithPassword:
+class AccountRepo(BaseModel):
+    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    INSERT INTO users
+                    INSERT INTO accounts
                         (
                             email,
                             username,
@@ -43,7 +43,7 @@ class UserRepo(BaseModel):
                     ]
                 )
                 acct = result.fetchone()
-                print(acct)
+                # print(acct)
                 account = AccountOutWithPassword(
                     id=acct[0],
                     email=acct[1],
@@ -53,23 +53,45 @@ class UserRepo(BaseModel):
                 return account
 
 
-    def get_user(self, username) -> AccountOutWithPassword | None:
+    def get_account(self, username: str) -> Optional[AccountOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 result = cur.execute(
                     """
-                    SELECT * FROM users
-                    """
-                    # [
-                    # account.email,
-                    # account.username,
-                    # hashed_password
-                    # ]
+                    SELECT id, email, username FROM accounts
+                    WHERE username=%s
+                    """,
+                    [username]
                 )
+                print(result)
                 acct = result.fetchone()
                 print(acct)
-                account = AccountOutWithPassword(id=acct[0], email=acct[1], username=acct[2], hashed_password=acct[3])
+                account = AccountOut(
+                    id=acct[0],
+                    email=acct[1],
+                    username=acct[2]
+                )
                 return account
+
+    def get_all_accounts(self) -> AccountOut:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                result = cur.execute(
+                    """
+                    SELECT id, email, username FROM accounts
+                    """
+                )
+                accts = []
+                for acct in result:
+                    account = AccountOut(
+                        id=acct[0],
+                        email=acct[1],
+                        username=acct[2],
+                    )
+                    accts.append(account)
+                return accts
+
+
 
 
 
