@@ -1,12 +1,10 @@
 ## Journals
 
-6/27 -
+Please keep all of your individual journals in this directory.
 
-We got postgresql working, we've been working on issues in gitlab. A good a-ha moment I had was when creating "user stories" and kind of understand how they really look and what their purpose is.
+Each team member is required to keep a development journal, which should be a single markdown file with an entry for each day the project was worked on.
 
-6/28 -
-
-Working on authentication
+Recommended naming convention is `first_last.md`.
 
 
 REELISTr
@@ -89,3 +87,12 @@ we would then take the search and put the results in cards. Each card will be cl
 
 
 And we would code the movie cards to be clickable. On click,
+## Journals
+
+6/27 -
+
+We got postgresql working, we've been working on issues in gitlab. A good a-ha moment I had was when creating "user stories" and kind of understand how they really look and what their purpose is.
+
+6/28 -
+
+Working on authentication
