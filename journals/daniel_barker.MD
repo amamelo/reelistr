@@ -87,3 +87,19 @@ we would then take the search and put the results in cards. Each card will be cl
 
 
 And we would code the movie cards to be clickable. On click,
+## Journals
+
+6/27 -
+
+We got postgresql working, we've been working on issues in gitlab. A good a-ha moment I had was when creating "user stories" and kind of understand how they really look and what their purpose is.
+
+6/28 -
+
+Working on authentication
+
+
+
+7/8
+
+Created two fastapi routes that get movie details, one from omdb and one from tmdb
+Built a simple react app that will retrive a movie poster and plot

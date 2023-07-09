@@ -101,7 +101,7 @@ class AccountRepo(BaseModel):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         UPDATE accounts
                         SET email= %s,
@@ -110,10 +110,9 @@ class AccountRepo(BaseModel):
                         WHERE username = %s
                         RETURNING id, email, username, hashed_password;
                         """,
-                        [account.email, account.username, hashed_password, account.username]
+                        [account.email, account.username, hashed_password, username]
                     )
-                    print("result:", result)
-                    acct = result.fetchone()
+                    acct = cur.fetchone()
                     print(acct)
                     account = AccountOut(
                         id=acct[0],
