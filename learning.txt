@@ -1,0 +1,16 @@
+error when updating: missing positional argument "hashed_password"
+resolved by: adding hashed_password to router line:
+return repo.update(username, account, hashed_password)
+
+when updating: 3 validation errors for accountOut:
+id, email, username
+error:value_error:missing
+added returning statement inside string thing
+there is no method update() - changed to fetchone()
+
+ERROR:
+2023-07-07 19:39:35   File "/app/./routers/authenticator.py", line 27, in get_hashed_password
+2023-07-07 19:39:35     return account.hashed_password
+2023-07-07 19:39:35 AttributeError: 'AccountOut' object has no attribute 'hashed_password'
+
+fix was to add hashed_password to SELECT and also to the account variable, also change the account variable to equal AccountOutWithPassword from AccountOut

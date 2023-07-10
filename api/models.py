@@ -23,18 +23,18 @@ class SessionOut(BaseModel):
     account_id: str
 
 
-class UserIn(BaseModel):
+class AccountIn(BaseModel):
     email: str
     password: str
     username: str
 
 
-class User(UserIn):
+class Account(AccountIn):
     # id: PydanticObjectId
     roles: List[str]
 
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: str
     email: str
     username: str
