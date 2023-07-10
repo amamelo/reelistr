@@ -22,8 +22,10 @@ def get_from_omdb(movie_name: str) -> dict:
     omdb_api_key = "3b11de2"
     omdb_url = f"http://www.omdbapi.com/?apikey={omdb_api_key}&t={movie_name}"
     response = requests.get(omdb_url)
+    print(response)
     if response.status_code == 200:
         movie_details = response.json()
+        print(movie_details)
         if movie_details.get("Response") == "True":
             return movie_details
     return None

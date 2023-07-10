@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Movie = () => {
-  const [title, setTitle] = useState('');
-  const [poster, setPoster] = useState('');
-  const [plot, setPlot] = useState('');
+  const [title, setTitle] = useState("");
+  const [poster, setPoster] = useState("");
+  const [plot, setPlot] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,24 +13,25 @@ const Movie = () => {
         setPoster(response.Poster);
         setPlot(response.Plot);
       } else {
-        setPoster('');
-        setPlot('');
+        setPoster("");
+        setPlot("");
       }
     } catch (error) {
-      console.error('Error fetching movie details:', error);
-      setPoster('');
-      setPlot('');
+      console.error("Error fetching movie details:", error);
+      setPoster("");
+      setPlot("");
     }
   };
 
   const fetchMovieDetails = async (title) => {
-    const response = await fetch(`http://localhost:8000/movies/omdb/${encodeURIComponent(title)}`);
+    const response = await fetch(
+      `http://localhost:8000/movies/omdb/${encodeURIComponent(title)}`
+    );
     if (response.ok) {
       const data = await response.json();
       return data;
-
     }
-    throw new Error('Failed to fetch movie details');
+    throw new Error("Failed to fetch movie details");
   };
 
   return (
