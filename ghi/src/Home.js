@@ -1,4 +1,4 @@
-import Movie from "./components/OMDBMovieSearch";
+import Movie from "./components/MovieSearch";
 export default function Home() {
   return (
     <div>
