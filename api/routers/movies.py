@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 import requests
+import os
+
+API_KEY = os.environ['FAST_API_TMDB_API_KEY']
 
 router=APIRouter()
 
@@ -10,14 +13,13 @@ class MovieOut(BaseModel):
     overview: str
     poster_path: str
     release_date: str
-    poster_path: str
+    poster_path: Optional[str]
 
 
 @router.get("/movies/{movie_name}", response_model=List[MovieOut])
 def get_from_tmdb(movie_name: str) -> List[MovieOut]:
-    tmdb_api_key = "c44a2f159bdbba605eacc243b547c826"
     encoded_movie_name = requests.utils.quote(movie_name)
-    tmdb_url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={encoded_movie_name}"
+    tmdb_url = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={encoded_movie_name}"
 
     response = requests.get(tmdb_url)
     if response.status_code == 200:

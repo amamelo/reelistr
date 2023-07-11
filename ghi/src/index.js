@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import Movie from "./components/MovieSearch";
 import reportWebVitals from "./reportWebVitals";
+import './css/styles.css'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
