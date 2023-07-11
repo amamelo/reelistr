@@ -13,8 +13,8 @@ const Movie = () => {
       const response = await fetchMovieDetails(title);
       console.log(response);
       // debugger //response.results for TMDB
-      if (response.results) {
-        setMovieData(response.results);
+      if (response) {
+        setMovieData(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
@@ -47,12 +47,12 @@ const Movie = () => {
       </form>
       {movieData.map(movie => {
         return (
-          <div className="shadow-lg card bg-light mb-3">
+          <div key={movie.poster_path} className="shadow-lg card bg-light mb-3">
             <h1 className="card-header">{movie.title}</h1>
-            <p className="card-body">
+            <div className="card-body">
             {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
             {movie.overview && <p>{movie.overview}</p>}
-            </p>
+            </div>
           </div>
       );
       }) }
