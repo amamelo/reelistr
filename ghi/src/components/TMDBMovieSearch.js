@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'dotenv'
 
 const Movie = () => {
     const [movieData, setMovieData] = useState([])

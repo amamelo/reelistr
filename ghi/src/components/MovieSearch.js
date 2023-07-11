@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const Movie = () => {
   const [title, setTitle] = useState("");
   const [poster, setPoster] = useState("");
@@ -11,7 +12,7 @@ const Movie = () => {
     try {
       const response = await fetchMovieDetails(title);
       console.log(response);
-      debugger //response.results for TMDB
+      // debugger //response.results for TMDB
       if (response.results) {
         setMovieData(response.results);
       }
@@ -23,7 +24,7 @@ const Movie = () => {
   };
 
   const fetchMovieDetails = async (title) => {
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=c44a2f159bdbba605eacc243b547c826&query=${encodeURIComponent(title)}`);
+    const response = await fetch(`http://localhost:8000/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -46,10 +47,12 @@ const Movie = () => {
       </form>
       {movieData.map(movie => {
         return (
-          <div>
-            <h1>{movie.title}</h1>
+          <div className="shadow-lg card bg-light mb-3">
+            <h1 className="card-header">{movie.title}</h1>
+            <p className="card-body">
             {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
             {movie.overview && <p>{movie.overview}</p>}
+            </p>
           </div>
       );
       }) }
@@ -59,3 +62,10 @@ const Movie = () => {
 };
 
 export default Movie;
+
+          // <div className="shadow-lg card bg-light mb-3">
+          //   <h1 className="card-header">{movie.title}</h1>
+          //   <p className="card-body">
+          //   {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
+          //   {movie.overview && <p>{movie.overview}</p>}
+          //   </p>
