@@ -116,7 +116,7 @@ def get_upcoming() -> List[MovieSearchOut]:
 
 
 # GET watch providers (Netflix, Amazon Prime, Disney+)
-@router.get("/movies/{movie_id}/watch_providers", response_model=dict)
+@router.get("/movies/{movie_id}/watch_providers", response_model=dict | list)
 def get_movie_watch_providers(movie_id: int):
     tmdb_url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key={API_KEY}"
     # define response
@@ -124,7 +124,7 @@ def get_movie_watch_providers(movie_id: int):
     if response.status_code == 200:
         data = response.json()
         if data['results']:
-            movie_details = data['results']
+            movie_details = data['results']['US']['flatrate']
             print(movie_details)
             return movie_details
 
