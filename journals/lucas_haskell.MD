@@ -29,17 +29,32 @@ one person doesn't have any steps, so they would not be joined, and that is desi
 therefore, use an inner join
 if you wanted to include that person anyway, it would be an outer join
 
+
+
+as a user i want to creat a collection of movies
+create a collection of best movies
+select movies to add to collection
+when that movie is selected it is stored in our database (and in my best movies)
+and that movie data will be stored in our database
+
+
+## MVP:
+
+
+
+
+
 Reelistr CORE functionality:
 [ ] Member Profile
-[ ] Log in/ log out
-[ ] authentication
-[ ] Edit account
+[ / ] Log in/ log out
+[ / ] authentication
+[ / ] Edit account
     [ ] change password
     [ ] change email
-[ ] Create lists
+[ ] Create collection
     [ ] search bar/dropdown to select movie that is to be added to list
     [ ] ratings (stars, tomatoes, something different??)
-    [ ] tags
+    <!-- [ ] tags -->
 [ ] View ‘my’ lists
 [ ] Edit lists
 [ ] Delete lists
