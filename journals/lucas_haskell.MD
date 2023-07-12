@@ -16,9 +16,18 @@ Rey has completed the wireframes, and we weren't given a ton of time to work on 
 (7/11/23) Today we spent quite a long time in lecture before splitting into our project group, so our progress was limited. We had to ask Midge for help in the architecture of our tables. We concluded that we will need to perform some JOIN operations with our tables so that the tables can interact (?). I'm still fuzzy on that part, but the part that is clear is that those operations will take place in back-end python code. We have set a goal of the end of the week to have our back end complete. This seems extremely ambitious to me, but I will help in whatever way I can.
 
 ### Day 12:
-(7/12/23) 
+(7/12/23)
 
+## NOTES:
+-----------------
+### outer join:
 
+### inner join:
+when you want portions of both tables where they both have values.
+in the learn example, the average steps tables.
+one person doesn't have any steps, so they would not be joined, and that is desirable
+therefore, use an inner join
+if you wanted to include that person anyway, it would be an outer join
 
 Reelistr CORE functionality:
 [ ] Member Profile
