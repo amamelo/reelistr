@@ -61,8 +61,8 @@ const Movie = () => {
                     <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
                     <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
                     <Card.Body>
-                      <Card.Text style={{ fontSize: '16px'}}>{movie.overview}</Card.Text>
-                      <Button variant='primary' href={'http://localhost:8000/movies/details/' + movie.id}>Go To Movie</Button>
+                      <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
+                      <Button variant='primary' href='#'>Go To Movie</Button>
                     </Card.Body>
                   </Card>
                 </Col>

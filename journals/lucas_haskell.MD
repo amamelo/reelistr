@@ -41,6 +41,7 @@ and that movie data will be stored in our database
 ## MVP:
 
 
+>>>>>>>>> Temporary merge branch 2
 
 
 
@@ -170,5 +171,3 @@ General Stretch Goals:
 [ ] Discussion Forum
 [ ] Recommendations for what to watch next (on homepage)
 [ ]
-
-
