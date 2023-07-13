@@ -16,18 +16,18 @@ const MovieCards = ({ movies }) => {
         <div className='movies'>
             {currentMovies.map((movie) => (
                 <div
-                key={movie.id}
+                key={movie.poster_path}
                 className='container'
                 style={{ maxWidth: "70%", maxHeight: "", marginTop: "20px" }}
                 >
-                    <div className='shadow-lg animal-card card text-center'>
+                    <div className='shadow-lg movie-card card text-center'>
                         <img
                         className='card-img-top w-100 d-block moviecardimg'
                         src={movie.poster_path}
                         alt="movie poster"
                         ></img>
                         <div className='card-body'>
-                            <h4 className='card-title'>{movie.original_title}</h4>
+                            <h4 className='card-title'>{movie.title}</h4>
                             <Link className='btn btn-primary' to={`/`}>
                                 Details
                             </Link>
