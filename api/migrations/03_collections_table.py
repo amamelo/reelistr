@@ -13,6 +13,11 @@
 #         """
 #         DROP TABLE collections;
 #         """
+        # CREATE TABLE movies (
+        #     movie_id INTEGER PRIMARY KEY NOT NULL,
+        #     movie_title VARCHAR(500) UNIQUE NOT NULL
+        #     poster_path VARCHAR(500)
+        # );
 #     ]
 # ]
 
@@ -27,13 +32,12 @@ steps = [
         );
 
         CREATE TABLE movies (
-            movie_id INTEGER PRIMARY KEY NOT NULL,
-            movie_title VARCHAR(500) UNIQUE NOT NULL
+            movie_id INTEGER PRIMARY KEY NOT NULL
         );
 
         CREATE TABLE movies_in_collections (
             id SERIAL PRIMARY KEY NOT NULL,
-            username VARCHAR(50) UNIQUE NOT NULL REFERENCES accounts(username),
+            username VARCHAR(50) NOT NULL REFERENCES accounts(username),
             collection_id INTEGER REFERENCES movie_collection(id),
             movie_id INTEGER UNIQUE NOT NULL REFERENCES movies(movie_id)
         );
