@@ -9,19 +9,52 @@ Rey worked on completing wireframes for the rest of our future pages. We continu
 ### Day 3:
 Rey has completed the wireframes, and we weren't given a ton of time to work on anything else project-related today, so we spent time studying our exploration in Learn today.
 
+### Day 10:
+(7/10/23) Resuming from summer break. Before break, we'd sorted out most of our auth on the back end and had tested most endpoints in the fastapi terminal. However, some time during merging with the main branch, I undid a lot of our work, rendering most of our back end auth useless. On the Friday before returning to class, Dan and I got together to resolve the issues. So today we started fresh with functional auth. We continued on brainstorming our next steps and creating tables for other features, like reviews, collections, and watchlist.
+
+### Day 11:
+(7/11/23) Today we spent quite a long time in lecture before splitting into our project group, so our progress was limited. We had to ask Midge for help in the architecture of our tables. We concluded that we will need to perform some JOIN operations with our tables so that the tables can interact (?). I'm still fuzzy on that part, but the part that is clear is that those operations will take place in back-end python code. We have set a goal of the end of the week to have our back end complete. This seems extremely ambitious to me, but I will help in whatever way I can.
+
+### Day 12:
+(7/12/23)
+
+## NOTES:
+-----------------
+### outer join:
+
+### inner join:
+when you want portions of both tables where they both have values.
+in the learn example, the average steps tables.
+one person doesn't have any steps, so they would not be joined, and that is desirable
+therefore, use an inner join
+if you wanted to include that person anyway, it would be an outer join
+
+
+
+as a user i want to creat a collection of movies
+create a collection of best movies
+select movies to add to collection
+when that movie is selected it is stored in our database (and in my best movies)
+and that movie data will be stored in our database
+
+
+## MVP:
+
+
+
 
 
 Reelistr CORE functionality:
 [ ] Member Profile
-[ ] Log in/ log out
-[ ] authentication
-[ ] Edit account
+[ / ] Log in/ log out
+[ / ] authentication
+[ / ] Edit account
     [ ] change password
     [ ] change email
-[ ] Create lists
+[ ] Create collection
     [ ] search bar/dropdown to select movie that is to be added to list
     [ ] ratings (stars, tomatoes, something different??)
-    [ ] tags
+    <!-- [ ] tags -->
 [ ] View ‘my’ lists
 [ ] Edit lists
 [ ] Delete lists

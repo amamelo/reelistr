@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+
 const Movie = () => {
   const [title, setTitle] = useState("");
-  const [poster, setPoster] = useState("");
-  const [plot, setPlot] = useState("");
+  // const [poster, setPoster] = useState("");
+  // const [plot, setPlot] = useState("");
   const [movieData, setMovieData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetchMovieDetails(title);
-      console.log(response);
-      debugger //response.results for TMDB
-      if (response.results) {
-        setMovieData(response.results);
+      // debugger //response.results for TMDB
+      if (response) {
+        setMovieData(response);
+        console.log(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
-      setPoster("");
-      setPlot("");
+      // setPoster("");
+      // setPlot("");
     }
   };
 
   const fetchMovieDetails = async (title) => {
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=c44a2f159bdbba605eacc243b547c826&query=${encodeURIComponent(title)}`);
+    const response = await fetch(`http://localhost:8000/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -31,6 +37,7 @@ const Movie = () => {
     }
     throw new Error("Failed to fetch movie details");
   };
+
 
   return (
     <div>
@@ -44,18 +51,37 @@ const Movie = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {movieData.map(movie => {
-        return (
-          <div>
-            <h1>{movie.title}</h1>
-            {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
-            {movie.overview && <p>{movie.overview}</p>}
-          </div>
-      );
-      }) }
+      <div>
+        <Container className="p-4" fluid>
+          <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
+            {movieData.map(movie => {
+              return (
+                <Col xs='4'>
+                  <Card key={movie.poster_path} style={{ width: '18rem' }} className="flex-fill">
+                    <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
+                    <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
+                    <Card.Body>
+                      <Card.Text style={{ fontSize: '16px'}}>{movie.overview}</Card.Text>
+                      <Button variant='primary' href={'http://localhost:8000/movies/details/' + movie.id}>Go To Movie</Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+              );
+            })}
+          </Row>
+        </Container>
+      </div>
 
     </div>
   );
 };
 
 export default Movie;
+
+          // <div className="shadow-lg card bg-light mb-3">
+          //   <h1 className="card-header">{movie.title}</h1>
+          //   <p className="card-body">
+          //   {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
+          //   {movie.overview && <p>{movie.overview}</p>}
+          //   </p>

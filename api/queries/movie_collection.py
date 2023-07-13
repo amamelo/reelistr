@@ -7,107 +7,108 @@ class Error(BaseModel):
     message:str
 
 class CollectionIn(BaseModel):
+    username: str
     collection_name: str
 
 class CollectionOut(BaseModel):
-    collection_id: int
+    id: int
     username: str
     collection_name: str
-    
 
 class CollectionRespository:
-    def create(self, collection: CollectionIn, username:str) -> CollectionOut:
+    def create(self, collection: CollectionIn) -> CollectionOut:
         with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         INSERT INTO movie_collection
-                        (username,collection_name)
+                        (username,
+                        collection_name)
                         VALUES
                         (%s,%s)
                         RETURNING id, username, collection_name
                         """,
                         [
-                        username,
-                        collection.collection_name,
+                        collection.username,
+                        collection.collection_name
                         ]
                     )
                     coll = result.fetchone()
                     collection = CollectionOut(
-                        collection_id = coll[0],
+                        id = coll[0],
                         username = coll[1],
                         collection_name = coll[2]
                     )
                     return collection
-    
+
     def update(self, collection_id:int, collection: CollectionIn) -> CollectionOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        UPDATE movie_collection 
+                        UPDATE movie_collection
                         SET
-                        collection_name = %s
-                        WHERE id = %s
-                        RETURNING id, username, collection_name
+                        collection_name = %s,
+                        WHERE id = %s,
                         """,
                         [
                         collection.collection_name,
-                        collection_id,
+                        collection_id
                         ]
                     )
                     coll = result.fetchone()
                     collection = CollectionOut(
-                        collection_id = coll[0],
-                        username= coll[1],
-                        collection_name = coll[2]
+                        id = coll[0],
+                        collection_name = [1]
                     )
                     return collection
         except Exception as e:
             return {'message':'could not update collection'}
 
-    def get_one(self, collection_id:int) -> Optional[CollectionOut]:
-        
+    def get_one(self, username:str) -> Optional[CollectionOut]:
+
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT 
+                        SELECT
                         id,
-                        username,
                         collection_name
                         FROM movie_collection
-                        where id= %s
+                        where username = %s
                         """,
-                        [collection_id]
+                        [username]
                     )
                     coll = result.fetchone()
                     collection = CollectionOut(
-                        collection_id = coll[0],
+                        id = coll[0],
                         username = coll[1],
-                        collection_name = coll[2]
+                        collection_name = [2]
                     )
                     return collection
-            
-    def get_all(self) -> Optional[CollectionOut]:
+
+    def get_all(self, username:str) -> Optional[CollectionOut]:
+
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT 
-                        *
+                        SELECT
+                        id,
+                        username,
+                        collection_name
                         FROM movie_collection
                         """,
                     )
                     collections = []
                     for coll in result:
                         collection = CollectionOut(
-                            collection_id=coll[0],
-                            username= coll[1],
+                            id=coll[0],
+                            usernae=coll[1],
                             collection_name=coll[2],
-                        )
-                        collections.append(collection)
+                    )
+                    collections.append(collection)
                     return collections
 
     def delete(self, collection_id: int) -> bool:
@@ -117,7 +118,7 @@ class CollectionRespository:
                     db.execute(
                         """
                         DELETE FROM movie_collection
-                        WHERE id = %s;
+                        WHERE collection_name = %s;
                         """,
                         [collection_id]
                     )
@@ -125,4 +126,3 @@ class CollectionRespository:
         except Exception as e:
             print(e)
             return False
-                    

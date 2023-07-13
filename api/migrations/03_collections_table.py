@@ -13,6 +13,11 @@
 #         """
 #         DROP TABLE collections;
 #         """
+        # CREATE TABLE movies (
+        #     movie_id INTEGER PRIMARY KEY NOT NULL,
+        #     movie_title VARCHAR(500) UNIQUE NOT NULL
+        #     poster_path VARCHAR(500)
+        # );
 #     ]
 # ]
 
@@ -27,8 +32,7 @@ steps = [
         );
 
         CREATE TABLE movies (
-            movie_id INTEGER PRIMARY KEY NOT NULL,
-            movie_title VARCHAR(500) UNIQUE NOT NULL
+            movie_id INTEGER PRIMARY KEY NOT NULL
         );
 
         CREATE TABLE movies_in_collections (

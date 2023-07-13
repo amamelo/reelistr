@@ -1,0 +1,12 @@
+.movies {
+  display: grid;
+  margin-right: 6%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 25px;
+  grid-row-gap: 10px;
+}
+
+.moviecardimg {
+  height: 180px;
+  object-fit: cover;
+}
