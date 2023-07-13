@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.authenticator import authenticator
-from routers import accounts, movies, movie_collection
+from routers import accounts, movies, movie_collection, movie_add
 
 
 app = FastAPI()
@@ -35,3 +35,4 @@ app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(movies.router)
 app.include_router(movie_collection.router)
+app.include_router(movie_add.router)
