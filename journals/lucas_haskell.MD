@@ -18,30 +18,6 @@ Rey has completed the wireframes, and we weren't given a ton of time to work on 
 ### Day 12:
 (7/12/23)
 
-## NOTES:
------------------
-### outer join:
-
-### inner join:
-when you want portions of both tables where they both have values.
-in the learn example, the average steps tables.
-one person doesn't have any steps, so they would not be joined, and that is desirable
-therefore, use an inner join
-if you wanted to include that person anyway, it would be an outer join
-
-
-
-as a user i want to creat a collection of movies
-create a collection of best movies
-select movies to add to collection
-when that movie is selected it is stored in our database (and in my best movies)
-and that movie data will be stored in our database
-
-
-## MVP:
-
-
-
 
 
 Reelistr CORE functionality:
