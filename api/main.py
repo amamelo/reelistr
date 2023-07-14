@@ -7,7 +7,8 @@ from routers import (
     movies,
     movie_collection,
     movie_add,
-    movies_to_collection
+    movies_to_collection,
+    reviews
 )
 
 
@@ -43,3 +44,4 @@ app.include_router(movies.router)
 app.include_router(movie_collection.router)
 app.include_router(movie_add.router)
 app.include_router(movies_to_collection.router)
+app.include_router(reviews.router)
