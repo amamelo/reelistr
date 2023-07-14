@@ -142,8 +142,7 @@ class MovieReviewRepo:
                     return True
                 else:
                     return False
-                
-
+                    
     def update_review(self, id: int, review: MovieReviewIn) -> MovieReviewOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
