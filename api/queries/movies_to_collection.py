@@ -69,8 +69,6 @@ class MovieToCollectionRepo:
                     movies.append(movie)
                 return movies
 
-
-
 # order matters here
     def delete_movie_in_collection(self, username: str, collection_id: int, movie_id: int) -> bool:
         try:
@@ -100,4 +98,3 @@ class MovieToCollectionRepo:
             print(e)
             return False
 
-    # # def get_all_movies_in_collection()
