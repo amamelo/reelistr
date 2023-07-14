@@ -50,6 +50,27 @@ class MovieToCollectionRepo:
                 )
                 return collection
 
+    def get_all_movies_in_collection(self, username: str, collection_id: int) -> List[MovieToCollectionOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                        SELECT * FROM movies_in_collections
+                    """,
+                )
+                print("result:", result)
+                movies = []
+                for film in result:
+                    movie = MovieToCollectionOut(
+                        id = film[0],
+                        movie_id = film[3],
+                        collection_id = film[2],
+                    )
+                    movies.append(movie)
+                return movies
+
+
+
 # order matters here
     def delete_movie_in_collection(self, username: str, collection_id: int, movie_id: int) -> bool:
         try:

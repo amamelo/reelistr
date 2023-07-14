@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from fastapi import (
     Depends,
     HTTPException,
@@ -31,6 +31,19 @@ async def add_movie_to_collection(
     repo: MovieToCollectionRepo = Depends(),
 ):
     return repo.add_movie_to_collection(username, movie_id, collection_id)
+
+# get all movies in collection
+@router.get("/users/{username}/collections/{collection_id}/", response_model=List[MovieToCollectionOut] | Error)
+async def get_all_movies_in_collection(
+    username: str,
+    collection_id: int,
+    response: Response,
+    repo: MovieToCollectionRepo = Depends(),
+) -> List[MovieToCollectionOut]:
+    return repo.get_all_movies_in_collection(username, collection_id)
+
+
+
 
 # @router.post("/users/{username}/collections/{collection_id}/", response_model=MovieToCollectionOut | Error)
 
