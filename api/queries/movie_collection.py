@@ -39,7 +39,6 @@ class CollectionRespository:
                         collection_name = coll[2]
                     )
                     return collection
-
     def update(self, collection_id:int, collection: CollectionIn) -> CollectionOut:
         try:
             with pool.connection() as conn:

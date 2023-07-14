@@ -10,7 +10,7 @@ from queries.movie_add import (
 router = APIRouter()
 
 @router.post("/movies/", response_model=MovieOut)
-def add_movie(
+def add_movie_to_db(
     movie: MovieIn,
     response: Response,
     repo: MovieRepository=Depends(),
@@ -19,7 +19,7 @@ def add_movie(
 
 
 @router.get("/movies/{id}/", response_model=MovieOut)
-def get_movie(
+def get_movie_from_db(
     id: int,
     response: Response,
     repo: MovieRepository=Depends(),
@@ -28,13 +28,13 @@ def get_movie(
 
 
 @router.get("/movies/", response_model=List[MovieOut])
-def get_all_movies(
+def get_all_movies_from_db(
     repo: MovieRepository=Depends(),
 ):
     return repo.get_all_movies_db()
 
 @router.delete("/movies/{id}/", response_model=bool)
-def delete_movie(
+def delete_movie_from_db(
     id: int,
     response: Response,
     repo: MovieRepository=Depends(),

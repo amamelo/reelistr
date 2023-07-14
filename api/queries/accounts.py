@@ -21,7 +21,7 @@ class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 
-class AccountRepo(BaseModel):
+class AccountRepo:
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
