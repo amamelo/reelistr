@@ -41,7 +41,7 @@ and that movie data will be stored in our database
 ## MVP:
 
 
->>>>>>>>> Temporary merge branch 2
+>>>>>>> main
 
 
 

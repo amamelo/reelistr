@@ -40,7 +40,7 @@ steps = [
             id SERIAL PRIMARY KEY NOT NULL,
             username VARCHAR(50) NOT NULL REFERENCES accounts(username),
             collection_id INTEGER REFERENCES movie_collection(id),
-            movie_id INTEGER UNIQUE NOT NULL REFERENCES movies(tmdb_movie_id)
+            movie_id INTEGER NOT NULL REFERENCES movies(tmdb_movie_id)
         );
         """,
         # "Down" SQL statement
