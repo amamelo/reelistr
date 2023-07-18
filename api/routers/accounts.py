@@ -19,6 +19,7 @@ from queries.accounts import (
     DuplicateAccountError,
     AccountOutWithPassword
 )
+from queries.watchlist import MovieWatchlistRepo
 
 class AccountForm(BaseModel):
     email: str
@@ -40,11 +41,13 @@ async def create_account(
     request: Request,
     response: Response,
     repo: AccountRepo = Depends(),
+    watchlist_repo: MovieWatchlistRepo = Depends()
 ):
     print("repo:", repo)
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
+        watchlist_repo.create_watchlist(account.username)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
