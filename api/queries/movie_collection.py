@@ -16,7 +16,7 @@ class CollectionOut(BaseModel):
 
 
 class CollectionRespository:
-    def create(self, collection: CollectionIn, username:str) -> CollectionOut:
+    def create_collection(self, collection: CollectionIn, username:str) -> CollectionOut:
         with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
@@ -39,7 +39,7 @@ class CollectionRespository:
                         collection_name = coll[2]
                     )
                     return collection
-    def update(self, collection_id:int, collection: CollectionIn) -> CollectionOut:
+    def update_collection(self, collection_id:int, collection: CollectionIn) -> CollectionOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -66,7 +66,7 @@ class CollectionRespository:
         except Exception as e:
             return {'message':'could not update collection'}
 
-    def get_one(self, collection_id:int) -> Optional[CollectionOut]:
+    def get_one_collection(self, collection_id:int) -> Optional[CollectionOut]:
 
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -89,7 +89,7 @@ class CollectionRespository:
                     )
                     return collection
 
-    def get_all(self) -> Optional[CollectionOut]:
+    def get_all_collections(self) -> Optional[CollectionOut]:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
@@ -109,7 +109,7 @@ class CollectionRespository:
                         collections.append(collection)
                     return collections
 
-    def delete(self, collection_id: int) -> bool:
+    def delete_collection(self, collection_id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

@@ -1,19 +1,13 @@
 from typing import Optional, List
 from fastapi import (
     Depends,
-    HTTPException,
-    status,
     Response,
     APIRouter,
     Request,
 )
-from jwtdown_fastapi.authentication import Token
 from routers.authenticator import authenticator
 
-from pydantic import BaseModel
-
 from queries.movies_to_collection import (
-    MovieToCollectionIn,
     MovieToCollectionOut,
     MovieToCollectionRepo,
     Error
@@ -28,6 +22,7 @@ async def add_movie_to_collection(
     movie_id: int,
     collection_id: int,
     request: Request,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: MovieToCollectionRepo = Depends(),
 ):
     return repo.add_movie_to_collection(username, movie_id, collection_id)
@@ -38,6 +33,7 @@ async def get_all_movies_in_collection(
     username: str,
     collection_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: MovieToCollectionRepo = Depends(),
 ) -> List[MovieToCollectionOut]:
     return repo.get_all_movies_in_collection(username, collection_id)
@@ -54,6 +50,7 @@ async def delete_movie_from_collection(
     collection_id: int,
     movie_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: MovieToCollectionRepo = Depends(),
 ) -> bool:
     return repo.delete_movie_in_collection(username, collection_id, movie_id)
