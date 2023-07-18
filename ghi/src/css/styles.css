@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 .movies {
   display: grid;
   margin-right: 6%;
