@@ -21,6 +21,7 @@ async def create_watchlist(
     username: str,
     request: Request,
     repo: MovieWatchlistRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.create_watchlist(username)
 
@@ -31,7 +32,9 @@ async def get_watchlist_detail(
     watchlist_id: int,
     request: Request,
     repo: MovieWatchlistRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> List[MovieWatchlistOut]:
+    
     return repo.get_watchlist_details(username, watchlist_id)
 
 
@@ -39,6 +42,7 @@ async def get_watchlist_detail(
 async def get_all_watchlists(
     request: Request,
     repo: MovieWatchlistRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_watchlists()
 
@@ -51,6 +55,7 @@ async def add_to_watchlist(
     watched: bool,
     request: Request,
     repo: MovieWatchlistRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.add_to_watchlist(username, watchlist_id, movie_id, watched)
 
@@ -61,5 +66,6 @@ async def delete_from_watchlist(
     movie_id: int,
     response: Response,
     repo: MovieWatchlistRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete_from_watchlist(username, watchlist_id, movie_id)
