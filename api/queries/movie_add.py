@@ -54,7 +54,7 @@ class MovieRepository:
                 )
                 mov = result.fetchone()
                 movie= MovieOut(
-                    id= mov[0],
+                    id = mov[0],
                     tmdb_movie_id = mov[1]
                 )
                 return movie

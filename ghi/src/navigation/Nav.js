@@ -14,8 +14,8 @@ function Nav() {
                     <NavLink className="dropdown-item" aria-current="page" to="/login">Log In</NavLink>
                     <NavLink className="dropdown-item" aria-current="page" to="/moviedetails">Movie Details</NavLink>
                     <NavLink className="dropdown-item" aria-current="page" to="user/profile">Profile</NavLink>
-                    <NavLink className="dropdown-item" aria-current="page" to="/collections">Collections</NavLink>
-                    <NavLink className="dropdown-item" aria-current="page" to="/watchlist">Watchlist</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/user/collections">Collections</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/user/watchlist">Watchlist</NavLink>
                     {/* <ul className="navbar-nav"> */}
                     {/* <li className="nav-item dropdown">
                             <NavLink className="nav-link active dropdown-toggle" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="/">menu</NavLink>

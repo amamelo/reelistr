@@ -21,6 +21,7 @@ class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 
+
 class AccountRepo:
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
@@ -43,13 +44,14 @@ class AccountRepo:
                     hashed_password
                     ]
                 )
-                print("result:", result)
+                # print("result:", result)
                 acct = result.fetchone()
                 account = AccountOutWithPassword(
                     id=acct[0],
                     email=acct[1],
                     username=acct[2],
-                    hashed_password=acct[3]
+                    hashed_password=acct[3],
+
                 )
                 return account
 
@@ -60,21 +62,24 @@ class AccountRepo:
                 result = cur.execute(
                     """
                     SELECT
-                        id,
-                        email,
-                        username,
-                        hashed_password
-                    FROM accounts
-                    WHERE username=%s
+                        a.id,
+                        a.email,
+                        a.username,
+                        a.hashed_password,
+                        w.id watchlist_id
+                    FROM accounts a
+                    JOIN watchlists w ON a.username = w.username
+                    WHERE a.username = %s
                     """,
                     [username]
                 )
                 acct = result.fetchone()
+                print(acct)
                 account = AccountOutWithPassword(
                     id=acct[0],
                     email=acct[1],
                     username=acct[2],
-                    hashed_password=acct[3]
+                    hashed_password=acct[3],
                 )
                 return account
 

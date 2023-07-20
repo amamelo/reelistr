@@ -34,7 +34,7 @@ async def get_watchlist_detail(
     repo: MovieWatchlistRepo = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> List[MovieWatchlistOut]:
-    
+
     return repo.get_watchlist_details(username, watchlist_id)
 
 
