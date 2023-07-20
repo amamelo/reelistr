@@ -6,7 +6,9 @@ class Error(BaseModel):
 
 class MovieReviewIn(BaseModel):
     review: str
-    rating: int
+    rating: float
+    username: str
+    movie_id: int
 
 
 class MovieReviewOut(BaseModel):
@@ -14,10 +16,10 @@ class MovieReviewOut(BaseModel):
     username: str
     movie_id: int
     review: str
-    rating: int
+    rating: float
 
 class MovieReviewRepo:
-    def add_review(self, username: str, movie_id: int, review: MovieReviewIn) -> MovieReviewOut:
+    def add_review(self, username: str, movie_id: int, review: str, rating: float) -> MovieReviewOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -36,8 +38,8 @@ class MovieReviewRepo:
                     [
                     username,
                     movie_id,
-                    review.review,
-                    review.rating
+                    review,
+                    rating
                     ]
                 )
                 rev = result.fetchone()
@@ -142,7 +144,7 @@ class MovieReviewRepo:
                     return True
                 else:
                     return False
-                    
+
     def update_review(self, id: int, review: MovieReviewIn) -> MovieReviewOut:
         with pool.connection() as conn:
             with conn.cursor() as db:

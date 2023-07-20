@@ -19,7 +19,6 @@ const Movie = () => {
       // debugger //response.results for TMDB
       if (response) {
         setMovieData(response);
-        console.log(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
@@ -32,7 +31,6 @@ const Movie = () => {
     const response = await fetch(`http://localhost:8000/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       return data;
     }
     throw new Error("Failed to fetch movie details");

@@ -5,6 +5,7 @@ from routers.authenticator import authenticator
 
 router = APIRouter()
 
+# refactor POST requests to only have request body & no query parameters
 
 @router.get("/reviews", response_model=List[MovieReviewOut])
 def get_all_reviews():
@@ -14,14 +15,12 @@ def get_all_reviews():
 
 @router.post("/reviews", response_model=MovieReviewOut | Error)
 def add_review(
-    review: MovieReviewIn, 
-    username: str, 
-    movie_id: int,
-    account_data: dict = Depends(authenticator.get_current_account_data),           
+    review: MovieReviewIn,
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    repo = MovieReviewRepo() 
+    repo = MovieReviewRepo()
     try:
-        result = repo.add_review(username, movie_id, review)
+        result = repo.add_review(review.username, review.movie_id, review.review, review.rating)
         print(result)
         return result
     except Exception as e:
@@ -54,7 +53,7 @@ def delete_review(
 
 @router.put("/reviews/{id}", response_model=MovieReviewOut | Error)
 def update_review(
-    id: int, 
+    id: int,
     review: MovieReviewIn,
     account_data: dict = Depends(authenticator.get_current_account_data)
 ):

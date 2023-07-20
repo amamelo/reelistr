@@ -19,6 +19,7 @@ from queries.accounts import (
     DuplicateAccountError,
     AccountOutWithPassword
 )
+from psycopg.errors import UniqueViolation
 from queries.watchlist import MovieWatchlistRepo
 
 class AccountForm(BaseModel):
@@ -28,6 +29,7 @@ class AccountForm(BaseModel):
 
 class AccountToken(Token):
     account: AccountOut
+    watchlist_id: int
 
 class HttpError(BaseModel):
     detail: str
@@ -47,26 +49,33 @@ async def create_account(
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
-        watchlist_repo.create_watchlist(account.username)
-    except DuplicateAccountError:
+
+        watchlist = watchlist_repo.create_watchlist(account.username)
+    except UniqueViolation:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
     form = AccountForm(email=info.email, username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=account, **token.dict())
+    return AccountToken(account=account,watchlist_id=watchlist.id, **token.dict())
 
+#update route to make call to watchlist table to get watchlist id using account username
+#pass in the repo class as a parameter
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
+    repo:MovieWatchlistRepo = Depends(),
     account: AccountOutWithPassword = Depends(authenticator.try_get_current_account_data)
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
+        watchlist = repo.get_watchlist_by_username(account["username"])
+        print(account)
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
             "account": account,
+            "watchlist_id": watchlist.id
         }
 
 @router.get("/api/accounts/{username}", response_model=AccountOut)

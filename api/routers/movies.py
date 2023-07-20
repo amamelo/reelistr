@@ -91,9 +91,9 @@ def get_details_from_tmdb(movie_id: int) -> MovieDetailsOut:
     return None
 
 # trending GET
-@router.get('/movies/trending', response_model=List[MovieSearchOut])
+@router.get('/trending/', response_model=List[MovieSearchOut])
 def get_trending() -> List[MovieSearchOut]:
-    tmdb_url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={API_KEY}"
+    tmdb_url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}"
     response = requests.get(tmdb_url)
     if response.status_code == 200:
         data = response.json()
@@ -103,16 +103,15 @@ def get_trending() -> List[MovieSearchOut]:
     return None
 
 # upcoming GET
-@router.get('/movies/upcoming', response_model=List[MovieSearchOut])
+@router.get('/upcoming', response_model=List[MovieSearchOut])
 def get_upcoming() -> List[MovieSearchOut]:
-    tmdb_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={API_KEY}&language=en-US&page=1"
+    tmdb_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={API_KEY}&language=en-US&page=1&region=US&with_release_type=2|3"
     response = requests.get(tmdb_url)
     if response.status_code == 200:
         data = response.json()
         if data['results']:
             movie_details = data['results']
-            return movie_details
-    return None
+    return movie_details
 
 
 # GET watch providers (Netflix, Amazon Prime, Disney+)
@@ -153,5 +152,3 @@ def get_movie_watch_providers(movie_id: int):
 #         if movie_details.get("Response") == "True":
 #             return movie_details
 #     return None
-
-
