@@ -6,7 +6,7 @@ import Home from "./pages/Home.js";
 import LoginForm from "./components/Login.js";
 import MovieDetails from "./pages/MoviesDetails.js";
 import Profile from "./pages/Profile.js";
-import Collections from "./components/Collections.js";
+import CollectionList from "./pages/CollectionList.js";
 import Watchlist from "./pages/Watchlist.js";
 import SignUpForm from "./components/Signup.js";
 import ComingSoonApi from "./components/ComingSoon.js";
