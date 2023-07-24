@@ -63,8 +63,7 @@ class WatchProviders(BaseModel):
 @router.get("/movies/{movie_name}", response_model=List[MovieSearchOut])
 def search_tmdb(movie_name: str) -> List[MovieSearchOut]:
     encoded_movie_name = requests.utils.quote(movie_name)
-    tmdb_url = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={encoded_movie_name}"
-
+    tmdb_url = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={encoded_movie_name}"  # noqa
     response = requests.get(tmdb_url)
     if response.status_code == 200:
         data = response.json()
@@ -77,7 +76,7 @@ def search_tmdb(movie_name: str) -> List[MovieSearchOut]:
 # movie details GET
 @router.get('/movies/details/{movie_id}', response_model=MovieDetailsOut)
 def get_details_from_tmdb(movie_id: int) -> MovieDetailsOut:
-    tmdb_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
+    tmdb_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}" # noqa
     response = requests.get(tmdb_url)
     if response.status_code == 200:
         data = response.json()
@@ -115,7 +114,7 @@ def get_trending() -> List[MovieSearchOut]:
 # upcoming GET
 @router.get('/upcoming', response_model=List[MovieSearchOut])
 def get_upcoming() -> List[MovieSearchOut]:
-    tmdb_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={API_KEY}&language=en-US&page=1&region=US&with_release_type=2|3"
+    tmdb_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={API_KEY}&language=en-US&page=1&region=US&with_release_type=2|3" # noqa
     response = requests.get(tmdb_url)
     if response.status_code == 200:
         data = response.json()
@@ -127,7 +126,7 @@ def get_upcoming() -> List[MovieSearchOut]:
 # GET watch providers (Netflix, Amazon Prime, Disney+)
 @router.get("/movies/{movie_id}/watch_providers", response_model=dict | list)
 def get_movie_watch_providers(movie_id: int):
-    tmdb_url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key={API_KEY}"
+    tmdb_url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key={API_KEY}" # noqa
     # define response
     response = requests.get(tmdb_url)
     if response.status_code == 200:

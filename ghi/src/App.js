@@ -35,7 +35,7 @@ function App() {
             </Route>
             <Route path="/signup" element={<SignUpForm />} />
             <Route path="user" >
-              <Route path="collections" element={<Collections />} />
+              <Route path="collections" element={<CollectionList />} />
               <Route path=":collection_id" element={<CollectionDetail />} />
               <Route path="profile" element={<Profile />} />
             </Route>

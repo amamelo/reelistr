@@ -16,9 +16,11 @@ class MyAuthenticator(Authenticator):
         self,
         accounts: AccountRepo = Depends(),
     ):
+
         return accounts
 
     def get_hashed_password(self, account: AccountOutWithPassword):
+
         return account.hashed_password
 
     def try_get_account_data_for_cookie(self, account: AccountOutWithPassword):
