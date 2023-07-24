@@ -9,7 +9,7 @@ import Profile from "./pages/Profile.js";
 import Collections from "./components/Collections.js";
 import Watchlist from "./pages/Watchlist.js";
 import SignUpForm from "./components/Signup.js";
-import ComingSoon from "./components/ComingSoon.js";
+import ComingSoonApi from "./components/ComingSoon.js";
 import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
@@ -25,28 +25,22 @@ function App() {
         <Nav />
         <div>
           <Routes>
-            <Route path="user">
-            </Route>
-            <Route path="profile">
-              <Route path="collections" element={<Collections />} />
-              <Route path=":collection_id" element={<CollectionDetail />} />
-            </Route>
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/movies">
               <Route path=":movie_id" element={<MovieDetails />} />
+              <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
+              <Route path="/movies/trending" element={<Trending />} />
             </Route>
-            {/* <Route path="/profile" element={<Profile />} /> */}
-
-            {/* <Route path="/watchlist" element={<Watchlist />} /> */}
             <Route path="/signup" element={<SignUpForm />} />
-            <Route path="/comingsoon" element={<ComingSoon />} />
-            <Route path="/trending" element={<Trending />} />
+            <Route path="user" >
+              <Route path="collections" element={<Collections />} />
+              <Route path=":collection_id" element={<CollectionDetail />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
             <Route path="/reviews" element={<Reviews />} />
-
           </Routes>
-
         </div>
       </AuthProvider>
     </BrowserRouter>

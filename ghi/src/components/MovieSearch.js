@@ -39,7 +39,7 @@ const Movie = () => {
 
   return (
     <div>
-      <h1>Movie Poster App</h1>
+      <h1></h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
