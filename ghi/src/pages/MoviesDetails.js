@@ -73,7 +73,7 @@ export default function MovieDetails() {
                 body: JSON.stringify({ username, rating, review, movie_id })
             })
             if (response.ok) {
-                const data = await response.json()
+                // const data = await response.json()
                 navigate(`/movies/${movie_id}`)
                 // refresh component
                 fetchMovieData();
