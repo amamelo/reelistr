@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import Nav from "./navigation/Nav.js";
@@ -49,7 +49,3 @@ function App() {
 
 export default App;
 
-{
-  /* <ErrorNotification error={error} />
-<Construct info={launchInfo} /> */
-}

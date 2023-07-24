@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
