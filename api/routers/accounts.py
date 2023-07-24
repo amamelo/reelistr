@@ -16,23 +16,26 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
-    DuplicateAccountError,
     AccountOutWithPassword
 )
 from psycopg.errors import UniqueViolation
 from queries.watchlist import MovieWatchlistRepo
+
 
 class AccountForm(BaseModel):
     email: str
     username: str
     password: str
 
+
 class AccountToken(Token):
     account: AccountOut
     watchlist_id: int
 
+
 class HttpError(BaseModel):
     detail: str
+
 
 router = APIRouter()
 
@@ -56,17 +59,23 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
-    form = AccountForm(email=info.email, username=info.username, password=info.password)
+    form = AccountForm(
+        email=info.email,
+        username=info.username,
+        password=info.password)
     token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=account,watchlist_id=watchlist.id, **token.dict())
+    return AccountToken(
+        account=account,
+        watchlist_id=watchlist.id,
+        **token.dict())
 
-#update route to make call to watchlist table to get watchlist id using account username
-#pass in the repo class as a parameter
+
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    repo:MovieWatchlistRepo = Depends(),
-    account: AccountOutWithPassword = Depends(authenticator.try_get_current_account_data)
+    repo: MovieWatchlistRepo = Depends(),
+    account: AccountOutWithPassword = Depends(
+        authenticator.try_get_current_account_data)
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         watchlist = repo.get_watchlist_by_username(account["username"])
@@ -78,11 +87,13 @@ async def get_token(
             "watchlist_id": watchlist.id
         }
 
+
 @router.get("/api/accounts/{username}", response_model=AccountOut)
 async def get_account(
     username: str,
     repo: AccountRepo = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(
+        authenticator.try_get_current_account_data),
 ):
     return repo.get_account(username)
 
@@ -90,9 +101,11 @@ async def get_account(
 @router.get("/api/accounts")
 async def get_all_accounts(
     repo: AccountRepo = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(
+        authenticator.try_get_current_account_data),
 ):
     return repo.get_all_accounts()
+
 
 @router.put("/api/accounts/{username}", response_model=AccountOut)
 async def update_account(
@@ -103,8 +116,12 @@ async def update_account(
 ):
 
     hashed_password = authenticator.hash_password(account.password)
-    form = AccountForm(email=account.email, username=account.username, password=account.password)
+    AccountForm(
+        email=account.email,
+        username=account.username,
+        password=account.password)
     return repo.update(username, account, hashed_password)
+
 
 @router.delete('/api/accounts/{username}', response_model=bool)
 def delete_account(
@@ -112,20 +129,3 @@ def delete_account(
     repo: AccountRepo = Depends(),
 ) -> bool:
     return repo.delete(username)
-
-
-# @router.get("/api/accounts", response_model=AccountOutWithPassword | None)
-# async def get_all_accounts(
-#     request: Request,
-#     repo: AccountRepo = Depends(),
-# ):
-#     try:
-
-#         accounts = repo.get_all_accounts()
-#         print(repo)
-#         return accounts
-#     except Exception:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot get all accounts",
-#         )

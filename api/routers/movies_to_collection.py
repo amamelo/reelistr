@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List
 from fastapi import (
     Depends,
     Response,
@@ -16,7 +16,8 @@ from queries.movies_to_collection import (
 router = APIRouter()
 
 
-@router.post("/users/{username}/collections/{collection_id}/", response_model=MovieToCollectionOut| Error)
+@router.post("/users/{username}/collections/{collection_id}/",
+             response_model=MovieToCollectionOut | Error)
 async def add_movie_to_collection(
     username: str,
     movie_id: int,
@@ -27,8 +28,10 @@ async def add_movie_to_collection(
 ):
     return repo.add_movie_to_collection(username, movie_id, collection_id)
 
+
 # get all movies in collection
-@router.get("/users/{username}/collections/{collection_id}/", response_model=List[MovieToCollectionOut] | Error)
+@router.get("/users/{username}/collections/{collection_id}/",
+            response_model=List[MovieToCollectionOut] | Error)
 async def get_all_movies_in_collection(
     username: str,
     collection_id: int,
@@ -39,12 +42,9 @@ async def get_all_movies_in_collection(
     return repo.get_all_movies_in_collection(username, collection_id)
 
 
-
-
-# @router.post("/users/{username}/collections/{collection_id}/", response_model=MovieToCollectionOut | Error)
-
 # delete router
-@router.delete("/users/{username}/collections/{collection_id}/{movie_id}", response_model=bool | Error)
+@router.delete("/users/{username}/collections/{collection_id}/{movie_id}",
+               response_model=bool | Error)
 async def delete_movie_from_collection(
     username: str,
     collection_id: int,

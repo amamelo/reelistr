@@ -10,7 +10,6 @@ class MyAuthenticator(Authenticator):
         username: str,
         accounts: AccountRepo,
     ):
-
         return accounts.get_account(username)
 
     def get_account_getter(
@@ -25,8 +24,6 @@ class MyAuthenticator(Authenticator):
         return account.hashed_password
 
     def try_get_account_data_for_cookie(self, account: AccountOutWithPassword):
-        # Return the username and the data for the cookie.
-        # You must return TWO values from this method.
         return account.username, AccountOut(**account.dict())
 
 
