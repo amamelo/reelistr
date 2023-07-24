@@ -1,12 +1,9 @@
-import { React, useEffect, useState } from 'react';
-
-import Card from 'react-bootstrap/Card'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
+import React, { useEffect, useState } from 'react';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [posterPaths, setPosterPaths] = useState([])
 
   const fetchReviews = async () => {
     const response = await fetch(`http://localhost:8000/reviews/`);
@@ -19,33 +16,66 @@ function Reviews() {
     throw new Error("Failed to retrieve reviews");
   };
 
+  const fetchMovies = async () => {
+    const movieIds = reviews.map(review => review.movie_id);
+    const posterPaths = []
+    for (const movieId of movieIds) {
+      const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+      const movieResponse = await fetch(movieUrl);
+      console.log(movieResponse)
+      if (movieResponse.ok) {
+        const data = await movieResponse.json();
+        console.log(data);
+        posterPaths.push(data.poster_path)
+      }
+    }
+    setPosterPaths(posterPaths)
+    console.log(posterPaths)
+  };
+
   useEffect(() => {
-    fetchReviews();
+    const fetchData = async () => {
+      try {
+        const reviewsData = await fetchReviews();
+        const moviesData = await fetchMovies();
+        const sortedReviews = reviewsData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        setReviews(sortedReviews);
+        setMovies(moviesData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
     <div>
       <h1>Reviews</h1>
-      <Container className="p-4">
-        <Row xs={1} md={1} lg={1} className="g-3 justify-content-md-center">
-          {reviews.map(review => {
+      <h2 className='container'>Recent Reviews</h2>
+      <div className='container text-center'>
+        <div className='row justify-content-center'>
+          {reviews.map((review, index) => {
             return (
-              <Col xs='4'>
-                <Card key={review.id} style={{ width: '600px', height: '300px' }} className="flex-fill">
-                  <Card.Body>
-                    <Card.Text>{review.username}</Card.Text>
-                    <Card.Text>{review.movie_id}</Card.Text>
-                    <Card.Text>{review.review}</Card.Text>
-                    <Card.Text>{review.rating}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
+              <div key={index} className='col-md-6'>
+                <div className='card mb-4'>
+                  <div className='card-body'>
+                    <h5 className='card-title'>{review.username}</h5>
+                    <p className='card-text'>Movie ID: {review.movie_id}</p>
+                    <img
+                      src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
+                      alt={`Poster for movie with ID ${review.movie_id}`}
+                    />
+                    <p className='card-text'>Rating: {review.rating}</p>
+                    <p className='card-text'>{review.review}</p>
+                  </div>
+                </div>
+              </div>
             );
           })}
-        </Row>
-      </Container>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Reviews;
