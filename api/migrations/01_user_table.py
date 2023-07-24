@@ -9,7 +9,6 @@ steps = [
             hashed_password VARCHAR(500)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE accounts;
         """

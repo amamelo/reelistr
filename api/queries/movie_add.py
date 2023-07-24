@@ -1,14 +1,15 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date
+from typing import Optional
 from queries.pool import pool
 
 
 class Error(BaseModel):
-    message:str
+    message: str
+
 
 class MovieIn(BaseModel):
     tmdb_movie_id: int
+
 
 class MovieOut(BaseModel):
     id: int
@@ -28,18 +29,17 @@ class MovieRepository:
                     RETURNING id, tmdb_movie_id
                     """,
                     [
-                    movie.tmdb_movie_id
+                        movie.tmdb_movie_id
                     ]
                 )
                 mov = result.fetchone()
                 movie = MovieOut(
-                    id= mov[0],
-                    tmdb_movie_id = mov[1]
+                    id=mov[0],
+                    tmdb_movie_id=mov[1]
                 )
                 return movie
 
-
-    def get_movie_from_db(self, id:int) -> Optional[MovieOut]:
+    def get_movie_from_db(self, id: int) -> Optional[MovieOut]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -53,12 +53,11 @@ class MovieRepository:
                     [id]
                 )
                 mov = result.fetchone()
-                movie= MovieOut(
-                    id= mov[0],
-                    tmdb_movie_id = mov[1]
+                movie = MovieOut(
+                    id=mov[0],
+                    tmdb_movie_id=mov[1]
                 )
                 return movie
-
 
     def get_all_movies_db(self) -> Optional[MovieOut]:
         with pool.connection() as conn:
@@ -77,7 +76,8 @@ class MovieRepository:
                         record[column.name] = mov[i]
                     movies.append(record)
                 return movies
-    def delete(self, id:int) -> bool:
+
+    def delete(self, id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

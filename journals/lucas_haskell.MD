@@ -18,6 +18,9 @@ Rey has completed the wireframes, and we weren't given a ton of time to work on 
 ### Day 12:
 (7/12/23)
 
+### Day 19:
+Got rudimentary movie detail pages working after struggling to get the movie detail page routes to work. Ended up using a very simply and effective useParams in MovieDetail.js.
+
 ## NOTES:
 -----------------
 ### outer join:

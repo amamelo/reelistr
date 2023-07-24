@@ -19,7 +19,6 @@ const Movie = () => {
       // debugger //response.results for TMDB
       if (response) {
         setMovieData(response);
-        console.log(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
@@ -32,7 +31,6 @@ const Movie = () => {
     const response = await fetch(`http://localhost:8000/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       return data;
     }
     throw new Error("Failed to fetch movie details");
@@ -41,7 +39,7 @@ const Movie = () => {
 
   return (
     <div>
-      <h1>Movie Poster App</h1>
+      <h1></h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -62,7 +60,7 @@ const Movie = () => {
                     <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
                     <Card.Body>
                       <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
-                      <Button variant='primary' href={'http://localhost:8000/movies/details/' + movie.id}>Go To Movie</Button>
+                      <Button variant='primary' href={'http://localhost:3000/movies/' + movie.id}>Go To Movie</Button>
                     </Card.Body>
                   </Card>
                 </Col>
