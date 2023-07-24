@@ -1,26 +1,3 @@
-# steps = [
-#     [
-#         # "Up" SQL statement
-#         """
-#         CREATE TABLE collections (
-#             id SERIAL PRIMARY KEY NOT NULL,
-#             username VARCHAR(50) UNIQUE NOT NULL REFERENCES accounts(username), # noqa: E501
-
-
-#         );
-#         """,
-#         # "Down" SQL statement
-#         """
-#         DROP TABLE collections;
-#         """
-        # CREATE TABLE movies (
-        #     movie_id INTEGER PRIMARY KEY NOT NULL,
-        #     movie_title VARCHAR(500) UNIQUE NOT NULL
-        #     poster_path VARCHAR(500)
-        # );
-#     ]
-# ]
-
 steps = [
     [
         # "Up" SQL statement

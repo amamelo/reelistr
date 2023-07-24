@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class MovieReviewIn(BaseModel):
     review: str
@@ -18,8 +20,9 @@ class MovieReviewOut(BaseModel):
     review: str
     rating: float
 
+
 class MovieReviewRepo:
-    def add_review(self, username: str, movie_id: int, review: str, rating: float) -> MovieReviewOut:
+    def add_review(self, username: str, movie_id: int, review: str, rating: float) -> MovieReviewOut: # noqa
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -36,19 +39,19 @@ class MovieReviewRepo:
                     RETURNING id, username, movie_id, review, rating
                     """,
                     [
-                    username,
-                    movie_id,
-                    review,
-                    rating
+                        username,
+                        movie_id,
+                        review,
+                        rating
                     ]
                 )
                 rev = result.fetchone()
                 review = MovieReviewOut(
-                    id= rev[0],
-                    username= rev[1],
-                    movie_id= rev[2],
-                    review= rev[3],
-                    rating= rev[4]
+                    id=rev[0],
+                    username=rev[1],
+                    movie_id=rev[2],
+                    review=rev[3],
+                    rating=rev[4]
                 )
                 return review
 
@@ -158,17 +161,17 @@ class MovieReviewRepo:
                     RETURNING id, username, movie_id, review, rating
                     """,
                     [
-                    review.review,
-                    review.rating,
-                    id
+                        review.review,
+                        review.rating,
+                        id
                     ]
                 )
                 rev = result.fetchone()
                 review = MovieReviewOut(
-                    id= rev[0],
-                    username= rev[1],
-                    movie_id= rev[2],
-                    review= rev[3],
-                    rating= rev[4]
+                    id=rev[0],
+                    username=rev[1],
+                    movie_id=rev[2],
+                    review=rev[3],
+                    rating=rev[4]
                 )
                 return review
