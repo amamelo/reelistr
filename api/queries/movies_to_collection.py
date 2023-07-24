@@ -1,7 +1,5 @@
-import os
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date
+from typing import List
 from queries.pool import pool
 
 
@@ -21,7 +19,7 @@ class MovieToCollectionOut(BaseModel):
 
 
 class MovieToCollectionRepo:
-    def add_movie_to_collection(self, username: str, movie_id: int, collection_id: int) -> MovieToCollectionOut:
+    def add_movie_to_collection(self, username: str, movie_id: int, collection_id: int) -> MovieToCollectionOut: # noqa
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -37,20 +35,20 @@ class MovieToCollectionRepo:
                     RETURNING id, collection_id, movie_id
                     """,
                     [
-                    username,
-                    collection_id,
-                    movie_id
+                        username,
+                        collection_id,
+                        movie_id
                     ]
                 )
                 collec = result.fetchone()
                 collection = MovieToCollectionOut(
-                    id= collec[0],
-                    collection_id= collec[1],
-                    movie_id = collec[2]
+                    id=collec[0],
+                    collection_id=collec[1],
+                    movie_id=collec[2]
                 )
                 return collection
 
-    def get_all_movies_in_collection(self, username: str, collection_id: int) -> List[MovieToCollectionOut]:
+    def get_all_movies_in_collection(self, username: str, collection_id: int) -> List[MovieToCollectionOut]: # noqa
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -70,15 +68,15 @@ class MovieToCollectionRepo:
                 movies = []
                 for film in result:
                     movie = MovieToCollectionOut(
-                        id = film[0],
-                        movie_id = film[3],
-                        collection_id = film[2],
+                        id=film[0],
+                        movie_id=film[3],
+                        collection_id=film[2],
                     )
                     movies.append(movie)
                 return movies
 
 # order matters here
-    def delete_movie_in_collection(self, username: str, collection_id: int, movie_id: int) -> bool:
+    def delete_movie_in_collection(self, username: str, collection_id: int, movie_id: int) -> bool: # noqa
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

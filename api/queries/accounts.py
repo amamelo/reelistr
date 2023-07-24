@@ -1,29 +1,31 @@
 import os
-from typing import Optional, Union
 from pydantic import BaseModel
 from psycopg_pool import ConnectionPool
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
+
 class DuplicateAccountError(BaseException):
     pass
+
 
 class AccountIn(BaseModel):
     email: str
     username: str
     password: str
 
+
 class AccountOut(BaseModel):
     id: int
     email: str
     username: str
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 
-
 class AccountRepo:
-    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
+    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword: # noqa
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -39,9 +41,9 @@ class AccountRepo:
                     RETURNING id, email, username, hashed_password
                     """,
                     [
-                    account.email,
-                    account.username,
-                    hashed_password
+                        account.email,
+                        account.username,
+                        hashed_password
                     ]
                 )
                 # print("result:", result)
@@ -54,7 +56,6 @@ class AccountRepo:
 
                 )
                 return account
-
 
     def get_account(self, username: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
@@ -101,8 +102,7 @@ class AccountRepo:
                     accts.append(account)
                 return accts
 
-
-    def update(self, username: str, account: AccountIn, hashed_password: str) -> AccountOut:
+    def update(self, username: str, account: AccountIn, hashed_password: str) -> AccountOut: # noqa
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -115,7 +115,12 @@ class AccountRepo:
                         WHERE username = %s
                         RETURNING id, email, username, hashed_password;
                         """,
-                        [account.email, account.username, hashed_password, username]
+                        [
+                            account.email,
+                            account.username,
+                            hashed_password,
+                            username
+                        ]
                     )
                     acct = cur.fetchone()
                     print(acct)
@@ -130,7 +135,6 @@ class AccountRepo:
         except Exception as e:
             print(e)
             return {'message': 'could not update account'}
-
 
     def delete(self, username: str) -> bool:
         try:
@@ -147,25 +151,3 @@ class AccountRepo:
         except Exception as e:
             print(e)
             return False
-
-
-    # def create(self, info: UserIn, hashed_password: str) -> AccountOutWithPassword | dict:
-    #     try:
-    #         user = None
-
-    #         if row is not None:
-    #             user = {}
-    #             user_fields = [
-    #                 'id',
-    #                 'email',
-    #                 'username',
-    #                 'hashed_password'
-    #             ]
-    #             for i, column in enumerate(description):
-    #                 if column.name in user_fields:
-    #                         user[column.name] = row[i]
-
-    #         return {"message": "succcess"}
-
-    #     except Exception:
-    #         return {"message": "couldn't create account"}

@@ -9,11 +9,6 @@ steps = [
             hashed_password VARCHAR(500)
         );
         """,
-        # Seed
-        # """
-        # INSERT INTO accounts (id, email, username) VALUES ('1', 'luke', 'luke@email.com')
-        # """
-        # "Down" SQL statement
         """
         DROP TABLE accounts;
         """
