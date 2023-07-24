@@ -76,7 +76,7 @@ class MovieRepository:
                         record[column.name] = mov[i]
                     movies.append(record)
                 return movies
-            
+
     def delete(self, id: int) -> bool:
         try:
             with pool.connection() as conn:
