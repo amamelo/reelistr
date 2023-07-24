@@ -13,7 +13,7 @@ import ComingSoonApi from "./components/ComingSoon.js";
 import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
-
+import CreateCollection from "./components/CreateCollection";
 
 function App() {
 
@@ -25,6 +25,7 @@ function App() {
         <Nav />
         <div>
           <Routes>
+            <Route path="/createcollection" element={<CreateCollection />} />
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
@@ -35,7 +36,7 @@ function App() {
             </Route>
             <Route path="/signup" element={<SignUpForm />} />
             <Route path="user" >
-              <Route path="collections" element={<Collections />} />
+              <Route path="collections" element={<CollectionList />} />
               <Route path=":collection_id" element={<CollectionDetail />} />
               <Route path="profile" element={<Profile />} />
             </Route>
