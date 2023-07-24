@@ -5,7 +5,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 const CreateCollection = () => {
     const [collectionName, setCollectionName] = useState('');
     const [username, setUsername] = useState('');
-    const [accessToken, setAccessToken] = useState(''); // Add accessToken state
+    const [accessToken, setAccessToken] = useState('');
     const navigate = useNavigate();
     const { token } = useToken();
 
