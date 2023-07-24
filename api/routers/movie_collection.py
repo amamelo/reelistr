@@ -54,8 +54,9 @@ def delete_collection(
     return repo.delete_collection(collection_id)
 
 
-@router.get("/user/collections/", response_model = List[CollectionOut])
+@router.get("/{username}/collections/", response_model = List[CollectionOut])
 def get_all_collections(
+    username: str,
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: CollectionRespository= Depends(),
 ):

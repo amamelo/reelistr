@@ -56,7 +56,15 @@ class MovieToCollectionRepo:
                 result = db.execute(
                     """
                         SELECT * FROM movies_in_collections
+                        WHERE
+                        username = %s
+                        AND
+                        collection_id = %s
                     """,
+                    [
+                        username,
+                        collection_id
+                    ]
                 )
                 print("result:", result)
                 movies = []
