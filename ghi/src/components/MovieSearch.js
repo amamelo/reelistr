@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
@@ -9,22 +8,18 @@ import { Link } from "react-router-dom"
 
 const Movie = () => {
   const [title, setTitle] = useState("");
-  // const [poster, setPoster] = useState("");
-  // const [plot, setPlot] = useState("");
   const [movieData, setMovieData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetchMovieDetails(title);
-      // debugger //response.results for TMDB
       if (response) {
         setMovieData(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
-      // setPoster("");
-      // setPlot("");
+
     }
   };
 
@@ -37,10 +32,14 @@ const Movie = () => {
     throw new Error("Failed to fetch movie details");
   };
 
+  useEffect(() => {
+    fetchMovieDetails();
+  }, []);
+
 
   return (
     <div>
-      <h1></h1>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -63,7 +62,6 @@ const Movie = () => {
                     </Link>
                     <Card.Body>
                       <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
-                      <Button variant='primary' href={'http://localhost:3000/movies/' + movie.id}>Go To Movie</Button>
                     </Card.Body>
                   </Card>
                 </Col>

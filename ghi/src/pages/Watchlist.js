@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { Link } from 'react-router-dom';
 
 export default function Watchlist() {
     const [movies, setMovies] = useState([]);
@@ -60,11 +61,6 @@ export default function Watchlist() {
         fetchUsername();
     }, []);
 
-    const handleDetailRedirect = () => {
-        window.location.href = "/details";
-        // window.location.href = "/details/";
-    }
-
     return (
         <div>
             <br />
@@ -77,11 +73,11 @@ export default function Watchlist() {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                                    <a href={'http://localhost:3000/movies/' + movie.movie_id }>
+                                    <Link to={'/movies/' + movie.id }>
                                     <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                         alt={movie.title}
-                                        onClick={() => handleDetailRedirect()} />
-                                    </a>
+                                    />
+                                    </Link>
                                 </Card>
                             </Col>
                         );
