@@ -57,8 +57,8 @@ const Movie = () => {
                 <Col xs='4'>
                   <Card key={movie.poster_path} style={{ width: '18rem' }} className="flex-fill">
                     <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
-                    <Link to="/movies/">
-                      <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
+                    <Link to={'/movies/' + movie.movie_id} >
+                    <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
                     </Link>
                     <Card.Body>
                       <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
