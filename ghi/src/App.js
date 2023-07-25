@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import Nav from "./navigation/Nav.js";
@@ -13,18 +13,21 @@ import ComingSoonApi from "./components/ComingSoon.js";
 import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
-
+import CreateCollection from "./components/CreateCollection";
 
 function App() {
 
   const baseUrl = process.env.REACT_APP_API_HOST
+  const domain = /https:\/\/[^/]+/
+  const basename = process.env.PUBLIC_URL.replace(domain, '')
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider baseUrl={baseUrl}>
         <Nav />
         <div>
           <Routes>
+            <Route path="/createcollection" element={<CreateCollection />} />
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
@@ -49,7 +52,3 @@ function App() {
 
 export default App;
 
-{
-  /* <ErrorNotification error={error} />
-<Construct info={launchInfo} /> */
-}
