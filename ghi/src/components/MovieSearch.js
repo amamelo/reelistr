@@ -1,29 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
+import { Link } from "react-router-dom"
 
 const Movie = () => {
   const [title, setTitle] = useState("");
-  // const [poster, setPoster] = useState("");
-  // const [plot, setPlot] = useState("");
   const [movieData, setMovieData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetchMovieDetails(title);
-      // debugger //response.results for TMDB
       if (response) {
         setMovieData(response);
       }
     } catch (error) {
       console.error("Error fetching movie details:", error);
-      // setPoster("");
-      // setPlot("");
+
     }
   };
 
@@ -35,6 +31,10 @@ const Movie = () => {
     }
     throw new Error("Failed to fetch movie details");
   };
+
+  useEffect(() => {
+    fetchMovieDetails();
+  }, []);
 
 
   return (
@@ -57,10 +57,11 @@ const Movie = () => {
                 <Col xs='4'>
                   <Card key={movie.poster_path} style={{ width: '18rem' }} className="flex-fill">
                     <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
-                    <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
+                    <Link to="/movies/">
+                      <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
+                    </Link>
                     <Card.Body>
                       <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
-                      <Button variant='primary' href={'http://localhost:3000/movies/' + movie.id}>Go To Movie</Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -70,7 +71,7 @@ const Movie = () => {
         </Container>
       </div>
 
-    </div>
+    </div >
   );
 };
 
