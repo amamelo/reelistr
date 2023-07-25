@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import '../css/styles.css'
 
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
@@ -28,22 +29,23 @@ function ComingSoonApi() {
   return (
     <div>
       <h1>Coming Soon</h1>
-      <Container className="p-4">
+      <h2 className='container'>Upcoming Movies</h2>
+      <Container>
         <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
-          {movies.map(movie => {
-            return (
-              <Col xs='4'>
-                <Card key={movie.poster_path} style={{ width: '80%', height: '80%' }} className="flex-fill">
-                  <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path}
-                    alt={movie.title}
-                    onClick={() => handleDetailRedirect()} />
-                </Card>
-              </Col>
-            );
-          })}
+          {movies.map((movie, index) => (
+            <Col key={index} xs='4'>
+              <Card className="custom-card">
+                <Card.Img
+                  src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`}
+                  alt={movie.title}
+                  onClick={() => handleDetailRedirect()}
+                />
+              </Card>
+            </Col>
+          ))}
         </Row>
       </Container>
-    </div >
-  )
+    </div>
+  );
 }
 export default ComingSoonApi;
