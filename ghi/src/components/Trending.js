@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
+import { Link } from 'react-router-dom';
 
 function TrendingApi() {
   const [movies, setMovies] = useState([]);
@@ -17,10 +18,6 @@ function TrendingApi() {
     throw new Error("Failed to fetch movie details");
   };
 
-  const handleDetailRedirect = () => {
-    window.location.href = "/details";
-  }
-
   useEffect(() => {
     fetchTrending();
   }, []);
@@ -33,11 +30,12 @@ function TrendingApi() {
           {movies.map((movie, index) => (
             <Col key={index} xs='4'>
               <Card className="custom-card">
+                <Link to={'/movies/' + movie.id} >
                 <Card.Img
                   src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`}
                   alt={movie.title}
-                  onClick={() => handleDetailRedirect()}
                 />
+                </Link>
               </Card>
             </Col>
           ))}
