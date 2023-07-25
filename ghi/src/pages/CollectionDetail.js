@@ -11,8 +11,8 @@ export default function CollectionDetail() {
 
     const [movies, setMovies] = useState([]);
     const [username, setUsername] = useState('');
-    const [collectionId, setCollectionId] = useState('');
-    const [collectionName, setCollectionName] = useState('');
+    // const [collectionId, setCollectionId] = useState('');
+    // const [collectionName, setCollectionName] = useState('');
     const [posterPaths, setPosterPaths] = useState([])
     const { collection_id } = useParams();
     const { token } = useToken();
@@ -64,10 +64,7 @@ export default function CollectionDetail() {
     }
 
     useEffect(() => {
-        if (token) {
-            fetchMovies();
-        }
-        if (username) {
+        if (token && username) {
             fetchMovies();
         }
     }, [token, username]);
