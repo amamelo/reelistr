@@ -14,24 +14,39 @@ function Reviews() {
     throw new Error("Failed to retrieve reviews");
   };
 
-  const fetchMovies = async () => {
-    const movieIds = reviews.map(review => review.movie_id);
-    const posterPaths = []
-    for (const movieId of movieIds) {
-      const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-      const movieResponse = await fetch(movieUrl);
-      if (movieResponse.ok) {
-        const data = await movieResponse.json();
-        posterPaths.push(data.poster_path)
-      }
-    }
-    setPosterPaths(posterPaths)
-  };
+  // const fetchMovies = async () => {
+  //   const movieIds = reviews.map(review => review.movie_id);
+  //   const posterPaths = []
+  //   for (const movieId of movieIds) {
+  //     const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+  //     const movieResponse = await fetch(movieUrl);
+  //     if (movieResponse.ok) {
+  //       const data = await movieResponse.json();
+  //       posterPaths.push(data.poster_path)
+  //     }
+  //   }
+  //   setPosterPaths(posterPaths)
+  // };
 
   useEffect(() => {
     fetchReviews();
   }, []);
+
+
   useEffect(() => {
+    const fetchMovies = async () => {
+      const movieIds = reviews.map(review => review.movie_id);
+      const posterPaths = []
+      for (const movieId of movieIds) {
+        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+        const movieResponse = await fetch(movieUrl);
+        if (movieResponse.ok) {
+          const data = await movieResponse.json();
+          posterPaths.push(data.poster_path)
+        }
+      }
+      setPosterPaths(posterPaths)
+    };
     fetchMovies();
   }, [reviews]);
 
