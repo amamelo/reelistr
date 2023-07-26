@@ -13,8 +13,7 @@ router = APIRouter()
 
 # refactor POST requests to only have request body & no query parameters
 @router.get("/reviews", response_model=List[MovieReviewOut])
-def get_all_reviews():
-    repo = MovieReviewRepo()
+def get_all_reviews(repo: MovieReviewRepo = Depends()):
     result = repo.get_all_reviews()
     return result
 
