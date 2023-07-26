@@ -29,3 +29,7 @@ def test_get_all_reviews():
     # Assert
     assert response.status_code == 200
     assert response.json()[0]["id"] == 1
+    assert response.json()[0]["username"] == "MagicJohnson"
+    assert response.json()[0]["movie_id"] == 1
+    assert response.json()[0]["review"] == "loved this movie"
+    assert response.json()[0]["rating"] == 5
