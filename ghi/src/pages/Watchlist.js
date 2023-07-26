@@ -38,7 +38,7 @@ export default function Watchlist() {
             // fetch movie details for each movie
             const posterPaths = []
             for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
                 const movieResponse = await fetch(movieUrl);
                 if (movieResponse.ok) {
                     const data = await movieResponse.json();
@@ -66,7 +66,7 @@ export default function Watchlist() {
             <br />
             <br />
             <br />
-            <h1>Trending</h1>
+            <h1>Watchlist</h1>
             <Container className="p-4">
                 <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
                     {movies.map((movie, index) => {
