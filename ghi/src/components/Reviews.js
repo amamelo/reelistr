@@ -22,7 +22,7 @@ function Reviews() {
     const movieIds = reviews.map(review => review.movie_id);
     const posterPaths = []
     for (const movieId of movieIds) {
-      const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+      const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
       const movieResponse = await fetch(movieUrl);
       if (movieResponse.ok) {
         const data = await movieResponse.json();
