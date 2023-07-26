@@ -45,6 +45,26 @@ export default function MovieDetails() {
   }
 
   useEffect(() => {
+    const fetchMovieData = async () => {
+
+      const movieDataUrl = `http://localhost:8000/movies/details/${movie_id}`;
+      const response = await fetch(movieDataUrl);
+      if (response.ok) {
+        const data = await response.json();
+        setMovie(data)
+
+        // 2nd fetch for reviews by movie_id
+        const reviewsUrl = `http://localhost:8000/reviews/movie/${movie_id}`;
+        const reviewsResponse = await fetch(reviewsUrl);
+        if (reviewsResponse.ok) {
+          const reviewsData = await reviewsResponse.json();
+          setReviews(reviewsData)
+        }
+
+      } else {
+        throw new Error("Failed to retrieve movie data")
+      }
+    }
     fetchMovieData();
   }, [movie_id]);
 
@@ -73,10 +93,12 @@ export default function MovieDetails() {
         body: JSON.stringify({ username, rating, review, movie_id })
       })
       if (response.ok) {
-        const data = await response.json()
+        // const data = await response.json()
         navigate(`/movies/${movie_id}`)
         // refresh component
         fetchMovieData();
+        setReview('');
+        setRating('');
       } else {
         const errorData = await response.json();
         setError(errorData.message);
