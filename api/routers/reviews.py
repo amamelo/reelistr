@@ -22,8 +22,8 @@ def get_all_reviews(repo: MovieReviewRepo = Depends()):
 def add_review(
     review: MovieReviewIn,
     account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: MovieReviewRepo = Depends()
 ):
-    repo = MovieReviewRepo()
     try:
         result = repo.add_review(
             review.username,
@@ -38,18 +38,18 @@ def add_review(
 
 @router.get("/reviews/user/{username}", response_model=List[MovieReviewOut])
 def get_reviews_by_user(
-    username: str
+    username: str,
+    repo: MovieReviewRepo = Depends()
 ):
-    repo = MovieReviewRepo()
     result = repo.get_reviews_by_user(username)
     return result
 
 
 @router.get("/reviews/movie/{movie_id}", response_model=List[MovieReviewOut])
 def get_reviews_by_movie(
-    movie_id: int
+    movie_id: int,
+    repo: MovieReviewRepo = Depends()
 ):
-    repo = MovieReviewRepo()
     result = repo.get_reviews_by_movie(movie_id)
     return result
 
@@ -68,9 +68,9 @@ def delete_review(
 def update_review(
     id: int,
     review: MovieReviewIn,
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: MovieReviewRepo = Depends()
 ):
-    repo = MovieReviewRepo(),
     try:
         result = repo.update_review(id, review)
         return result
