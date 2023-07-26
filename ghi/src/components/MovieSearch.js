@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom"
 
 const Movie = () => {
   const [title, setTitle] = useState("");
