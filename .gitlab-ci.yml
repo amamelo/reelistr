@@ -23,6 +23,8 @@ api-unit-tests-job:
   script:
     - cd api
     - pip install -r requirements.txt
+    - export DATABASE_URL='postgresql://reelistr:secret@postgres/reelistr_db'
+    - export SIGNING_KEY='6Ed*32F3Vzk@qAvVJR6o'
     - python -m pytest
 
 # # Build API Image:
