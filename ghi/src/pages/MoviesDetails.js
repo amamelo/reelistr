@@ -25,7 +25,7 @@ export default function MovieDetails() {
 
   const fetchMovieData = async () => {
 
-    const movieDataUrl = `http://localhost:8000/movies/details/${movie_id}`;
+    const movieDataUrl = `http://localhost:8000/tmdb/movies/details/${movie_id}`;
     const response = await fetch(movieDataUrl);
     if (response.ok) {
       const data = await response.json();

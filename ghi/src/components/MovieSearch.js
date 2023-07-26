@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 const Movie = () => {
   const [title, setTitle] = useState("");
@@ -24,7 +24,7 @@ const Movie = () => {
   };
 
   const fetchMovieDetails = async (title) => {
-    const response = await fetch(`http://localhost:8000/movies/${encodeURIComponent(title)}`);
+    const response = await fetch(`http://localhost:8000/tmdb/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -57,7 +57,7 @@ const Movie = () => {
                 <Col xs='4'>
                   <Card key={movie.poster_path} style={{ width: '18rem' }} className="flex-fill">
                     <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
-                    <Link to={'/movies/' + movie.movie_id} >
+                    <Link to={'/movies/' + movie.id} >
                     <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
                     </Link>
                     <Card.Body>
