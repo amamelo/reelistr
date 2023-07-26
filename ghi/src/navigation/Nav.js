@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { NavLink, Link } from 'react-router-dom';
-import Movie from "../components/MovieSearch";
 
 
 function Nav() {
