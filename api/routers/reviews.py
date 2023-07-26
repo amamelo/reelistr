@@ -57,9 +57,9 @@ def get_reviews_by_movie(
 @router.delete("/reviews/{id}", response_model=bool)
 def delete_review(
     id: int,
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: MovieReviewRepo = Depends()
 ):
-    repo = MovieReviewRepo(),
     result = repo.delete_review(id)
     return result
 
