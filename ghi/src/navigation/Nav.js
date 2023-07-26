@@ -16,6 +16,10 @@ function Nav() {
     }
   }, [token]);
 
+  function logout() {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  }
   return (
     <div className="navbar">
       <div className="navbar-container">
@@ -23,17 +27,22 @@ function Nav() {
         <div className="menu-container">
           {isLoggedIn ? (
             <ul className="menu-list">
-              <li className="menu-list-item"><NavLink className="nav-link" to="/dashboard">Dashboard</NavLink></li>
-              <li className="menu-list-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li>
-              <li className="menu-list-item"><NavLink className="nav-link" to="/">Logout</NavLink></li>
+              <NavLink className="nav-link" to="/"><li className="menu-list-item">Home</li></NavLink>
+              <NavLink className="nav-link"><li className="menu-list-item">Movies</li></NavLink>
+              <NavLink className="nav-link" to="/watchlist"><li className="menu-list-item">Watchlist</li></NavLink>
+              <NavLink className="nav-link" to="/profile"><li className="menu-list-item">Profile</li></NavLink>
+              <NavLink className="nav-link" onClick={logout}><li className="menu-list-item">Logout</li></NavLink>
             </ul>
           ) : (
             // Links to display when the user is not signed in
-            <ul className="menu-list">
-              <li className="menu-list-item"><NavLink classname="nav-link">Movies</NavLink></li>
-              <li className="menu-list-item"><NavLink classname="nav-link" to="/login">Login</NavLink></li>
-              <li className="menu-list-item"><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
-            </ul>
+            <div className="menu-container">
+              <ul className="menu-list">
+                <NavLink className="nav-link" to="/"><li className="menu-list-item">Home</li></NavLink>
+                <NavLink classname="nav-link" to="/comingsoon"><li className="menu-list-item">Movies</li></NavLink>
+                <NavLink classname="nav-link" to="/login"><li className="menu-list-item">Login</li></NavLink>
+                <NavLink className="nav-link" to="/signup"><li className="menu-list-item">Sign Up</li></NavLink>
+              </ul>
+            </div>
           )}
         </div>
         <div className="search-container"><li className="search-bar"><Movie /></li></div>
