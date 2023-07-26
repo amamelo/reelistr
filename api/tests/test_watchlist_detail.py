@@ -36,7 +36,7 @@ def test_get_current_account_data():
 def test_get_watchlist_detail():
     # Arrange
     app.dependency_overrides[MovieWatchlistRepo] = EmptyMovieWatchlist
-    app.dependency_overrides[authenticator.get_current_account_data] = test_get_current_account_data
+    app.dependency_overrides[authenticator.get_current_account_data] = test_get_current_account_data  # noqa: E501
 
     # Act
     response = client.get("/users/Johnwick/watchlist/1/")

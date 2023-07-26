@@ -5,7 +5,6 @@ from queries.reviews import MovieReviewRepo
 
 client = TestClient(app)
 
-#unit test for get all reviews
 
 class EmptyReviewRepository:
     def get_all_reviews(self):
@@ -15,6 +14,7 @@ class EmptyReviewRepository:
             "movie_id": 1,
             "review": "loved this movie",
             "rating": 5}]
+
 
 def test_get_all_reviews():
     # Arrange
