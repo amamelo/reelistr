@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 // import Reviews from "../components/Reviews";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
@@ -23,7 +23,7 @@ export default function MovieDetails() {
   const { token } = useToken();
   let { movie_id } = useParams()
 
-  const fetchMovieData = async () => {
+  const fetchMovieData = useCallback(async () => {
 
     const movieDataUrl = `http://localhost:8000/tmdb/movies/details/${movie_id}`;
     const response = await fetch(movieDataUrl);
@@ -42,11 +42,11 @@ export default function MovieDetails() {
     } else {
       throw new Error("Failed to retrieve movie data")
     }
-  }
+  }, [movie_id]);
 
   useEffect(() => {
     fetchMovieData();
-  }, [movie_id]);
+  }, [movie_id, fetchMovieData]);
 
   useEffect(() => {
     fetchUsername();
@@ -73,10 +73,12 @@ export default function MovieDetails() {
         body: JSON.stringify({ username, rating, review, movie_id })
       })
       if (response.ok) {
-        const data = await response.json()
+        // const data = await response.json()
         navigate(`/movies/${movie_id}`)
         // refresh component
         fetchMovieData();
+        setReview('');
+        setRating('');
       } else {
         const errorData = await response.json();
         setError(errorData.message);
@@ -101,14 +103,18 @@ export default function MovieDetails() {
       {error && <p>{error}</p>}
       <div>
         <Container className="bg-image fluid">
-          <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+          {movie.backdrop_path ? (
+            <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+          ) : null}
         </Container>
 
         <Container>
           <Row>
             <Col className="text-center">
               <Card>
-                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+                {movie.poster_path ? (
+                  <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+                ) : null}
               </Card>
             </Col>
             <Col>
@@ -125,7 +131,7 @@ export default function MovieDetails() {
             </Col>
           </Row>
           <Row>
-            `               {reviews.map((review) => {
+            {reviews.map((review) => {
               return (
                 <Card key={review.id}>
                   <Card.Text>{review.username}</Card.Text>

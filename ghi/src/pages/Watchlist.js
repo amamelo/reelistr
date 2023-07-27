@@ -1,5 +1,4 @@
-import { React, useEffect, useState } from "react";
-
+import { React, useEffect, useState, useCallback } from "react";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
@@ -24,7 +23,7 @@ export default function Watchlist() {
         }
     }
 
-    const fetchMovies = async () => {
+    const fetchMovies = useCallback(async () => {
         const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
         const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
         if (response.ok) {
@@ -49,13 +48,45 @@ export default function Watchlist() {
         } else {
             throw new Error("Failed to retrieve movies watched")
         }
-    };
+    }, [username, watchlist_id, token]);
 
     useEffect(() => {
-        if (username !== '') {
+        if (username) {
             fetchMovies();
         }
-    }, [username]);
+    }, [username, watchlist_id, token, fetchMovies]);
+
+    // useEffect(() => {
+    //     if (username !== '') {
+    //         const fetchMovies = async () => {
+    //             const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
+    //             const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
+    //             if (response.ok) {
+    //                 const data = await response.json();
+    //                 setMovies(data)
+
+
+    //                 // extract movie IDs
+    //                 const movieIds = data.map(movie => movie.movie_id);
+
+    //                 // fetch movie details for each movie
+    //                 const posterPaths = []
+    //                 for (const movieId of movieIds) {
+    //                     const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+    //                     const movieResponse = await fetch(movieUrl);
+    //                     if (movieResponse.ok) {
+    //                         const data = await movieResponse.json();
+    //                         posterPaths.push(data.poster_path)
+    //                     }
+    //                 }
+    //                 setPosterPaths(posterPaths)
+    //             } else {
+    //                 throw new Error("Failed to retrieve movies watched")
+    //             }
+    //         };
+    //         fetchMovies();
+    //     }
+    // }, [username, watchlist_id, token]);
 
     useEffect(() => {
         fetchUsername();
@@ -73,10 +104,10 @@ export default function Watchlist() {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                                    <Link to={'/movies/' + movie.movie_id }>
-                                    <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
-                                        alt={movie.title}
-                                    />
+                                    <Link to={'/movies/' + movie.movie_id}>
+                                        <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
+                                            alt={movie.title}
+                                        />
                                     </Link>
                                 </Card>
                             </Col>

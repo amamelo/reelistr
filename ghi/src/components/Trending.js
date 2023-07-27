@@ -13,6 +13,7 @@ function TrendingApi() {
     const response = await fetch(`http://localhost:8000/trending/`);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       return setMovies(data);
     }
     throw new Error("Failed to fetch movie details");

@@ -58,4 +58,127 @@
 }
 
 
-/* #2D3260 */
+/* homepage */
+
+.homepage-container{
+  padding:40px 0px 40px 0px;
+  /* background-color: #242121; */
+  background-image: linear-gradient(180deg, #FF5F05,#ff61054d, #ff610504);
+  border-radius: 10px;
+}
+.homepage-container h1 {
+  text-align: center;
+}
+.homepage-container h6 {
+  text-align: center;
+}
+.logo-image{
+  width: 70px;
+  position: right;
+}
+
+
+/* user profile */
+.profile-container{
+  padding:100px 0px 0px 0px;
+}
+
+.user-container{
+  padding: 20px 0px 20px 0px;
+  background-color: #242121;
+  border-radius: 10px;
+}
+
+.user-container h1{
+  text-align: left;
+}
+.profile-image{
+  width: 70px;
+}
+ .profile-link{
+  color: white;
+  text-decoration: none;
+
+ }
+.media-scroller {
+  /* --_spacer: var(--size-3); */
+  display: grid;
+  gap: 4px;
+  /* gap: var(--_spacer); */
+  grid-auto-flow: column;
+  grid-auto-columns: 21%;
+
+  padding: 0 var(--_spacer) var(--_spacer);
+
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.media-element {
+  display: grid;
+  grid-template-rows: min-content;
+  gap: var(--_spacer);
+  padding: var(--_spacer);
+  background: var(--surface-2);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-2);
+}
+.media-element > img {
+  inline-size: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: var(--_spacer, 1rem);
+}
+
+.snaps-inline > * {
+  scroll-snap-align: start;
+}
+
+
+.review-card{
+  background-color: #544f4f2f;
+  border-radius: 4px;
+  padding: 20px 0px 20px 0px;
+  margin: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+
+}
+.review-card img{
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.review-card h5{
+  font-size: 16pt;
+  padding: 20px 0px 20px 0px;
+
+
+}
+
+.signup-form{
+  background-color: #e9e0db;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+  color: rgb(6, 6, 6);
+}
+.signup-form h1{
+  color: black;
+}
+.signup-form button{
+  border-radius: 10px;
+  background-color: #FF5F05;
+  color:#f9f9f9;
+  border-style: none;
+  text-align: center;
+}
+
+.signup-form input{
+  border-radius: 10px;
+  background-color: #e7cbba;
+  color:#f9f9f9;
+  border-style: none;
+  border-radius: 10px;
+}
