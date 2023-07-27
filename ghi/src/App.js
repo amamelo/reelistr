@@ -14,14 +14,14 @@ import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
 import CreateCollection from "./components/CreateCollection";
-import { useToken } from "./hooks/useToken.js";
+import { useToken } from "@galvanize-inc/jwtdown-for-react";
 
 
 function App() {
 
   const { tokenData } = useToken()
 
-  const accountId = tokenData 
+  const accountId = tokenData
 
 
   const baseUrl = process.env.REACT_APP_API_HOST
