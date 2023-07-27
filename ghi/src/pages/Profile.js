@@ -177,14 +177,12 @@ export default function Profile() {
                 const reviewsData = await reviewsResponse.json();
                 setReviews(reviewsData)
                 setRating(reviewsData.rating)
-
-
             } else {
                 throw new Error("Failed to retrieve user reviews")
             }
         };
         fetchUserReviews();
-    }, [username, token]);
+    }, [username]);
 
     useEffect(() => {
         const reviewPosterFetch = async () => {
