@@ -103,14 +103,18 @@ export default function MovieDetails() {
       {error && <p>{error}</p>}
       <div>
         <Container className="bg-image fluid">
-          <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+          {movie.backdrop_path ? (
+            <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+          ) : null}
         </Container>
 
         <Container>
           <Row>
             <Col className="text-center">
               <Card>
-                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt="movie poster" />
+                {movie.poster_path ? (
+                  <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+                ) : null}
               </Card>
             </Col>
             <Col>
@@ -127,7 +131,7 @@ export default function MovieDetails() {
             </Col>
           </Row>
           <Row>
-            `               {reviews.map((review) => {
+            {reviews.map((review) => {
               return (
                 <Card key={review.id}>
                   <Card.Text>{review.username}</Card.Text>
