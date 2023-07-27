@@ -29,45 +29,77 @@ export default function CollectionDetail() {
     }
     console.log("username:", username)
 
-    const fetchMovies = async () => {
-        console.log("username:", username)
-        const moviesUrl = `http://localhost:8000/users/${username}/collections/${collection_id}`;
-        const response = await fetch(moviesUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setMovies(data)
+    // const fetchMovies = async () => {
+    //     console.log("username:", username)
+    //     const moviesUrl = `http://localhost:8000/users/${username}/collections/${collection_id}`;
+    //     const response = await fetch(moviesUrl, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         },
+    //     });
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         console.log(data)
+    //         setMovies(data)
 
-            const movieIds = data.map(movie => movie.movie_id);
-            console.log(movieIds)
+    //         const movieIds = data.map(movie => movie.movie_id);
+    //         console.log(movieIds)
 
-            // fetch movie details for each movie
-            const posterPaths = []
-            for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
-                const movieResponse = await fetch(movieUrl);
-                if (movieResponse.ok) {
-                    const data = await movieResponse.json();
-                    posterPaths.push(data.poster_path)
-                }
-            }
-            setPosterPaths(posterPaths)
-        } else {
-            throw new Error("Failed to retrieve movies watched")
-        }
+    //         // fetch movie details for each movie
+    //         const posterPaths = []
+    //         for (const movieId of movieIds) {
+    //             const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+    //             const movieResponse = await fetch(movieUrl);
+    //             if (movieResponse.ok) {
+    //                 const data = await movieResponse.json();
+    //                 posterPaths.push(data.poster_path)
+    //             }
+    //         }
+    //         setPosterPaths(posterPaths)
+    //     } else {
+    //         throw new Error("Failed to retrieve movies watched")
+    //     }
 
-    }
+    // }
 
     useEffect(() => {
         if (token && username) {
-            fetchMovies();
+            const fetchMovies = async () => {
+                const moviesUrl = `http://localhost:8000/users/${username}/collections/${collection_id}`;
+                const response = await fetch(moviesUrl, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data)
+                    setMovies(data)
+
+                    const movieIds = data.map(movie => movie.movie_id);
+                    console.log(movieIds)
+
+                    // fetch movie details for each movie
+                    const posterPaths = []
+                    for (const movieId of movieIds) {
+                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                        const movieResponse = await fetch(movieUrl);
+                        if (movieResponse.ok) {
+                            const data = await movieResponse.json();
+                            posterPaths.push(data.poster_path)
+                        }
+                    }
+                    setPosterPaths(posterPaths)
+                } else {
+                    throw new Error("Failed to retrieve movies watched")
+                }
+
+            }
+        fetchMovies();
         }
-    }, [token, username]);
+    }, [token, username, collection_id]);
 
     useEffect(() => {
         fetchUsername();
@@ -92,7 +124,6 @@ export default function CollectionDetail() {
                                     <a href={'http://localhost:3000/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}
-                                            // onClick={() => handleDetailRedirect()} />
                                         />
                                     </a>
                                 </Card>

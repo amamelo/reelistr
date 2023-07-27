@@ -1,13 +1,8 @@
-import Movie from "../components/MovieSearch";
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import useToken from "@galvanize-inc/jwtdown-for-react";
-import reelistr_logo from './reelistr_logo.png';
 import Image from 'react-bootstrap/Image';
 
 import '../css/styles.css'

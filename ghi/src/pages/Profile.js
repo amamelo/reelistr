@@ -1,10 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import reelistr_logo from './reelistr_logo.png';
 import Image from 'react-bootstrap/Image';
@@ -23,7 +21,6 @@ export default function Profile() {
     const [reviews, setReviews] = useState([]);
     const [reviewsposterPaths, setReviewPosterPaths] = useState([]);
     const [rating, setRating] = useState('');
-    const [star, setStar] = useState('')
     const { token } = useToken();
 
     const fetchUserInfo = async () => {
@@ -38,73 +35,73 @@ export default function Profile() {
         }
     }
 
-    const fetchMovies = async () => {
-        const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
-        const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
-        if (response.ok) {
-            const data = await response.json();
-            setMovies(data)
+    // const fetchMovies = async () => {
+    //     const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
+    //     const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         setMovies(data)
 
-            // extract movie IDs
-            const movieIds = data.map(movie => movie.movie_id);
+    //         // extract movie IDs
+    //         const movieIds = data.map(movie => movie.movie_id);
 
-            // fetch movie details for each movie
-            const posterPaths = []
-            for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-                const movieResponse = await fetch(movieUrl);
-                if (movieResponse.ok) {
-                    const data = await movieResponse.json();
-                    posterPaths.push(data.poster_path)
-                }
-            }
-            setPosterPaths(posterPaths)
-        } else {
-            throw new Error("Failed to retrieve movies watched")
-        }
-    };
+    //         // fetch movie details for each movie
+    //         const posterPaths = []
+    //         for (const movieId of movieIds) {
+    //             const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+    //             const movieResponse = await fetch(movieUrl);
+    //             if (movieResponse.ok) {
+    //                 const data = await movieResponse.json();
+    //                 posterPaths.push(data.poster_path)
+    //             }
+    //         }
+    //         setPosterPaths(posterPaths)
+    //     } else {
+    //         throw new Error("Failed to retrieve movies watched")
+    //     }
+    // };
 
-    const fetchCollections = async () => {
-        const collectionsUrl = `http://localhost:8000/${username}/collections/`;
-        const response = await fetch(collectionsUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            setCollections(data);
+    // const fetchCollections = async () => {
+    //     const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+    //     const response = await fetch(collectionsUrl, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         },
+    //     });
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         setCollections(data);
 
-        } else {
-            throw new Error("Failed to retrieve collections")
-        }
-    }
+    //     } else {
+    //         throw new Error("Failed to retrieve collections")
+    //     }
+    // }
 
-    const fetchUserReviews = async () => {
-        const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
-        const reviewsResponse = await fetch(reviewsUrl);
-        if (reviewsResponse.ok) {
-            const reviewsData = await reviewsResponse.json();
-            setReviews(reviewsData)
-            setRating(reviewsData.rating)
+    // const fetchUserReviews = async () => {
+    //     const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
+    //     const reviewsResponse = await fetch(reviewsUrl);
+    //     if (reviewsResponse.ok) {
+    //         const reviewsData = await reviewsResponse.json();
+    //         setReviews(reviewsData)
+    //         setRating(reviewsData.rating)
 
-            const movieIds = reviews.map(review => review.movie_id);
-            // fetch movie details for each movie in review
-            const reviewposterPaths = []
-            for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-                const movieResponse = await fetch(movieUrl);
-                if (movieResponse.ok) {
-                    const data = await movieResponse.json();
-                    reviewposterPaths.push(data.poster_path)
-                }
-            }
-            setReviewPosterPaths(reviewposterPaths)
-        } else {
-            throw new Error("Failed to retrieve user reviews")
-        }
-    };
+    //         const movieIds = reviews.map(review => review.movie_id);
+    //         // fetch movie details for each movie in review
+    //         const reviewposterPaths = []
+    //         for (const movieId of movieIds) {
+    //             const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+    //             const movieResponse = await fetch(movieUrl);
+    //             if (movieResponse.ok) {
+    //                 const data = await movieResponse.json();
+    //                 reviewposterPaths.push(data.poster_path)
+    //             }
+    //         }
+    //         setReviewPosterPaths(reviewposterPaths)
+    //     } else {
+    //         throw new Error("Failed to retrieve user reviews")
+    //     }
+    // };
 
 
     useEffect(() => {
@@ -113,14 +110,80 @@ export default function Profile() {
 
     useEffect(() => {
         if (token && username) {
+            const fetchCollections = async () => {
+                const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+                const response = await fetch(collectionsUrl, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setCollections(data);
+
+                } else {
+                    throw new Error("Failed to retrieve collections")
+                }
+            }
             fetchCollections();
+
+            const fetchMovies = async () => {
+                const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
+                const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
+                if (response.ok) {
+                    const data = await response.json();
+                    setMovies(data)
+
+                    // extract movie IDs
+                    const movieIds = data.map(movie => movie.movie_id);
+
+                    // fetch movie details for each movie
+                    const posterPaths = []
+                    for (const movieId of movieIds) {
+                        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                        const movieResponse = await fetch(movieUrl);
+                        if (movieResponse.ok) {
+                            const data = await movieResponse.json();
+                            posterPaths.push(data.poster_path)
+                        }
+                    }
+                    setPosterPaths(posterPaths)
+                } else {
+                    throw new Error("Failed to retrieve movies watched")
+                }
+            };
             fetchMovies();
         }
-    }, [token, username]);
+    }, [token, username, watchlist_id]);
 
     useEffect(() => {
+        const fetchUserReviews = async () => {
+            const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
+            const reviewsResponse = await fetch(reviewsUrl);
+            if (reviewsResponse.ok) {
+                const reviewsData = await reviewsResponse.json();
+                setReviews(reviewsData)
+                setRating(reviewsData.rating)
+
+                const movieIds = reviews.map(review => review.movie_id);
+                // fetch movie details for each movie in review
+                const reviewposterPaths = []
+                for (const movieId of movieIds) {
+                    const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                    const movieResponse = await fetch(movieUrl);
+                    if (movieResponse.ok) {
+                        const data = await movieResponse.json();
+                        reviewposterPaths.push(data.poster_path)
+                    }
+                }
+                setReviewPosterPaths(reviewposterPaths)
+            } else {
+                throw new Error("Failed to retrieve user reviews")
+            }
+        };
         fetchUserReviews();
-    }, [username]);
+    }, [username, rating, token, watchlist_id, posterPaths, reviewsposterPaths, movies, collections, reviews]);
 
     return (
         <div className="profile-container">
@@ -191,7 +254,7 @@ export default function Profile() {
                                     <div className="col-md-7">
                                         <div className="card-body ">
                                             <h5 className="card-title">{review.username}</h5>
-                                            <p className="card-text">{review.rating}</p>
+                                            <p className="card-text">{review.rating}{rating}</p>
                                             <p className="card-text">{review.review}</p>
                                         </div>
                                     </div>
