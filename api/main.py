@@ -15,7 +15,7 @@ from routers import (
 origins = [
     os.environ.get("CORS_HOST"),
     "https://localhost:3000",
-    'https://barkmulcher.gitlab.io/module2-project-gamma'
+    'https://barkmulcher.gitlab.io/module3-project-gamma'
 ]
 
 
@@ -23,9 +23,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000")
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
