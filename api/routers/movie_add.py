@@ -9,7 +9,7 @@ from queries.movie_add import (
 router = APIRouter()
 
 
-@router.post("/movies/", response_model=MovieOut)
+@router.post("/movies", response_model=MovieOut)
 def add_movie_to_db(
     movie: MovieIn,
     response: Response,
@@ -18,7 +18,7 @@ def add_movie_to_db(
     return repo.add_movie_to_db(movie)
 
 
-@router.get("/movies/{id}/", response_model=MovieOut)
+@router.get("/movies/{id}", response_model=MovieOut)
 def get_movie_from_db(
     id: int,
     response: Response,
@@ -34,14 +34,14 @@ def get_movie_from_db(
         raise HTTPException(status_code=404, detail='Movie Not Found')
 
 
-@router.get("/movies/", response_model=List[MovieOut])
+@router.get("/movies", response_model=List[MovieOut])
 def get_all_movies_from_db(
     repo: MovieRepository = Depends(),
 ):
     return repo.get_all_movies_db()
 
 
-@router.delete("/movies/{id}/", response_model=bool)
+@router.delete("/movies/{id}", response_model=bool)
 def delete_movie_from_db(
     id: int,
     response: Response,

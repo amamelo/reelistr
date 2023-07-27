@@ -16,7 +16,7 @@ from queries.movies_to_collection import (
 router = APIRouter()
 
 
-@router.post("/users/{username}/collections/{collection_id}/",
+@router.post("/users/{username}/collections/{collection_id}",
              response_model=MovieToCollectionOut | Error)
 async def add_movie_to_collection(
     username: str,
@@ -30,7 +30,7 @@ async def add_movie_to_collection(
 
 
 # get all movies in collection
-@router.get("/users/{username}/collections/{collection_id}/",
+@router.get("/users/{username}/collections/{collection_id}",
             response_model=List[MovieToCollectionOut] | Error)
 async def get_all_movies_in_collection(
     username: str,
