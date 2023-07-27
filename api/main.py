@@ -13,9 +13,11 @@ from routers import (
 )
 
 origins = [
-    "http://localhost:3000",
-    os.environ.get("CORS_HOST", None)
+    os.environ.get("CORS_HOST"),
+    "https://localhost:3000",
+    'https://barkmulcher.gitlab.io/module2-project-gamma'
 ]
+
 
 app = FastAPI()
 
