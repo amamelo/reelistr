@@ -46,7 +46,7 @@ def update_collection(
     return repo.update_collection(collection_id, collection)
 
 
-@router.delete("/user/collections/{collection_id}/", response_model=bool)
+@router.delete("/user/collections/{collection_id}", response_model=bool)
 def delete_collection(
     collection_id: int,
     response: Response,
@@ -56,7 +56,7 @@ def delete_collection(
     return repo.delete_collection(collection_id)
 
 
-@router.get("/{username}/collections/", response_model=List[CollectionOut])
+@router.get("/{username}/collections", response_model=List[CollectionOut])
 def get_all_collections(
     username: str,
     account_data: dict = Depends(authenticator.get_current_account_data),
