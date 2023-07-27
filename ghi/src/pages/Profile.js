@@ -152,7 +152,7 @@ export default function Profile() {
                     // fetch movie details for each movie
                     const posterPathsArray = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
@@ -192,7 +192,7 @@ export default function Profile() {
         // fetch movie details for each movie in review
         const reviewposterPathsArray = []
         for (const movieId of movieIds) {
-            const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+            const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
             const movieResponse = await fetch(movieUrl);
             if (movieResponse.ok) {
                 const data = await movieResponse.json();
