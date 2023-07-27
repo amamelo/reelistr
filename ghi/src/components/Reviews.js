@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -18,24 +14,39 @@ function Reviews() {
     throw new Error("Failed to retrieve reviews");
   };
 
-  const fetchMovies = async () => {
-    const movieIds = reviews.map(review => review.movie_id);
-    const posterPaths = []
-    for (const movieId of movieIds) {
-      const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
-      const movieResponse = await fetch(movieUrl);
-      if (movieResponse.ok) {
-        const data = await movieResponse.json();
-        posterPaths.push(data.poster_path)
-      }
-    }
-    setPosterPaths(posterPaths)
-  };
+  // const fetchMovies = async () => {
+  //   const movieIds = reviews.map(review => review.movie_id);
+  //   const posterPaths = []
+  //   for (const movieId of movieIds) {
+  //     const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+  //     const movieResponse = await fetch(movieUrl);
+  //     if (movieResponse.ok) {
+  //       const data = await movieResponse.json();
+  //       posterPaths.push(data.poster_path)
+  //     }
+  //   }
+  //   setPosterPaths(posterPaths)
+  // };
 
   useEffect(() => {
     fetchReviews();
   }, []);
+
+
   useEffect(() => {
+    const fetchMovies = async () => {
+      const movieIds = reviews.map(review => review.movie_id);
+      const posterPaths = []
+      for (const movieId of movieIds) {
+        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+        const movieResponse = await fetch(movieUrl);
+        if (movieResponse.ok) {
+          const data = await movieResponse.json();
+          posterPaths.push(data.poster_path)
+        }
+      }
+      setPosterPaths(posterPaths)
+    };
     fetchMovies();
   }, [reviews]);
 

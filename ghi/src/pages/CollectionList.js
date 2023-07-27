@@ -21,33 +21,50 @@ export default function CollectionList() {
         }
     }
 
-    const fetchCollections = async () => {
-        const collectionsUrl = `http://localhost:8000/${username}/collections/`;
-        const response = await fetch(collectionsUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            setCollections(data);
-            // setCollectionName(data)
-            // console.log(data[1]['collection_name'])
+    // const fetchCollections = async () => {
+    //     const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+    //     const response = await fetch(collectionsUrl, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         },
+    //     });
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         setCollections(data);
+    //         // setCollectionName(data)
+    //         // console.log(data[1]['collection_name'])
 
 
-            const collectionNames = data.map(collection => collection.collection_name);
-            console.log(collectionNames)
+    //         const collectionNames = data.map(collection => collection.collection_name);
+    //         console.log(collectionNames)
 
 
-        } else {
-            throw new Error("Failed to retrieve collections")
-        }
+    //     } else {
+    //         throw new Error("Failed to retrieve collections")
+    //     }
 
-    }
+    // }
 
     useEffect(() => {
         if (token && username) {
+            const fetchCollections = async () => {
+                const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+                const response = await fetch(collectionsUrl, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setCollections(data);
+                    const collectionNames = data.map(collection => collection.collection_name);
+                    console.log(collectionNames)
+                } else {
+                    throw new Error("Failed to retrieve collections")
+                }
+            }
             fetchCollections();
         }
     }, [token, username])
@@ -56,17 +73,13 @@ export default function CollectionList() {
         fetchUsername();
     }, [])
 
-
-
     return (
         <>
         <br/>
         <br/>
         <br/>
+        <br/>
         <div>
-            <br />
-            <br />
-            <br />
             <h1>Collection List</h1>
         </div>
         <Container className="p-4">
