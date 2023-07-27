@@ -23,17 +23,17 @@ export default function Profile() {
     const [rating, setRating] = useState('');
     const { token } = useToken();
 
-    const fetchUserInfo = async () => {
-        const tokenUrl = 'http://localhost:8000/token';
-        const response = await fetch(tokenUrl, { credentials: "include" });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setUserName(data.account.username)
-            setWatchlistId(data.watchlist_id)
-            setUserEmail(data.account.email)
-        }
-    }
+    // const fetchUserInfo = async () => {
+    //     const tokenUrl = 'http://localhost:8000/token';
+    //     const response = await fetch(tokenUrl, { credentials: "include" });
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         console.log(data)
+    //         setUserName(data.account.username)
+    //         setWatchlistId(data.watchlist_id)
+    //         setUserEmail(data.account.email)
+    //     }
+    // }
 
     // const fetchMovies = async () => {
     //     const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
@@ -105,6 +105,17 @@ export default function Profile() {
 
 
     useEffect(() => {
+        const fetchUserInfo = async () => {
+            const tokenUrl = 'http://localhost:8000/token';
+            const response = await fetch(tokenUrl, { credentials: "include" });
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+                setUserName(data.account.username)
+                setWatchlistId(data.watchlist_id)
+                setUserEmail(data.account.email)
+            }
+        }
         fetchUserInfo();
     }, []);
 
@@ -126,7 +137,6 @@ export default function Profile() {
                     throw new Error("Failed to retrieve collections")
                 }
             }
-            fetchCollections();
 
             const fetchMovies = async () => {
                 const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
@@ -137,25 +147,27 @@ export default function Profile() {
 
                     // extract movie IDs
                     const movieIds = data.map(movie => movie.movie_id);
+                    console.log("movieIds:+++++++++++++++++++++++++++", movieIds)
 
                     // fetch movie details for each movie
-                    const posterPaths = []
+                    const posterPathsArray = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
-                            posterPaths.push(data.poster_path)
+                            posterPathsArray.push(data.poster_path)
                         }
                     }
-                    setPosterPaths(posterPaths)
+                    setPosterPaths(posterPathsArray)
                 } else {
                     throw new Error("Failed to retrieve movies watched")
                 }
             };
+            fetchCollections();
             fetchMovies();
         }
-    }, [token, username, watchlist_id]);
+    }, [username, token, watchlist_id]);
 
     useEffect(() => {
         const fetchUserReviews = async () => {
@@ -166,24 +178,33 @@ export default function Profile() {
                 setReviews(reviewsData)
                 setRating(reviewsData.rating)
 
-                const movieIds = reviews.map(review => review.movie_id);
-                // fetch movie details for each movie in review
-                const reviewposterPaths = []
-                for (const movieId of movieIds) {
-                    const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-                    const movieResponse = await fetch(movieUrl);
-                    if (movieResponse.ok) {
-                        const data = await movieResponse.json();
-                        reviewposterPaths.push(data.poster_path)
-                    }
-                }
-                setReviewPosterPaths(reviewposterPaths)
+
             } else {
                 throw new Error("Failed to retrieve user reviews")
             }
         };
         fetchUserReviews();
-    }, [username, rating, token, watchlist_id, posterPaths, reviewsposterPaths, movies, collections, reviews]);
+    }, [username, token]);
+
+    useEffect(() => {
+        const reviewPosterFetch = async () => {
+        const movieIds = reviews.map(review => review.movie_id);
+        // fetch movie details for each movie in review
+        const reviewposterPathsArray = []
+        for (const movieId of movieIds) {
+            const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+            const movieResponse = await fetch(movieUrl);
+            if (movieResponse.ok) {
+                const data = await movieResponse.json();
+                reviewposterPathsArray.push(data.poster_path)
+            }
+        }
+        setReviewPosterPaths(reviewposterPathsArray)
+    }
+        if (reviews) {
+            reviewPosterFetch()
+    }
+    }, [reviews])
 
     return (
         <div className="profile-container">
