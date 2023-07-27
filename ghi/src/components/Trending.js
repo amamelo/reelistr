@@ -30,11 +30,11 @@ function TrendingApi() {
           {movies.map((movie, index) => (
             <Col key={index} xs='4'>
               <Card className="custom-card">
-                <Link to={'/movies/' + movie.movie_id} >
-                <Card.Img
-                  src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`}
-                  alt={movie.title}
-                />
+                <Link to={'/movies/' + movie.id} >
+                  <Card.Img
+                    src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`}
+                    alt={movie.title}
+                  />
                 </Link>
               </Card>
             </Col>
