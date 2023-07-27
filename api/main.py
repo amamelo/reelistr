@@ -12,6 +12,10 @@ from routers import (
     watchlist
 )
 
+origins = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", None)
+]
 
 app = FastAPI()
 

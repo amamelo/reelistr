@@ -1,3 +1,225 @@
+Friday July 28th
+
+
+
+Thursday July 27th
+
+
+
+
+Wednesday July 26th
+
+
+
+Tuesday July 25th
+
+Wrote my unit test! 
+
+
+Monday July 24th
+
+Started CI/CD 
+
+
+
+Friday July 21st
+no class
+
+
+Thursday July 20th
+
+Done:
+-Finished front-end movie details page (needs styling) 
+-Finished front-end collection detail page
+
+Up Next:
+[] User Profile
+[] Collections (all)
+[] Collection Detail
+[] Unit tests (one per person)
+[] CI/CD (must start on Monday, split up to get it done)
+[] buttons (add movie to collection, add movie to watchlist)
+[] Read Me file
+[] Journals 
+
+Front-End Styling:
+[] Navigation: add search bar 
+[] Movie Details Page
+[] User Profile Page : container with user name + info, container with media scroller for—watchlist, collections, container for reviews. 
+[] Log In
+[] Sign Up
+[] Homepage : media scroller of trending, media scroller of coming soon
+[] My Collections (page that lists user’s collections)
+[] Collection Detail Page
+[] Watchlist Detail page 
+[] buttons
+
+If you want to work on features over the weekend, make a new branch, and let us know what you’re working on so we don’t overlap. 
+
+
+
+
+Wednesday July 19th
+
+Done:
+-watchlists front end fetch
+-Began front-end movie details page 
+
+
+Up Next:
+[] finish adding reviews to movie detail
+[] User Profile
+[] Collections (all)
+[] Collection Detail
+[] Unit tests (one per person)
+[] CI/CD (must start on Monday, split up to get it done)
+[] Read Me file
+[] Journals 
+
+
+Tuesday July 18th
+
+Done:
+-Front-end authentication
+-Protect views
+-Reviews component fetches reviews
+-Trending component fetches data from TMDB and displays a list 
+-Coming Soon component fetches data from TMDB, on click leads to blank movie detail page
+-Sign up form 
+
+Up Next:
+[] Front end components - Movie Details, Collections 
+[] Unit tests (one per person)
+
+Hex Colors:
+orange:
+FF5F05
+Brighter for buttons:
+FB6900
+
+Navy blue:
+2D3260
+
+Grey:
+EEEEEE
+
+
+Monday July 17th
+
+Done:
+Watchlist crud
+Watchlist automatically created when an account is made
+
+Up Next:
+[] Front-end authentication
+[] protect views
+[] Unit tests (one per person)
+[] Front end components! 
+
+Notes:
+Library is not necessary bc we put a bool in join table
+
+Due Date: July 28th
+
+
+Friday July 14th
+
+Done:CRUD for Movies in Collections
+Made branches for “Reviews CRUD, Library CRUD, Watchlist CRUD”Updated Reviews table to reference Movies
+Updated Library to reference Movies in its branch
+Updated Watchlist to reference Movies in its branch
+Designed a diagram for our table set up in excalidraw
+To Do: 
+Reviews CRUD
+Watchlist CRUD
+Library CRUD
+Front End Authentication
+Protect APIS for authentication (add jwt down code)
+Error: Operator…? 
+Change the order of the parameters in the query function to match the order of the SELECT and url path in the router. 
+
+Note: index numbers in the routes need to match the structure of the table
+
+
+Create a watchlist
+Add a film to watchlist,
+
+
+Automatically create watchlist when account is made 
+Add create watchlist to parameters and do a dependency injection like in line 42, watchlist repo: MovieWatchlistRepo = depends()
+
+After try statement in account, pass in parameters that that create watchlist function needs) 
+
+
+
+Thursday July 13th
+
+Today:
+-Merge finished (movie_collection CRUD and TMDB crud)working features to Main 
+-CRUD for movies database: finished and merged
+-Completed the “create” of CRUD for movies_in_collection
+
+Next steps:
+Complete CRUD for movies_in_collection
+CRUD apis for reviews
+CRUD apis for movies 
+Merge finished working features to Main 
+Protect views (add jwt-token code)
+Front-End Authentication
+
+Errors:
+“Unprocessable entity” : solved by matching the path of router.post to router.get
+
+Attribute error: nonetype
+Solution: the movie_id we were inputing was not matching the id (tmdb_movie_id) that was being referenced. 
+
+Notes: add timestamp to Reviews table in database
+
+Goals:
+[] Finish the back-end by the end of the week
+[] Next week focus on Front-end
+[] Last week before due date aim to work on fine-tuning/stretch goals
+
+I’ve been feeling much more comfortable withe the group and also understanding how things work a lot more. 
+
+
+
+Wednesday July 12th
+Today:
+-created all the apis for the TMDB
+-finished CRUD apis for Collections
+
+
+Next steps:
+CRUD apis for reviews
+CRUD apis for movies 
+Merge finished working features to Main 
+Protect views (add jwt-token code)
+Front-End Authentication
+
+
+Goals:
+[] Finish the back-end by the end of the week
+[] Next week focus on Front-end
+[] Last week before due date aim to work on fine-tuning/stretch goals
+
+
+Tuesday July 11
+
+-We have to create a more detailed table for storing movies into our database. -Began setting up fastapi CRUD for movie_collection 
+-Note from when Mitch helped: user will search movie, once movie is selected and added to that collection, movie data will be stored into our own database (movies table) 
+
+questions: how do we translate our joined table into our apis? 
+
+To do: 
+-Continue setting up tables
+-Continue CRUD for Reviews, Movies, Collection, watchlist, library
+-Add “require token” code to views we want protected (only accessed by logged in user). 
+
+Goals:
+[] Finish the back-end by the of the week
+[] Next week focus on Front-end
+[] Last week before due date aim to work on fine-tuning/stretch goals
 
 
 Monday, July 10
@@ -19,28 +241,47 @@ Goals:
 [] Next week focus on Front-end
 [] Last week before due date aim to work on fine-tuning/stretch goals
 
-Friday, June 27
+Friday, June 30
 
 Today we completed authentication! We gained a better understanding of the jwtdown fastapi code. Came across a couple of errors and decided to start keeping a journal of errors for future reference. Accomplished our goal of completing Authentication by today.
 It felt like a slow start at the beginning of all this, but today it felt like things were moving along at a better pace, particularly in terms of how we work together. 
 We've established to not put pressure on each other about working over the break, but we are free to do research and share anything with the group on Slack. 
  
 
-Thursday, June 27
+Thursday, June 29
 
 Continued with authentication. Came across errors that really slowed us down. These errors have been helpful, however, in allowing us to get a better understanding of how things worked. We worked until we were able to fix the errors.
 
+Accomplishments:
+- Log in/log out authentication
+
+Goals: 
+Continue with authentication for account creation
+Have authentication ready by Friday. 
 
 
-Wednesday, June 29th
+Wednesday, June 28th
 Accomplishments:
 Log in/log out authentication
 Goals:
 Have authentication ready by Friday.
 
-Tuesday, June 28
+Tuesday, June 27
 Today I designed a logo for our Reelistr app. Additionally, we set up the postgresql database and connected to pgAdmin. We were having some issues so we all attempted run the containers on our individual branches to make sure everything was working for everyone. 
 We set up goals for what is next. 
+
+Accomplishments:
+- Set up postgresql on our project
+- Connected pgAdmin
+- Everyone succeeded in running containers without errors. 
+
+Next steps:
+- Database table creation
+- Authentication (waiting on lecture)
+
+Goals:
+Tomorrow: get started on authentication 
+Have authentication ready by Friday, June 30th (before break)
 
 
 Monday, June 26

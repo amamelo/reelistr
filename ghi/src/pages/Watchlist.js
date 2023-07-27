@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { Link } from 'react-router-dom';
 
 export default function Watchlist() {
     const [movies, setMovies] = useState([]);
@@ -37,7 +38,7 @@ export default function Watchlist() {
             // fetch movie details for each movie
             const posterPaths = []
             for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+                const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
                 const movieResponse = await fetch(movieUrl);
                 if (movieResponse.ok) {
                     const data = await movieResponse.json();
@@ -60,28 +61,23 @@ export default function Watchlist() {
         fetchUsername();
     }, []);
 
-    const handleDetailRedirect = () => {
-        window.location.href = "/details";
-        // window.location.href = "/details/";
-    }
-
     return (
         <div>
             <br />
             <br />
             <br />
-            <h1>Trending</h1>
+            <h1>Watchlist</h1>
             <Container className="p-4">
                 <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
                     {movies.map((movie, index) => {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                                    <a href={'http://localhost:3000/movies/' + movie.movie_id }>
+                                    <Link to={'/movies/' + movie.movie_id }>
                                     <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                         alt={movie.title}
-                                        onClick={() => handleDetailRedirect()} />
-                                    </a>
+                                    />
+                                    </Link>
                                 </Card>
                             </Col>
                         );

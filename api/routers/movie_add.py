@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import List
 from queries.movie_add import (
     MovieIn,
@@ -24,7 +24,14 @@ def get_movie_from_db(
     response: Response,
     repo: MovieRepository = Depends(),
 ):
-    return repo.get_movie_from_db(id)
+    movie = repo.get_movie_from_db(id)
+    # if response returns a record
+    if movie:
+        # return the movie
+        return movie
+    # else set response.status_code = 404 & send error message
+    else:
+        raise HTTPException(status_code=404, detail='Movie Not Found')
 
 
 @router.get("/movies/", response_model=List[MovieOut])
