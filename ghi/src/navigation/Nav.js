@@ -37,8 +37,8 @@ function Nav() {
                 Movies
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><NavLink className="dropdown-item" to="/trending">Trending</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/upcoming">Coming Soon</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/movies/trending">Trending</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/movies/comingsoon">Coming Soon</NavLink></li>
               </ul>
             </li>
             {isLoggedIn ? (
