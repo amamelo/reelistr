@@ -14,30 +14,24 @@ import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
 import CreateCollection from "./components/CreateCollection";
-import { useToken } from "@galvanize-inc/jwtdown-for-react";
 
 
 function App() {
 
-  const { tokenData } = useToken()
-
-  const accountId = tokenData
-
-
-  const baseUrl = process.env.REACT_APP_API_HOST
+  
   const domain = /https:\/\/[^/]+/
   const basename = process.env.PUBLIC_URL.replace(domain, '')
 
   return (
     <BrowserRouter basename={basename}>
-      <AuthProvider baseUrl={baseUrl}>
+      <AuthProvider>
         <Nav />
         <div>
           <Routes>
             <Route path="/createcollection" element={<CreateCollection />} />
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm accountId={accountId}/>} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/movies">
               <Route path=":movie_id" element={<MovieDetails />} />
               <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
