@@ -73,10 +73,10 @@ export default function Watchlist() {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                                    <Link to={'/movies/' + movie.movie_id }>
-                                    <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
-                                        alt={movie.title}
-                                    />
+                                    <Link to={'/movies/' + movie.movie_id}>
+                                        <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
+                                            alt={movie.title}
+                                        />
                                     </Link>
                                 </Card>
                             </Col>
