@@ -104,7 +104,7 @@ export default function MovieDetails() {
       <div>
         <Container className="bg-image fluid">
           {movie.backdrop_path ? (
-            <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+            <img className="backdrop-img" src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
           ) : null}
         </Container>
 

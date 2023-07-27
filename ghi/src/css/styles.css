@@ -1,6 +1,11 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'https://fonts.googleapis.com/css2?family=Abril+Fatface&family=League+Spartan:wght@100;400;700&display=swap';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .container-fluid {
   font-family: 'League Spartan', sans-serif;
@@ -8,10 +13,11 @@
   font-weight: 700;
   color: white;
 }
-.body {
-  background: rgb(12, 12, 33);
+
+body {
+  background-color: rgb(0, 0, 255);
   color: white;
-  font-family:'League Spartan', sans-serif;
+  font-family:'comic sans ms';
 }
 
 .custom-navbar {
@@ -43,6 +49,18 @@
   background-clip: text;
   color: transparent;
 }
+
+.backdrop-img {
+  max-width: 100%;
+  display: block;
+}
+
+.backdrop-img img {
+  object-fit: cover;
+  /* -webkit-mask-image: linear-gradient(to top, transparent 5%, black 100%); */
+  mask-image: linear-gradient(to top, transparent 5%, black 100%);
+}
+
 
 .custom-card{
   border-radius: 4px;

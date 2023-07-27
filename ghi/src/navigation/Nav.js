@@ -26,7 +26,7 @@ function Nav() {
   return (
     <nav className="navbar custom-navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <NavLink className="navbar-brand logo" to="/"><div className="logo">Reelister</div></NavLink>
+        <NavLink className="navbar-brand logo" to="/"><div className="logo">reelister</div></NavLink>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
