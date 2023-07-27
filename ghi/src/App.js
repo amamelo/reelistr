@@ -14,8 +14,15 @@ import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
 import CreateCollection from "./components/CreateCollection";
+import { useToken } from "./hooks/useToken.js";
+
 
 function App() {
+
+  const { tokenData } = useToken()
+
+  const accountId = tokenData 
+
 
   const baseUrl = process.env.REACT_APP_API_HOST
   const domain = /https:\/\/[^/]+/
@@ -30,7 +37,7 @@ function App() {
             <Route path="/createcollection" element={<CreateCollection />} />
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm accountId={accountId}/>} />
             <Route path="/movies">
               <Route path=":movie_id" element={<MovieDetails />} />
               <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
