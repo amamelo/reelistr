@@ -89,7 +89,6 @@ export default function CollectionDetail() {
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
                             posterPaths.push(data.poster_path)
-                            console.log(data.poster_path)
                         }
                     }
                     setPosterPaths(posterPaths)
