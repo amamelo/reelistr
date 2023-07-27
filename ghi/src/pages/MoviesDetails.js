@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 // import Reviews from "../components/Reviews";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
@@ -23,7 +23,7 @@ export default function MovieDetails() {
   const { token } = useToken();
   let { movie_id } = useParams()
 
-  const fetchMovieData = async () => {
+  const fetchMovieData = useCallback(async () => {
 
     const movieDataUrl = `http://localhost:8000/tmdb/movies/details/${movie_id}`;
     const response = await fetch(movieDataUrl);
@@ -42,31 +42,11 @@ export default function MovieDetails() {
     } else {
       throw new Error("Failed to retrieve movie data")
     }
-  }
+  }, [movie_id]);
 
   useEffect(() => {
-    const fetchMovieData = async () => {
-
-      const movieDataUrl = `http://localhost:8000/movies/details/${movie_id}`;
-      const response = await fetch(movieDataUrl);
-      if (response.ok) {
-        const data = await response.json();
-        setMovie(data)
-
-        // 2nd fetch for reviews by movie_id
-        const reviewsUrl = `http://localhost:8000/reviews/movie/${movie_id}`;
-        const reviewsResponse = await fetch(reviewsUrl);
-        if (reviewsResponse.ok) {
-          const reviewsData = await reviewsResponse.json();
-          setReviews(reviewsData)
-        }
-
-      } else {
-        throw new Error("Failed to retrieve movie data")
-      }
-    }
     fetchMovieData();
-  }, [movie_id]);
+  }, [movie_id, fetchMovieData]);
 
   useEffect(() => {
     fetchUsername();
@@ -130,7 +110,7 @@ export default function MovieDetails() {
           <Row>
             <Col className="text-center">
               <Card>
-                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt="movie poster" />
               </Card>
             </Col>
             <Col>
