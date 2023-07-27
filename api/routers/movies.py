@@ -99,7 +99,7 @@ def get_details_from_tmdb(movie_id: int) -> MovieDetailsOut:
 
 
 # trending GET
-@router.get('/trending/', response_model=List[MovieSearchOut])
+@router.get('/trending', response_model=List[MovieSearchOut])
 def get_trending() -> List[MovieSearchOut]:
     tmdb_url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}"
     response = requests.get(tmdb_url)

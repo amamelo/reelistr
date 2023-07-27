@@ -17,7 +17,7 @@ from queries.watchlist import (
 router = APIRouter()
 
 
-@router.post("/users/{username}/watchlist/",
+@router.post("/users/{username}/watchlist",
              response_model=MoviesWatchlistUserOut | Error)
 async def create_watchlist(
     username: str,
@@ -28,7 +28,7 @@ async def create_watchlist(
     return repo.create_watchlist(username)
 
 
-@router.get("/users/{username}/watchlist/{watchlist_id}/",
+@router.get("/users/{username}/watchlist/{watchlist_id}",
             response_model=List[MovieWatchlistOut] | Error)
 async def get_watchlist_detail(
     username: str,
@@ -41,7 +41,7 @@ async def get_watchlist_detail(
     return repo.get_watchlist_details(username, watchlist_id)
 
 
-@router.get("/watchlists/",
+@router.get("/watchlists",
             response_model=List[MoviesWatchlistUserOut] | Error)
 async def get_all_watchlists(
     request: Request,

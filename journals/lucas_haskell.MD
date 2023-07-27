@@ -21,6 +21,9 @@ Rey has completed the wireframes, and we weren't given a ton of time to work on 
 ### Day 19:
 Got rudimentary movie detail pages working after struggling to get the movie detail page routes to work. Ended up using a very simply and effective useParams in MovieDetail.js.
 
+### Day 20 (of journaling):
+Got our site deployed today! Very exciting. Still working on getting it going so we can present while deployed.
+
 ## NOTES:
 -----------------
 ### outer join:
