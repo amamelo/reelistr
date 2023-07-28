@@ -8,9 +8,10 @@ import { Link } from 'react-router-dom';
 
 function TrendingApi() {
   const [movies, setMovies] = useState([]);
+  const baseUrl = process.env.REACT_APP_API_HOST
 
   const fetchTrending = async () => {
-    const response = await fetch(`http://localhost:8000/trending/`);
+    const response = await fetch(`${baseUrl}/trending/`);
     if (response.ok) {
       const data = await response.json();
       console.log(data)
