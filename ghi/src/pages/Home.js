@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image';
-
 import '../css/styles.css'
+
+
 export default function Home() {
 
   const [upcomingmovies, setUpcomingMovies] = useState([]);
@@ -16,10 +17,10 @@ export default function Home() {
     if (response.ok) {
       const data = await response.json();
       setUpcomingMovies(data);
-      return data;
+    } else {
+      throw new Error("Failed to fetch movie details");
     }
-    throw new Error("Failed to fetch movie details");
-  };
+  }
 
 
   const fetchTrending = async () => {
@@ -27,8 +28,9 @@ export default function Home() {
     if (response.ok) {
       const data = await response.json();
       return setTrendingMovies(data);
+    } else {
+      throw new Error("Failed to fetch movie details");
     }
-    throw new Error("Failed to fetch movie details");
   };
 
 
@@ -44,7 +46,8 @@ export default function Home() {
           </Col>
           <Col xs={6}>
             <h1>Welcome to reelistr!</h1>
-            <h6>your personal movie database</h6>
+            <h4>your personal movie database</h4>
+            <Link to="/signup"><button>Become a reelistr!</button></Link>
           </Col>
           <Col>
           </Col>
@@ -89,6 +92,3 @@ export default function Home() {
     </div >
   );
 }
-//coming soon
-//trending
-//recent reviews

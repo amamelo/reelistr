@@ -1,25 +1,27 @@
 Friday July 28th
+The project is due today. At last. 
 
 
 
 Thursday July 27th
-
-
+I continued working on the userprofile fixing some issues with the use effect (with help from Luke and the SEIRS). I did some more styling on the user profile, adding buttons and making the colors match the colors Rey changed the theme to. Additionally, I styled the collections, collection list, and and log in page. 
+I realized there was something different that could have been done in the back end in terms of our "get movie from collection", currently we are getting movies based on the collection_id as a url parameter, when we want to get a specific collection detail on the front end, we are unable to get the collection name to appear dynamically, bc it's not part of the data that we fethc. I think that having included the collection_name would have solved this. 
+Additionally, we are still missing a big part of the functionality of this application, that is the ability to add a movie to your watchlist or to your custom collection. I'm not sure how we are going to do this seeing that we don't have an endpoint to fethc all movies. We do however have a search movies endpoint. so perhaps if we allowed the user to search for a movie and then onclick or onsubmit add that movie to the collection? 
+Hopefully tomorrow we can all work on that together. 
 
 
 Wednesday July 26th
-
+Today I began design on the user profile page, the homepage and worked a little on the styling of the sign up page. Adding a media scroller for the watched movies and collections, and also making sure reviews appeared on the page. 
 
 
 Tuesday July 25th
 
-Wrote my unit test! 
+Wrote my unit test! It looked very simple but was a little more challenging to understand. I kept on getting a "no test ran" error, which was fixed by moving the tests directory into the app directory. 
 
 
 Monday July 24th
 
-Started CI/CD 
-
+Started CI/CD with Luke which has been a little difficult to follow while Rey worked on CSS designs. 
 
 
 Friday July 21st

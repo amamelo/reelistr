@@ -24,32 +24,34 @@ function App() {
   const basename = process.env.PUBLIC_URL.replace(domain, '')
 
   return (
-    <BrowserRouter basename={basename}>
-      <AuthProvider baseUrl={baseUrl}>
-        <Nav />
-        <div>
-          <Routes>
-            <Route path="/movie/:title" element={<Movie />} />
-            <Route path="/createcollection" element={<CreateCollection />} />
-            <Route path="watchlist" element={<Watchlist />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/movies">
-              <Route path=":movie_id" element={<MovieDetails />} />
-              <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
-              <Route path="/movies/trending" element={<Trending />} />
-            </Route>
-            <Route path="/signup" element={<SignUpForm />} />
-            <Route path="user" >
-              <Route path="collections" element={<CollectionList />} />
-              <Route path=":collection_id" element={<CollectionDetail />} />
-              <Route path="profile" element={<Profile />} />
-            </Route>
-            <Route path="/reviews" element={<Reviews />} />
-          </Routes>
-        </div>
-      </AuthProvider>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter basename={basename}>
+        <AuthProvider baseUrl={baseUrl}>
+          <Nav />
+          <div>
+            <Routes>
+              <Route path="/movie/:title" element={<Movie />} />
+              <Route path="/createcollection" element={<CreateCollection />} />
+              <Route path="watchlist" element={<Watchlist />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/movies">
+                <Route path=":movie_id" element={<MovieDetails />} />
+                <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
+                <Route path="/movies/trending" element={<Trending />} />
+              </Route>
+              <Route path="/signup" element={<SignUpForm />} />
+              <Route path="user" >
+                <Route path="collections" element={<CollectionList />} />
+                <Route path=":collection_id" element={<CollectionDetail />} />
+                <Route path="profile" element={<Profile />} />
+              </Route>
+              <Route path="/reviews" element={<Reviews />} />
+            </Routes>
+          </div>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 

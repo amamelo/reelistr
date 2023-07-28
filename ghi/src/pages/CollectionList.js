@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
 import Card from 'react-bootstrap/Card';
 import reelistr_logo from './reelistr_logo.png';
+import { Link } from "react-router-dom"
 
 export default function CollectionList() {
     // const [collectionName, setCollectionName] = useState('');
@@ -21,31 +22,6 @@ export default function CollectionList() {
         }
     }
 
-    // const fetchCollections = async () => {
-    //     const collectionsUrl = `http://localhost:8000/${username}/collections/`;
-    //     const response = await fetch(collectionsUrl, {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`
-    //         },
-    //     });
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         setCollections(data);
-    //         // setCollectionName(data)
-    //         // console.log(data[1]['collection_name'])
-
-
-    //         const collectionNames = data.map(collection => collection.collection_name);
-    //         console.log(collectionNames)
-
-
-    //     } else {
-    //         throw new Error("Failed to retrieve collections")
-    //     }
-
-    // }
-
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
@@ -60,7 +36,6 @@ export default function CollectionList() {
                     const data = await response.json();
                     setCollections(data);
                     const collectionNames = data.map(collection => collection.collection_name);
-                    console.log(collectionNames)
                 } else {
                     throw new Error("Failed to retrieve collections")
                 }
@@ -75,31 +50,38 @@ export default function CollectionList() {
 
     return (
         <>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-            <h1>Collection List</h1>
-        </div>
-        <Container className="p-4">
-        <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
-            {collections.map((collection) => {
-                return (
-                    <Col key={collection.id} xs='4'>
-                        <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                            <Card.Header style={{ fontSize: '26px' }}>{collection.collection_name}</Card.Header>
-                            <a href={'http://localhost:3000/user/' + collection.collection_id}>
-                            <Card.Img variant='top' src={reelistr_logo}
-                                alt={collection.collection_name} />
-                            </a>
-                        </Card>
-                    </Col>
-                );
-            })}
-        </Row>
-        </Container>
+            <div className="profile-container">
+                <Container className="user-container">
+                    <Row>
+                        <Col>
+                        </Col>
+                        <Col xs={6}>
+                            <h1>your reelistr collections</h1>
+                            <Link to="/createcollection"><button>+ Add Collection</button></Link>
+                            <button>+ Edit Collection</button>
+                        </Col>
+                        <Col>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <Container className="p-4">
+                <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
+                    {collections.map((collection) => {
+                        return (
+                            <Col key={collection.collection_id} xs='4'>
+                                <Card className="flex-fill custom-card">
+                                    <Card.Header style={{ fontSize: '26px' }}>{collection.collection_name}</Card.Header>
+                                    <a href={'http://localhost:3000/user/' + collection.collection_id}>
+                                        <Card.Img variant='top' src={reelistr_logo}
+                                            alt={collection.collection_name} />
+                                    </a>
+                                </Card>
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Container>
         </>
     )
 }
-
