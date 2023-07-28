@@ -29,23 +29,23 @@ function App() {
         <Nav />
         <div>
           <Routes>
-            <Route path="/movie/:title" element={<Movie baseUrl={baseUrl} />} />
-            <Route path="/createcollection" element={<CreateCollection baseUrl={baseUrl} />} />
-            <Route path="watchlist" element={<Watchlist baseUrl={baseUrl} />} />
-            <Route path="/" element={<Home baseUrl={baseUrl} />} />
-            <Route path="/login" element={<LoginForm baseUrl={baseUrl} />} />
+            <Route path="/movie/:title" element={<Movie />} />
+            <Route path="/createcollection" element={<CreateCollection />} />
+            <Route path="watchlist" element={<Watchlist />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/movies">
-              <Route path=":movie_id" element={<MovieDetails baseUrl={baseUrl} />} />
-              <Route path="/movies/comingsoon" element={<ComingSoonApi baseUrl={baseUrl} />} />
-              <Route path="/movies/trending" element={<Trending baseUrl={baseUrl} />} />
+              <Route path=":movie_id" element={<MovieDetails />} />
+              <Route path="/movies/comingsoon" element={<ComingSoonApi />} />
+              <Route path="/movies/trending" element={<Trending />} />
             </Route>
-            <Route path="/signup" element={<SignUpForm baseUrl={baseUrl} />} />
+            <Route path="/signup" element={<SignUpForm />} />
             <Route path="user" >
-              <Route path="collections" element={<CollectionList baseUrl={baseUrl} />} />
-              <Route path=":collection_id" element={<CollectionDetail baseUrl={baseUrl} />} />
-              <Route path="profile" element={<Profile baseUrl={baseUrl} />} />
+              <Route path="collections" element={<CollectionList />} />
+              <Route path=":collection_id" element={<CollectionDetail />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
-            <Route path="/reviews" element={<Reviews baseUrl={baseUrl} />} />
+            <Route path="/reviews" element={<Reviews />} />
           </Routes>
         </div>
       </AuthProvider>

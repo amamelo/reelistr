@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 const CreateCollection = () => {
     const [collectionName, setCollectionName] = useState('');
@@ -8,7 +9,6 @@ const CreateCollection = () => {
     const [accessToken, setAccessToken] = useState('');
     const navigate = useNavigate();
     const { token } = useToken();
-    const baseUrl = process.env.REACT_APP_API_HOST
 
     useEffect(() => {
         if (token) {
@@ -17,8 +17,6 @@ const CreateCollection = () => {
     }, [token]);
 
     useEffect(() => {
-
-
         const fetchUsername = async () => {
             const tokenUrl = `${baseUrl}/token`;
             const response = await fetch(tokenUrl, { credentials: 'include' });
@@ -27,7 +25,6 @@ const CreateCollection = () => {
                 setUsername(data.account.username);
             }
         };
-
         fetchUsername();
     }, []);
 
@@ -49,7 +46,6 @@ const CreateCollection = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
                 navigate('/createcollection');
             } else {
                 throw new Error('Network response was not ok');
@@ -60,22 +56,27 @@ const CreateCollection = () => {
     };
 
     return (
-        <div>
-            <br /><br /><br />
-            <h2>Create a Collection</h2>
-            <form onSubmit={handleFormSubmit}>
-                <label>
-                    Collection Name:
-                </label>
-                <input
-                    type="text"
-                    value={collectionName}
-                    onChange={handleInputChange}
-                />
-                <button type="submit">Create Collection</button>
-            </form>
+        <div className="container mt-5 pt-5">
+            <div div className="offset-3 col-6">
+                <form className="signup-form" onSubmit={handleFormSubmit}>
+                    <h2>Create a Collection</h2>
+                    <div className="mb-3"></div>
+                    <label className="form-label">
+                        Collection Name:
+                        <input
+                            type="text"
+                            value={collectionName}
+                            onChange={handleInputChange}
+                            className="form-control"
+                        />
+                    </label>
+                    <div>
+                        <button type="submit">Create Collection</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
-};
+}
 
 export default CreateCollection;

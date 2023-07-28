@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button'
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom"
 import ReactModal from 'react-modal'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState([]);
@@ -22,19 +23,18 @@ export default function MovieDetails() {
   const navigate = useNavigate();
   const { token } = useToken();
   let { movie_id } = useParams()
-  const baseUrl = process.env.REACT_APP_API_HOST
- 
+
 
   const fetchMovieData = useCallback(async () => {
 
-    const movieDataUrl = `${baseUrl }/tmdb/movies/details/${movie_id}`;
+    const movieDataUrl = `${baseUrl}/tmdb/movies/details/${movie_id}`;
     const response = await fetch(movieDataUrl);
     if (response.ok) {
       const data = await response.json();
       setMovie(data)
 
       // 2nd fetch for reviews by movie_id
-      const reviewsUrl = `${baseUrl }/reviews/movie/${movie_id}`;
+      const reviewsUrl = `${baseUrl}/reviews/movie/${movie_id}`;
       const reviewsResponse = await fetch(reviewsUrl);
       if (reviewsResponse.ok) {
         const reviewsData = await reviewsResponse.json();
@@ -51,17 +51,18 @@ export default function MovieDetails() {
   }, [movie_id, fetchMovieData]);
 
   useEffect(() => {
+    const fetchUsername = async () => {
+      const tokenUrl = `${baseUrl}/token`;
+      const response = await fetch(tokenUrl, { credentials: "include" });
+      if (response.ok) {
+        const data = await response.json();
+        setUsername(data.account.username);
+      }
+    }
     fetchUsername();
   }, []);
 
-  const fetchUsername = async () => {
-    const tokenUrl = `${baseUrl}/token`;
-    const response = await fetch(tokenUrl, { credentials: "include" });
-    if (response.ok) {
-      const data = await response.json();
-      setUsername(data.account.username);
-    }
-  }
+
 
   const submitBtnHandler = async (e) => {
     e.preventDefault()

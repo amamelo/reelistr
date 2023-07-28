@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link } from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function Watchlist() {
     const [movies, setMovies] = useState([]);
@@ -12,7 +13,6 @@ export default function Watchlist() {
     const [watchlist_id, setWatchlistId] = useState('');
     const [posterPaths, setPosterPaths] = useState([])
     const { token } = useToken();
-    const baseUrl = process.env.REACT_APP_API_HOST
 
 
     const fetchMovies = useCallback(async () => {
@@ -21,7 +21,6 @@ export default function Watchlist() {
         if (response.ok) {
             const data = await response.json();
             setMovies(data)
-
 
             // extract movie IDs
             const movieIds = data.map(movie => movie.movie_id);
@@ -40,7 +39,7 @@ export default function Watchlist() {
         } else {
             throw new Error("Failed to retrieve movies watched")
         }
-    }, [username, watchlist_id, token, baseUrl]);
+    }, [username, watchlist_id, token]);
 
     useEffect(() => {
         if (username) {
@@ -59,7 +58,7 @@ export default function Watchlist() {
             }
         }
         fetchUsername();
-    }, [baseUrl]);
+    }, []);
 
     return (
         <div className="profile-container">

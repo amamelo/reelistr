@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image';
 import '../css/styles.css'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 export default function Home() {
@@ -13,7 +14,6 @@ export default function Home() {
   const [trendingmovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
-    const baseUrl = process.env.REACT_APP_API_HOST
 
     const fetchComingSoon = async () => {
       const response = await fetch(`${baseUrl}/upcoming/`);

@@ -5,10 +5,10 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_API_HOST
 
 function TrendingApi() {
   const [movies, setMovies] = useState([]);
-  const baseUrl = process.env.REACT_APP_API_HOST
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -20,7 +20,7 @@ function TrendingApi() {
       throw new Error("Failed to fetch movie details");
     };
     fetchTrending();
-  }, [baseUrl]);
+  }, []);
 
 
   return (

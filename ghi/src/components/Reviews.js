@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
+const baseUrl = process.env.REACT_APP_API_HOST
 
-function Reviews(props) {
+function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [posterPaths, setPosterPaths] = useState([])
 
-  const fetchReviews = async (baseUrl) => {
-    const response = await fetch(`${baseUrl}/reviews/`);
-    if (response.ok) {
-      const data = await response.json();
-      setReviews(data);
-      return data;
-    }
-    throw new Error("Failed to retrieve reviews");
-  };
-
 
   useEffect(() => {
+    const fetchReviews = async () => {
+      const response = await fetch(`${baseUrl}/reviews/`);
+      if (response.ok) {
+        const data = await response.json();
+        setReviews(data);
+        return data;
+      }
+      throw new Error("Failed to retrieve reviews");
+    };
     fetchReviews();
   }, []);
 
 
   useEffect(() => {
-    const fetchMovies = async (baseUrl) => {
+    const fetchMovies = async () => {
       const movieIds = reviews.map(review => review.movie_id);
       const posterPaths = []
       for (const movieId of movieIds) {

@@ -7,6 +7,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import reelistr_logo from './reelistr_logo.png';
 import Image from 'react-bootstrap/Image';
 import '../css/styles.css'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 
@@ -22,7 +23,6 @@ export default function Profile(props) {
     const [reviewsposterPaths, setReviewPosterPaths] = useState([]);
 
     const { token } = useToken();
-    const baseUrl = process.env.REACT_APP_API_HOST
 
 
 
@@ -38,7 +38,7 @@ export default function Profile(props) {
             }
         }
         fetchUserInfo();
-    }, [baseUrl]);
+    }, []);
 
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export default function Profile(props) {
             fetchCollections();
             fetchMovies();
         }
-    }, [username, token, watchlist_id, baseUrl]);
+    }, [username, token, watchlist_id]);
 
 
     useEffect(() => {
@@ -106,7 +106,7 @@ export default function Profile(props) {
             fetchUserReviews();
         }
 
-    }, [username, token, baseUrl]);
+    }, [username, token]);
 
     useEffect(() => {
         const reviewPosterFetch = async () => {
@@ -126,7 +126,7 @@ export default function Profile(props) {
         if (reviews) {
             reviewPosterFetch()
     }
-    }, [reviews, baseUrl])
+    }, [reviews])
 
     return (
         <div className="profile-container">

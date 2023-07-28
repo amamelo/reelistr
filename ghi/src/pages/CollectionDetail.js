@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { useParams } from 'react-router-dom'
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function CollectionDetail() {
 
@@ -16,8 +17,6 @@ export default function CollectionDetail() {
     const { token } = useToken();
 
     const fetchUsername = async () => {
-        const baseUrl = process.env.REACT_APP_API_HOST
-
         const tokenUrl = `${baseUrl}/token`;
         const response = await fetch(tokenUrl, { credentials: "include" });
         if (response.ok) {
@@ -28,8 +27,6 @@ export default function CollectionDetail() {
 
 
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_HOST
-
         if (token && username) {
             const fetchMovies = async () => {
                 const moviesUrl = `${baseUrl}/users/${username}/collections/${collection_id}`;
@@ -87,7 +84,7 @@ export default function CollectionDetail() {
                     {movies.map((movie, index) => {
                         return (
                             <Col key={movie.id} xs='4'>
-                                <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
+                                <Card className="flex-fill custom-card">
                                     <a href={'/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}
