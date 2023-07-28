@@ -52,7 +52,7 @@ async def get_all_watchlists(
 
 
 @router.post("/users/{username}/watchlist/{watchlist_id}",
-             response_model=MovieWatchlistOut | Error)
+             response_model=MovieWatchlistOut | bool | Error)
 async def add_to_watchlist(
     username: str,
     watchlist_id: int,

@@ -109,29 +109,33 @@ class MovieWatchlistRepo:
                     """
                     INSERT INTO movies_to_watchlist
                         (
-
                         watchlist_id,
                         movie_id,
                         watched
                         )
-                    VALUES
-                    (%s, %s, %s)
+                    SELECT %s, %s, %s
+                    WHERE NOT EXISTS (SELECT movie_id FROM movies_to_watchlist WHERE watchlist_id = %s AND movie_id = %s)
                     RETURNING id, watchlist_id, movie_id, watched
                     """,
                     [
                         watchlist_id,
                         movie_id,
-                        watched
+                        watched,
+                        watchlist_id,
+                        movie_id
                     ]
                 )
                 watch = result.fetchone()
-                watchlist = MovieWatchlistOut(
-                    id=watch[0],
-                    watchlist_id=watch[1],
-                    movie_id=watch[2],
-                    watched=watch[3]
-                )
-                return watchlist
+                if watch:
+                    watchlist = MovieWatchlistOut(
+                        id=watch[0],
+                        watchlist_id=watch[1],
+                        movie_id=watch[2],
+                        watched=watch[3]
+                    )
+                    return watchlist
+                else:
+                    return True
 
     def delete_from_watchlist(self, username: str, watchlist_id: int, movie_id: int) -> bool: # noqa
         with pool.connection() as conn:
