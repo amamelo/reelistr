@@ -56,13 +56,12 @@ export default function Home() {
           {upcomingmovies.map((movie) => {
             return (
               <div key={movie.id}>
-                <div className="media-element">
+                <div className="media-element custom-card">
                   {movie.poster_path ? (
                     <Link to={'/movies/' + movie.id}>
                       <Image src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`} thumbnail />
                     </Link>
                   ) : null}
-                  <p className="title">{movie.title}</p>
                 </div>
               </div>
             )
@@ -81,7 +80,6 @@ export default function Home() {
                       <Image src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`} thumbnail />
                     </Link>
                   ) : null}
-                  <p className="title">{movie.title}</p>
                 </div>
               </div>
             )

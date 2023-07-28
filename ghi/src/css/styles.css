@@ -6,7 +6,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+h1 {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 50px;
+  font-weight: 700 !important;
+  color: white;
+}
 .container-fluid {
   font-family: 'League Spartan', sans-serif;
   font-size: 30px;
@@ -15,7 +20,7 @@
 }
 
 .body {
-  background: linear-gradient(to bottom, #000122, #002728);
+  background: rgb(12, 12, 33);
   color: white;
   font-family:'league spartan', sans-serif;
   font-weight: 700;
@@ -51,34 +56,113 @@
   color: transparent;
 }
 
-.backdrop {
+.content-container {
+  padding-top: 400px;
   position: relative;
-  width: 100%;
-  height: 600px;
+  z-index: 1;
+}
+
+.content-container {
+  position: relative;
+}
+
+.backdrop-container {
+  height: 675px;
+  left: 0;
   overflow: hidden;
-  border-radius: 10px;
-}
-
-.backdrop-img {
-  max-width: 100%;
-  height: 600px;
-  object-fit: cover;
-  display: block;
-  background-image: url('https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/1618602622635-4LFSCPXPMK8MOR64BC2N/cars_trip.jpg');
-}
-
-.backdrop-mask {
-  height: 100%;
-  content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,#14181d 0,rgba(20,24,29,.986) .97%,rgba(20,24,29,.945) 2.07833333%,rgba(20,24,29,.883) 3.29666667%,rgba(20,24,29,.803) 4.60166667%,rgba(20,24,29,.711) 5.96666667%,rgba(20,24,29,.61) 7.365%,rgba(20,24,29,.504) 8.77166667%,rgba(20,24,29,.398) 10.16%,rgba(20,24,29,.296) 11.505%,rgba(20,24,29,.203) 12.78%,rgba(20,24,29,.122) 13.95833333%,rgba(20,24,29,.059) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,rgba(20,24,29,.059) 84.98333333%,rgba(20,24,29,.122) 86.04166667%,rgba(20,24,29,.203) 87.22%,rgba(20,24,29,.296) 88.495%,rgba(20,24,29,.398) 89.84%,rgba(20,24,29,.504) 91.22833333%,rgba(20,24,29,.61) 92.635%,rgba(20,24,29,.711) 94.03333333%,rgba(20,24,29,.803) 95.39833333%,rgba(20,24,29,.883) 96.70333333%,rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.986) 99.03%,#14181d),linear-gradient(0deg,#14181d 0,#14181d 21.48148148%,rgba(20,24,29,.986) 23.63703704%,rgba(20,24,29,.945) 26.1%,rgba(20,24,29,.883) 28.80740741%,rgba(20,24,29,.803) 31.70740741%,rgba(20,24,29,.711) 34.74074074%,rgba(20,24,29,.61) 37.84814815%,rgba(20,24,29,.504) 40.97407407%,rgba(20,24,29,.398) 44.05925926%,rgba(20,24,29,.296) 47.04814815%,rgba(20,24,29,.203) 49.88148148%,rgba(20,24,29,.122) 52.5%,rgba(20,24,29,.059) 54.85185185%,rgba(20,24,29,.016) 56.87777778%,rgba(20,24,29,0) 58.51851852%);
+  top: 86px;
+  width: 100%;
+  z-index: 0;
 }
 
-.backdrop-img img {
-  object-fit: cover;
-  /* -webkit-mask-image: linear-gradient(to top, transparent 5%, black 100%); */
-  mask-image: linear-gradient(to top, transparent 5%, black 100%);
+.backdrop-wrapper {
+  height: 675px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1200px;
+  z-index: 0;
+}
+
+.backdropimage {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 99.95%;
+  position: absolute;
+  width: 100%;
+}
+
+.backdropmask {
+  padding-top: 500px;
+  position: relative;
+}
+
+.backdropmask::before {
+  background-image: linear-gradient(
+      90deg,
+      rgba(12, 12, 33, 0.986) 0,
+      rgba(12, 12, 33, 0.986) 0.97%,
+      rgba(12, 12, 33, 0.945) 2.07833333%,
+      rgba(12, 12, 33, 0.883) 3.29666667%,
+      rgba(12, 12, 33, 0.803) 4.60166667%,
+      rgba(12, 12, 33, 0.711) 5.96666667%,
+      rgba(12, 12, 33, 0.61) 7.365%,
+      rgba(12, 12, 33, 0.504) 8.77166667%,
+      rgba(12, 12, 33, 0.398) 10.16%,
+      rgba(12, 12, 33, 0.296) 11.505%,
+      rgba(12, 12, 33, 0.203) 12.78%,
+      rgba(12, 12, 33, 0.122) 13.95833333%,
+      rgba(12, 12, 33, 0.059) 15.01666667%,
+      rgba(12, 12, 33, 0.016) 15.92833333%,
+      rgba(12, 12, 33, 0) 16.66666667%,
+      rgba(12, 12, 33, 0) 83.33333333%,
+      rgba(12, 12, 33, 0.016) 84.07166667%,
+      rgba(12, 12, 33, 0.059) 84.98333333%,
+      rgba(12, 12, 33, 0.122) 86.04166667%,
+      rgba(12, 12, 33, 0.203) 87.22%,
+      rgba(12, 12, 33, 0.296) 88.495%,
+      rgba(12, 12, 33, 0.398) 89.84%,
+      rgba(12, 12, 33, 0.504) 91.22833333%,
+      rgba(12, 12, 33, 0.61) 92.635%,
+      rgba(12, 12, 33, 0.711) 94.03333333%,
+      rgba(12, 12, 33, 0.803) 95.39833333%,
+      rgba(12, 12, 33, 0.883) 96.70333333%,
+      rgba(12, 12, 33, 0.945) 97.92166667%,
+      rgba(12, 12, 33, 0.986) 99.03%,
+      rgba(12, 12, 33, 0.986)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(12, 12, 33, 0.986) 0,
+      rgba(12, 12, 33, 0.986) 21.48148148%,
+      rgba(12, 12, 33, 0.986) 23.63703704%,
+      rgba(12, 12, 33, 0.945) 26.1%,
+      rgba(12, 12, 33, 0.883) 28.80740741%,
+      rgba(12, 12, 33, 0.803) 31.70740741%,
+      rgba(12, 12, 33, 0.711) 34.74074074%,
+      rgba(12, 12, 33, 0.61) 37.84814815%,
+      rgba(12, 12, 33, 0.504) 40.97407407%,
+      rgba(12, 12, 33, 0.398) 44.05925926%,
+      rgba(12, 12, 33, 0.296) 47.04814815%,
+      rgba(12, 12, 33, 0.203) 49.88148148%,
+      rgba(12, 12, 33, 0.122) 52.5%,
+      rgba(12, 12, 33, 0.059) 54.85185185%,
+      rgba(12, 12, 33, 0.016) 56.87777778%,
+      rgba(12, 12, 33, 0) 58.51851852%
+    );
+  background-repeat: no-repeat;
+  content: "";
+  display: block;
+  height: 675px;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1200px;
+  z-index: 0;
 }
 
 
@@ -101,7 +185,7 @@
 .homepage-container{
   padding:40px 0px 40px 0px;
   /* background-color: #242121; */
-  background-image: linear-gradient(180deg, #FF5F05,#ff61054d, #ff610504);
+  background-image: linear-gradient( #00686a,rgb(70, 148, 117));
   border-radius: 10px;
 }
 .homepage-container h1 {
@@ -159,7 +243,14 @@
   background: var(--surface-2);
   border-radius: var(--radius-2);
   box-shadow: var(--shadow-2);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  cursor: pointer;
 }
+.media-element :hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
 .media-element > img {
   inline-size: 100%;
   aspect-ratio: 2/3;
