@@ -11,20 +11,18 @@ function ComingSoonApi() {
   const [movies, setMovies] = useState([]);
   const baseUrl = process.env.REACT_APP_API_HOST
 
-  const fetchComingSoon = async () => {
-    const response = await fetch(`${baseUrl}/upcoming/`);
-    if (response.ok) {
-      const data = await response.json();
-      setMovies(data);
-      return data;
-    }
-    throw new Error("Failed to fetch movie details");
-  };
-
-
   useEffect(() => {
+    const fetchComingSoon = async () => {
+      const response = await fetch(`${baseUrl}/upcoming/`);
+      if (response.ok) {
+        const data = await response.json();
+        setMovies(data);
+        return data;
+      }
+      throw new Error("Failed to fetch movie details");
+    };
     fetchComingSoon();
-  }, []);
+  }, [baseUrl]);
 
   return (
     <div>
