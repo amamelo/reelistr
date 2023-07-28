@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 const CreateCollection = () => {
     const [collectionName, setCollectionName] = useState('');
@@ -8,7 +9,6 @@ const CreateCollection = () => {
     const [accessToken, setAccessToken] = useState('');
     const navigate = useNavigate();
     const { token } = useToken();
-
 
     useEffect(() => {
         if (token) {
@@ -18,14 +18,13 @@ const CreateCollection = () => {
 
     useEffect(() => {
         const fetchUsername = async () => {
-            const tokenUrl = 'http://localhost:8000/token';
+            const tokenUrl = `${baseUrl}/token`;
             const response = await fetch(tokenUrl, { credentials: 'include' });
             if (response.ok) {
                 const data = await response.json();
                 setUsername(data.account.username);
             }
         };
-
         fetchUsername();
     }, []);
 
@@ -37,7 +36,7 @@ const CreateCollection = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8000/user/${username}/collections`, {
+            const response = await fetch(`${baseUrl}/user/${username}/collections`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,8 +46,7 @@ const CreateCollection = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                navigate('/user/collections');
+                navigate('/createcollection');
             } else {
                 throw new Error('Network response was not ok');
             }
@@ -79,6 +77,6 @@ const CreateCollection = () => {
             </div>
         </div>
     );
-};
+}
 
 export default CreateCollection;

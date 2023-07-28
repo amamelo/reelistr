@@ -7,10 +7,11 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import reelistr_logo from './reelistr_logo.png';
 import Image from 'react-bootstrap/Image';
 import '../css/styles.css'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 
-export default function Profile() {
+export default function Profile(props) {
 
     const [username, setUserName] = useState("");
     const [useremail, setUserEmail] = useState("");
@@ -24,9 +25,10 @@ export default function Profile() {
     const { token } = useToken();
 
 
+
     useEffect(() => {
         const fetchUserInfo = async () => {
-            const tokenUrl = 'http://localhost:8000/token';
+            const tokenUrl = `${baseUrl}/token`;
             const response = await fetch(tokenUrl, { credentials: "include" });
             if (response.ok) {
                 const data = await response.json();
@@ -42,7 +44,7 @@ export default function Profile() {
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
-                const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+                const collectionsUrl = `${baseUrl}/${username}/collections/`;
                 const response = await fetch(collectionsUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,7 +61,7 @@ export default function Profile() {
             }
 
             const fetchMovies = async () => {
-                const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
+                const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}/`;
                 const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
                 if (response.ok) {
                     const data = await response.json();
@@ -71,7 +73,7 @@ export default function Profile() {
                     // fetch movie details for each movie
                     const posterPathsArray = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                        const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
@@ -91,7 +93,7 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchUserReviews = async () => {
-            const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
+            const reviewsUrl = `${baseUrl}/reviews/user/${username}`;
             const reviewsResponse = await fetch(reviewsUrl, { headers: { Authorization: `Bearer ${token}` }, });
             if (reviewsResponse.ok) {
                 const reviewsData = await reviewsResponse.json();
@@ -112,7 +114,7 @@ export default function Profile() {
             // fetch movie details for each movie in review
             const reviewposterPathsArray = []
             for (const movieId of movieIds) {
-                const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
                 const movieResponse = await fetch(movieUrl);
                 if (movieResponse.ok) {
                     const data = await movieResponse.json();
@@ -123,9 +125,8 @@ export default function Profile() {
         }
         if (reviews) {
             reviewPosterFetch()
-        }
+    }
     }, [reviews])
-
 
     return (
         <div className="profile-container">

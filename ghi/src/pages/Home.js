@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image';
 import '../css/styles.css'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 export default function Home() {
@@ -12,30 +13,31 @@ export default function Home() {
   const [upcomingmovies, setUpcomingMovies] = useState([]);
   const [trendingmovies, setTrendingMovies] = useState([]);
 
-  const fetchComingSoon = async () => {
-    const response = await fetch(`http://localhost:8000/upcoming/`);
-    if (response.ok) {
-      const data = await response.json();
-      setUpcomingMovies(data);
-    } else {
-      throw new Error("Failed to fetch movie details");
-    }
-  }
-
-
-  const fetchTrending = async () => {
-    const response = await fetch(`http://localhost:8000/trending/`);
-    if (response.ok) {
-      const data = await response.json();
-      return setTrendingMovies(data);
-    } else {
-      throw new Error("Failed to fetch movie details");
-    }
-  };
-
-
   useEffect(() => {
-    fetchComingSoon(); fetchTrending();
+
+    const fetchComingSoon = async () => {
+      const response = await fetch(`${baseUrl}/upcoming/`);
+      if (response.ok) {
+        const data = await response.json();
+        setUpcomingMovies(data);
+        return data;
+      } else {
+        throw new Error("Failed to fetch movie details");
+      }
+    };
+    fetchComingSoon();
+
+    const fetchTrending = async () => {
+      const response = await fetch(`${baseUrl}/trending/`);
+      if (response.ok) {
+        const data = await response.json();
+        return setTrendingMovies(data);
+      } else {
+        throw new Error("Failed to fetch movie details");
+      }
+    };
+
+    fetchTrending();
   }, []);
 
   return (
