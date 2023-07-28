@@ -69,7 +69,7 @@ export default function Watchlist() {
                     </Col>
                     <Col xs={6}>
                         <h1>Watchlist</h1>
-                        <Link to="/addmovie"><button>+ Add Movie</button></Link>
+                        <button>+ Add Movie</button>
                     </Col>
                     <Col>
                     </Col>
