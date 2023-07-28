@@ -38,7 +38,7 @@ export default function Profile(props) {
             }
         }
         fetchUserInfo();
-    }, []);
+    }, [token]);
 
 
     useEffect(() => {
@@ -67,10 +67,8 @@ export default function Profile(props) {
                     const data = await response.json();
                     setMovies(data)
 
-                    // extract movie IDs
                     const movieIds = data.map(movie => movie.movie_id);
 
-                    // fetch movie details for each movie
                     const posterPathsArray = []
                     for (const movieId of movieIds) {
                         const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
@@ -111,7 +109,7 @@ export default function Profile(props) {
     useEffect(() => {
         const reviewPosterFetch = async () => {
             const movieIds = reviews.map(review => review.movie_id);
-            // fetch movie details for each movie in review
+
             const reviewposterPathsArray = []
             for (const movieId of movieIds) {
                 const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
@@ -125,7 +123,7 @@ export default function Profile(props) {
         }
         if (reviews) {
             reviewPosterFetch()
-    }
+        }
     }, [reviews])
 
     return (
