@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 
-export default function Signup() {
+export default function Signup(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
@@ -10,10 +10,10 @@ export default function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, baseUrl) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/api/accounts', {
+      const response = await fetch(`${baseUrl}/api/accounts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

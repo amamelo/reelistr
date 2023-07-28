@@ -19,7 +19,9 @@ export default function CollectionDetail() {
     console.log(token)
 
     const fetchUsername = async () => {
-        const tokenUrl = 'http://localhost:8000/token';
+        const baseUrl = process.env.REACT_APP_API_HOST
+
+        const tokenUrl = `${baseUrl}/token`;
         const response = await fetch(tokenUrl, { credentials: "include" });
         if (response.ok) {
             const data = await response.json();
@@ -64,9 +66,11 @@ export default function CollectionDetail() {
     // }
 
     useEffect(() => {
+        const baseUrl = process.env.REACT_APP_API_HOST
+
         if (token && username) {
             const fetchMovies = async () => {
-                const moviesUrl = `http://localhost:8000/users/${username}/collections/${collection_id}`;
+                const moviesUrl = `${baseUrl}/users/${username}/collections/${collection_id}`;
                 const response = await fetch(moviesUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -84,7 +88,7 @@ export default function CollectionDetail() {
                     // fetch movie details for each movie
                     const posterPaths = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                        const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
@@ -121,7 +125,7 @@ export default function CollectionDetail() {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
-                                    <a href={'http://localhost:3000/movies/' + movie.movie_id}>
+                                    <a href={'/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}
                                         />

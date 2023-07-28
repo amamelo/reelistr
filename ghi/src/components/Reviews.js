@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-function Reviews() {
+function Reviews(props) {
   const [reviews, setReviews] = useState([]);
   const [posterPaths, setPosterPaths] = useState([])
 
-  const fetchReviews = async () => {
-    const response = await fetch(`http://localhost:8000/reviews/`);
+  const fetchReviews = async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/reviews/`);
     if (response.ok) {
       const data = await response.json();
       setReviews(data);
@@ -14,19 +14,6 @@ function Reviews() {
     throw new Error("Failed to retrieve reviews");
   };
 
-  // const fetchMovies = async () => {
-  //   const movieIds = reviews.map(review => review.movie_id);
-  //   const posterPaths = []
-  //   for (const movieId of movieIds) {
-  //     const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-  //     const movieResponse = await fetch(movieUrl);
-  //     if (movieResponse.ok) {
-  //       const data = await movieResponse.json();
-  //       posterPaths.push(data.poster_path)
-  //     }
-  //   }
-  //   setPosterPaths(posterPaths)
-  // };
 
   useEffect(() => {
     fetchReviews();
@@ -34,11 +21,11 @@ function Reviews() {
 
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchMovies = async (baseUrl) => {
       const movieIds = reviews.map(review => review.movie_id);
       const posterPaths = []
       for (const movieId of movieIds) {
-        const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
+        const movieUrl = `${baseUrl}/movies/details/${movieId}`;
         const movieResponse = await fetch(movieUrl);
         if (movieResponse.ok) {
           const data = await movieResponse.json();

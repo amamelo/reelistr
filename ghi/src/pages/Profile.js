@@ -22,91 +22,13 @@ export default function Profile() {
     const [reviewsposterPaths, setReviewPosterPaths] = useState([]);
     const [rating, setRating] = useState('');
     const { token } = useToken();
+    const baseUrl = process.env.REACT_APP_API_HOST
 
-    // const fetchUserInfo = async () => {
-    //     const tokenUrl = 'http://localhost:8000/token';
-    //     const response = await fetch(tokenUrl, { credentials: "include" });
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         console.log(data)
-    //         setUserName(data.account.username)
-    //         setWatchlistId(data.watchlist_id)
-    //         setUserEmail(data.account.email)
-    //     }
-    // }
-
-    // const fetchMovies = async () => {
-    //     const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
-    //     const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         setMovies(data)
-
-    //         // extract movie IDs
-    //         const movieIds = data.map(movie => movie.movie_id);
-
-    //         // fetch movie details for each movie
-    //         const posterPaths = []
-    //         for (const movieId of movieIds) {
-    //             const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-    //             const movieResponse = await fetch(movieUrl);
-    //             if (movieResponse.ok) {
-    //                 const data = await movieResponse.json();
-    //                 posterPaths.push(data.poster_path)
-    //             }
-    //         }
-    //         setPosterPaths(posterPaths)
-    //     } else {
-    //         throw new Error("Failed to retrieve movies watched")
-    //     }
-    // };
-
-    // const fetchCollections = async () => {
-    //     const collectionsUrl = `http://localhost:8000/${username}/collections/`;
-    //     const response = await fetch(collectionsUrl, {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`
-    //         },
-    //     });
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         setCollections(data);
-
-    //     } else {
-    //         throw new Error("Failed to retrieve collections")
-    //     }
-    // }
-
-    // const fetchUserReviews = async () => {
-    //     const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
-    //     const reviewsResponse = await fetch(reviewsUrl);
-    //     if (reviewsResponse.ok) {
-    //         const reviewsData = await reviewsResponse.json();
-    //         setReviews(reviewsData)
-    //         setRating(reviewsData.rating)
-
-    //         const movieIds = reviews.map(review => review.movie_id);
-    //         // fetch movie details for each movie in review
-    //         const reviewposterPaths = []
-    //         for (const movieId of movieIds) {
-    //             const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-    //             const movieResponse = await fetch(movieUrl);
-    //             if (movieResponse.ok) {
-    //                 const data = await movieResponse.json();
-    //                 reviewposterPaths.push(data.poster_path)
-    //             }
-    //         }
-    //         setReviewPosterPaths(reviewposterPaths)
-    //     } else {
-    //         throw new Error("Failed to retrieve user reviews")
-    //     }
-    // };
 
 
     useEffect(() => {
         const fetchUserInfo = async () => {
-            const tokenUrl = 'http://localhost:8000/token';
+            const tokenUrl = `${baseUrl}/token`;
             const response = await fetch(tokenUrl, { credentials: "include" });
             if (response.ok) {
                 const data = await response.json();
@@ -122,7 +44,7 @@ export default function Profile() {
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
-                const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+                const collectionsUrl = `${baseUrl}/${username}/collections/`;
                 const response = await fetch(collectionsUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -139,7 +61,7 @@ export default function Profile() {
             }
 
             const fetchMovies = async () => {
-                const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
+                const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}/`;
                 const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
                 if (response.ok) {
                     const data = await response.json();
@@ -152,7 +74,7 @@ export default function Profile() {
                     // fetch movie details for each movie
                     const posterPathsArray = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                        const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
@@ -167,11 +89,11 @@ export default function Profile() {
             fetchCollections();
             fetchMovies();
         }
-    }, [username, token, watchlist_id]);
+    }, [username, token, watchlist_id, baseUrl]);
 
     useEffect(() => {
         const fetchUserReviews = async () => {
-            const reviewsUrl = `http://localhost:8000/reviews/user/${username}`;
+            const reviewsUrl = `${baseUrl}/reviews/user/${username}`;
             const reviewsResponse = await fetch(reviewsUrl);
             if (reviewsResponse.ok) {
                 const reviewsData = await reviewsResponse.json();
@@ -182,7 +104,7 @@ export default function Profile() {
             }
         };
         fetchUserReviews();
-    }, [username]);
+    }, [username, baseUrl]);
 
     useEffect(() => {
         const reviewPosterFetch = async () => {
@@ -190,7 +112,7 @@ export default function Profile() {
         // fetch movie details for each movie in review
         const reviewposterPathsArray = []
         for (const movieId of movieIds) {
-            const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+            const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
             const movieResponse = await fetch(movieUrl);
             if (movieResponse.ok) {
                 const data = await movieResponse.json();
@@ -202,7 +124,7 @@ export default function Profile() {
         if (reviews) {
             reviewPosterFetch()
     }
-    }, [reviews])
+    }, [reviews, baseUrl])
 
     return (
         <div className="profile-container">

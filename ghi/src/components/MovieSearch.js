@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom';
 
-const Movie = () => {
+const Movie = (props) => {
   const { title } = useParams();
   const [movieData, setMovieData] = useState([]);
 
@@ -22,8 +22,8 @@ const Movie = () => {
   //   }
   // };
 
-  const fetchMovieDetails = async (title) => {
-    const response = await fetch(`http://localhost:8000/tmdb/movies/${encodeURIComponent(title)}`);
+  const fetchMovieDetails = async (title, baseUrl) => {
+    const response = await fetch(`${baseUrl}/tmdb/movies/${encodeURIComponent(title)}`);
     if (response.ok) {
       const data = await response.json();
       return data;

@@ -8,7 +8,7 @@ const CreateCollection = () => {
     const [accessToken, setAccessToken] = useState('');
     const navigate = useNavigate();
     const { token } = useToken();
-
+    const baseUrl = process.env.REACT_APP_API_HOST
 
     useEffect(() => {
         if(token) {
@@ -17,8 +17,10 @@ const CreateCollection = () => {
     }, [token]);
 
     useEffect(() => {
+
+
         const fetchUsername = async () => {
-            const tokenUrl = 'http://localhost:8000/token';
+            const tokenUrl = `${baseUrl}/token`;
             const response = await fetch(tokenUrl, { credentials: 'include' });
             if (response.ok) {
                 const data = await response.json();
@@ -37,7 +39,7 @@ const CreateCollection = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8000/user/${username}/collections`, {
+            const response = await fetch(`${baseUrl}/user/${username}/collections`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,12 +67,12 @@ const CreateCollection = () => {
             <form onSubmit={handleFormSubmit}>
                 <label>
                     Collection Name:
-                    <input
-                        type="text"
-                        value={collectionName}
-                        onChange={handleInputChange}
-                    />
                 </label>
+                <input
+                    type="text"
+                    value={collectionName}
+                    onChange={handleInputChange}
+                />
                 <button type="submit">Create Collection</button>
             </form>
         </div>

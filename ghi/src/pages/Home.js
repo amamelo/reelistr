@@ -11,29 +11,30 @@ export default function Home() {
   const [upcomingmovies, setUpcomingMovies] = useState([]);
   const [trendingmovies, setTrendingMovies] = useState([]);
 
-  const fetchComingSoon = async () => {
-    const response = await fetch(`http://localhost:8000/upcoming/`);
-    if (response.ok) {
-      const data = await response.json();
-      setUpcomingMovies(data);
-      return data;
-    }
-    throw new Error("Failed to fetch movie details");
-  };
-
-
-  const fetchTrending = async () => {
-    const response = await fetch(`http://localhost:8000/trending/`);
-    if (response.ok) {
-      const data = await response.json();
-      return setTrendingMovies(data);
-    }
-    throw new Error("Failed to fetch movie details");
-  };
-
-
   useEffect(() => {
-    fetchComingSoon(); fetchTrending();
+    const baseUrl = process.env.REACT_APP_API_HOST
+
+    const fetchComingSoon = async () => {
+      const response = await fetch(`${baseUrl}/upcoming/`);
+      if (response.ok) {
+        const data = await response.json();
+        setUpcomingMovies(data);
+        return data;
+      }
+      throw new Error("Failed to fetch movie details");
+    };
+    fetchComingSoon();
+
+    const fetchTrending = async () => {
+      const response = await fetch(`${baseUrl}/trending/`);
+      if (response.ok) {
+        const data = await response.json();
+        return setTrendingMovies(data);
+      }
+      throw new Error("Failed to fetch movie details");
+    };
+
+    fetchTrending();
   }, []);
 
   return (
