@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { useParams } from 'react-router-dom'
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function CollectionDetail() {
 
@@ -16,7 +17,7 @@ export default function CollectionDetail() {
     const { token } = useToken();
 
     const fetchUsername = async () => {
-        const tokenUrl = 'http://localhost:8000/token';
+        const tokenUrl = `${baseUrl}/token`;
         const response = await fetch(tokenUrl, { credentials: "include" });
         if (response.ok) {
             const data = await response.json();
@@ -28,7 +29,7 @@ export default function CollectionDetail() {
     useEffect(() => {
         if (token && username) {
             const fetchMovies = async () => {
-                const moviesUrl = `http://localhost:8000/users/${username}/collections/${collection_id}`;
+                const moviesUrl = `${baseUrl}/users/${username}/collections/${collection_id}`;
                 const response = await fetch(moviesUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ export default function CollectionDetail() {
 
                     const posterPaths = []
                     for (const movieId of movieIds) {
-                        const movieUrl = `http://localhost:8000/tmdb/movies/details/${movieId}`;
+                        const movieUrl = `${baseUrl}/tmdb/movies/details/${movieId}`;
                         const movieResponse = await fetch(movieUrl);
                         if (movieResponse.ok) {
                             const data = await movieResponse.json();
@@ -84,7 +85,7 @@ export default function CollectionDetail() {
                         return (
                             <Col key={movie.id} xs='4'>
                                 <Card className="flex-fill custom-card">
-                                    <a href={'http://localhost:3000/movies/' + movie.movie_id}>
+                                    <a href={'/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}
                                         />

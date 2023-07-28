@@ -6,26 +6,17 @@ import Col from "react-bootstrap/Col";
 import Card from 'react-bootstrap/Card';
 import reelistr_logo from './reelistr_logo.png';
 import { Link } from "react-router-dom"
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function CollectionList() {
-    // const [collectionName, setCollectionName] = useState('');
     const [collections, setCollections] = useState([]);
     const [username, setUsername] = useState('');
     const { token } = useToken();
 
-    const fetchUsername = async () => {
-        const tokenUrl = 'http://localhost:8000/token';
-        const response = await fetch(tokenUrl, { credentials: "include" });
-        if (response.ok) {
-            const data = await response.json();
-            setUsername(data.account.username);
-        }
-    }
-
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
-                const collectionsUrl = `http://localhost:8000/${username}/collections/`;
+                const collectionsUrl = `${baseUrl}/${username}/collections/`;
                 const response = await fetch(collectionsUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -35,7 +26,6 @@ export default function CollectionList() {
                 if (response.ok) {
                     const data = await response.json();
                     setCollections(data);
-                    const collectionNames = data.map(collection => collection.collection_name);
                 } else {
                     throw new Error("Failed to retrieve collections")
                 }
@@ -45,6 +35,14 @@ export default function CollectionList() {
     }, [token, username])
 
     useEffect(() => {
+        const fetchUsername = async () => {
+            const tokenUrl = `${baseUrl}/token`;
+            const response = await fetch(tokenUrl, { credentials: "include" });
+            if (response.ok) {
+                const data = await response.json();
+                setUsername(data.account.username);
+            }
+        }
         fetchUsername();
     }, [])
 
@@ -72,7 +70,7 @@ export default function CollectionList() {
                             <Col key={collection.collection_id} xs='4'>
                                 <Card className="flex-fill custom-card">
                                     <Card.Header style={{ fontSize: '26px' }}>{collection.collection_name}</Card.Header>
-                                    <a href={'http://localhost:3000/user/' + collection.collection_id}>
+                                    <a href={'/user/' + collection.collection_id}>
                                         <Card.Img variant='top' src={reelistr_logo}
                                             alt={collection.collection_name} />
                                     </a>
