@@ -24,7 +24,7 @@ export default function Signup() {
       if (response.ok) {
         const data = await response.json()
         console.log('Sign-up Successful!', data)
-        navigate('/')
+        navigate('/user/profile')
       } else {
         const errorData = await response.json();
         setError(errorData.message);

@@ -48,7 +48,7 @@ const CreateCollection = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                navigate('/createcollection');
+                navigate('/user/collections');
             } else {
                 throw new Error('Network response was not ok');
             }
