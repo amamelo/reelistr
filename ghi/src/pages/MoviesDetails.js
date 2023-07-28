@@ -28,11 +28,6 @@ export default function MovieDetails() {
   const postTmdb = {
     "tmdb_movie_id": movieInt
   };
-  const addToWatchlist = {
-    "watched": false,
-    "watchlist_id": watchlistId,
-    "movie_id": movieInt,
-  };
 
 
   const fetchMovieData = useCallback(async () => {
