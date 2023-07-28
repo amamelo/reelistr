@@ -11,6 +11,7 @@ function Nav() {
   const [search, setSearch] = useState("");
   const { token } = useToken();
   const navigate = useNavigate();
+  const { logout } = useToken();
 
   useEffect(() => {
     if (token) {
@@ -24,9 +25,9 @@ function Nav() {
     setSearch("");
   };
 
-  function logout() {
-    localStorage.setItem("token", null);
+  function userlogout() {
     setIsLoggedIn(false);
+    logout();
   }
 
 
@@ -73,7 +74,7 @@ function Nav() {
           {isLoggedIn ? (
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" onClick={logout} to="/">Logout</NavLink>
+                <NavLink className="nav-link" onClick={userlogout} to="/">Logout</NavLink>
               </li>
             </ul>
           ) : (
