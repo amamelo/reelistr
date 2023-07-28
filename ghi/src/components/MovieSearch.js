@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom';
+import '../css/styles.css'
+
 const baseUrl = process.env.REACT_APP_API_HOST
 
 const Movie = () => {
@@ -33,27 +35,27 @@ const Movie = () => {
 
 
   return (
-      <div>
-        <Container className="p-4" fluid>
-          <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
-            {movieData.map(movie => {
-              return (
-                <Col xs='4'>
-                  <Card key={movie.poster_path} style={{ width: '18rem' }} className="flex-fill">
-                    <Card.Header style={{ fontSize: '26px' }}>{movie.title}</Card.Header>
-                    <Link to={'/movies/' + movie.id} >
-                      <Card.Img variant='top' src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" style={{ height: '300px' }} />
-                    </Link>
-                    <Card.Body>
-                      <Card.Text style={{ fontSize: '16px' }}>{movie.overview}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
-      </div>
+    <div>
+      <h1>Search Results for "{title}"</h1>
+      <Container className="p-4" fluid>
+        <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
+          {movieData.map(movie => {
+            return (
+              <Col xs='4'>
+                <Card className="custom-card">
+                  <Link to={'/movies/' + movie.id} >
+                    <Card.Img
+                      src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`}
+                      alt={movie.title}
+                    />
+                  </Link>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </div >
   );
 };
 
