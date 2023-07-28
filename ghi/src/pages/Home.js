@@ -21,8 +21,9 @@ export default function Home() {
         const data = await response.json();
         setUpcomingMovies(data);
         return data;
+      } else {
+        throw new Error("Failed to fetch movie details");
       }
-      throw new Error("Failed to fetch movie details");
     };
     fetchComingSoon();
 
@@ -31,8 +32,9 @@ export default function Home() {
       if (response.ok) {
         const data = await response.json();
         return setTrendingMovies(data);
+      } else {
+        throw new Error("Failed to fetch movie details");
       }
-      throw new Error("Failed to fetch movie details");
     };
 
     fetchTrending();

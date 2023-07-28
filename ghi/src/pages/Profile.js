@@ -10,7 +10,7 @@ import '../css/styles.css'
 
 
 
-export default function Profile() {
+export default function Profile(props) {
 
     const [username, setUserName] = useState("");
     const [useremail, setUserEmail] = useState("");
@@ -38,7 +38,7 @@ export default function Profile() {
             }
         }
         fetchUserInfo();
-    }, []);
+    }, [baseUrl]);
 
 
     useEffect(() => {

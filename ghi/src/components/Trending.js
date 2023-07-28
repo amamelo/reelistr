@@ -10,21 +10,18 @@ function TrendingApi() {
   const [movies, setMovies] = useState([]);
   const baseUrl = process.env.REACT_APP_API_HOST
 
-
-
   useEffect(() => {
     const fetchTrending = async () => {
       const response = await fetch(`${baseUrl}/trending/`);
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         return setMovies(data);
       }
       throw new Error("Failed to fetch movie details");
     };
     fetchTrending();
   }, [baseUrl]);
-  }, [baseUrl]);
+
 
   return (
     <div>
