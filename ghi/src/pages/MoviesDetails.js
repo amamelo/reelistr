@@ -103,12 +103,18 @@ export default function MovieDetails() {
       {error && <p>{error}</p>}
       <div>
         <Container className="bg-image fluid">
-          {movie.backdrop_path ? (
-            <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
-          ) : null}
+          <div className="page-content">
+            <div className="backdrop-container">
+              {movie.backdrop_path ? (
+                <div className="backdrop-wrapper">
+                  <img className="backdropimage" src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="movie backdrop" />
+                  <div className="backdropmask" />
+                </div>
+              ) : null}
+            </div>
+          </div>
         </Container>
-
-        <Container>
+        <Container className="content-container">
           <Row>
             <Col className="text-center">
               <Card>
