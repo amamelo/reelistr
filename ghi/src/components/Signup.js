@@ -25,8 +25,6 @@ export default function Signup() {
         body: JSON.stringify({ username, password, email })
       })
       if (response.ok) {
-        const data = await response.json()
-        console.log('Sign-up Successful!', data)
         login(username, password);
         navigate('/user/profile')
       } else {
