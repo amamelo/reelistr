@@ -1,14 +1,16 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/styles.css";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [search, setSearch] = useState("");
   const { token } = useToken();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -16,6 +18,11 @@ function Nav() {
     }
   }, [token]);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/movie/${search}`);
+    setSearch("");
+  };
 
   function logout() {
     localStorage.setItem("token", null);
@@ -79,7 +86,25 @@ function Nav() {
               </li>
             </ul>
           )}
-          <form className="d-flex">
+          <form className="d-flex" onSubmit={handleSearch}>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              value={search} // Set the value of the input field to searchValue
+              onChange={(e) => setSearch(e.target.value)} // Update searchValue when the input field changes
+            />
+            <button className="btn btn-outline-light" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  );
+}
+          {/* <form className="d-flex">
             <input
               className="form-control me-2"
               type="search"
@@ -94,6 +119,6 @@ function Nav() {
       </div>
     </nav>
   );
-}
+} */}
 
 export default Nav;
