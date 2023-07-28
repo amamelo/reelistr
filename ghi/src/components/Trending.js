@@ -24,6 +24,7 @@ function TrendingApi() {
     };
     fetchTrending();
   }, [baseUrl]);
+  }, [baseUrl]);
 
   return (
     <div>

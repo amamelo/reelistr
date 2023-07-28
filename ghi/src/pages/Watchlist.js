@@ -62,17 +62,25 @@ export default function Watchlist() {
     }, [baseUrl]);
 
     return (
-        <div>
-            <br />
-            <br />
-            <br />
-            <h1>Watchlist</h1>
+        <div className="profile-container">
+            <Container className="user-container">
+                <Row>
+                    <Col>
+                    </Col>
+                    <Col xs={6}>
+                        <h1>Watchlist</h1>
+                        <Link to="/addmovie"><button>+ Add Movie</button></Link>
+                    </Col>
+                    <Col>
+                    </Col>
+                </Row>
+            </Container>
             <Container className="p-4">
                 <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
                     {movies.map((movie, index) => {
                         return (
                             <Col key={movie.id} xs='4'>
-                                <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
+                                <Card className="flex-fill custom-card">
                                     <Link to={'/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
+import '../css/styles.css'
 
 export default function Signup(props) {
   const [username, setUsername] = useState('')
@@ -47,37 +48,42 @@ export default function Signup(props) {
         <div className="offset-3 col-6">
           <form className="signup-form" onSubmit={handleSubmit}>
             <h1>Sign Up</h1>
-            <div className="form-floating mb-3" >
-              <input className="form-control" placeholder="username" type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <div className="mb-3" >
               <label htmlFor="username">Username</label>
+              <input className="form-control" placeholder="username" type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             </div>
-            <div className="form-floating mb-3" >
-              <input className="form-control" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <div className="mb-3" >
               <label htmlFor="password">Password</label>
+              <input className="form-control" placeholder="password" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <div className="form-floating mb-3">
-              <input className="form-control" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-              <label htmlFor="email">Email</label>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="email">Email</label>
+              <input className="form-control" placeholder="email" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <button type="submit">Sign Up</button>
           </form>
+        </div>
+        <div>
           <ReactModal
+            ariaHideApp={false}
             isOpen={isModalOpen}
             onRequestClose={closeModal}
             contentLabel="Sign Up Failed"
             style={{
               overlay: {
+                position: 'fixed',
                 backgroundColor: 'rgba(255, 255, 255, 0.75)'
               }, content: {
-                background: '#FF5F05',
+                position: 'absolute',
+                background: '#7393B3',
                 top: '300px',
-                left: '150px',
-                right: '150px',
+                left: '300px',
+                right: '300px',
                 bottom: '300px',
                 border: '1px solid #ccc',
+                borderRadius: '10px'
               }
-            }}
-          >
+            }}>
             <h2>Uh-Oh! Sign Up Failed. </h2>
             <p>{error}</p>
             <button onClick={closeModal}>Close</button>

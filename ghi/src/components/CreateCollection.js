@@ -11,7 +11,7 @@ const CreateCollection = () => {
     const baseUrl = process.env.REACT_APP_API_HOST
 
     useEffect(() => {
-        if(token) {
+        if (token) {
             setAccessToken(token);
         }
     }, [token]);
@@ -50,7 +50,6 @@ const CreateCollection = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Collection created:', data);
                 navigate('/createcollection');
             } else {
                 throw new Error('Network response was not ok');
