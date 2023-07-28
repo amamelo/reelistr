@@ -19,13 +19,13 @@ import Movie from "./components/MovieSearch";
 
 function App() {
 
-  
+  const baseUrl = process.env.REACT_APP_API_HOST
   const domain = /https:\/\/[^/]+/
   const basename = process.env.PUBLIC_URL.replace(domain, '')
 
   return (
     <BrowserRouter basename={basename}>
-      <AuthProvider>
+      <AuthProvider baseUrl={baseUrl}>
         <Nav />
         <div>
           <Routes>
