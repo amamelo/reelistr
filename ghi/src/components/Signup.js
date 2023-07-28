@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import '../css/styles.css'
+import useToken from "@galvanize-inc/jwtdown-for-react";
 const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function Signup() {
@@ -11,6 +12,7 @@ export default function Signup() {
   const [error, setError] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
+  const { login } = useToken();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,6 +25,7 @@ export default function Signup() {
         body: JSON.stringify({ username, password, email })
       })
       if (response.ok) {
+        login(username, password);
         navigate('/user/profile')
       } else {
         const errorData = await response.json();

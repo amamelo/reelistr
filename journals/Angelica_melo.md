@@ -1,5 +1,7 @@
 Friday July 28th
 The project is due today. At last. 
+The functionality for adding a movie was added today. 
+I fixed the sizing on buttons, and made sure they redirected to the correct pages. I also updated sign up to log the new user in. 
 
 
 
