@@ -3,6 +3,7 @@ import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import '../css/styles.css'
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function Signup() {
   const [username, setUsername] = useState('')
@@ -16,7 +17,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/api/accounts', {
+      const response = await fetch(`${baseUrl}/api/accounts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,7 +28,7 @@ export default function Signup() {
         const data = await response.json()
         console.log('Sign-up Successful!', data)
         login(username, password);
-        // navigate('/user/login')
+        navigate('/user/profile')
       } else {
         const errorData = await response.json();
         setError(errorData.message);

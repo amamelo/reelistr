@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState, useCallback } from "react";
-// import Reviews from "../components/Reviews";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
@@ -10,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom"
 import ReactModal from 'react-modal'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 export default function MovieDetails() {
@@ -28,23 +28,18 @@ export default function MovieDetails() {
   const postTmdb = {
     "tmdb_movie_id": movieInt
   };
-  const addToWatchlist = {
-    "watched": false,
-    "watchlist_id": watchlistId,
-    "movie_id": movieInt,
-  };
 
 
   const fetchMovieData = useCallback(async () => {
 
-    const movieDataUrl = `http://localhost:8000/tmdb/movies/details/${movie_id}`;
+    const movieDataUrl = `${baseUrl}/tmdb/movies/details/${movie_id}`;
     const response = await fetch(movieDataUrl);
     if (response.ok) {
       const data = await response.json();
       setMovie(data)
 
       // 2nd fetch for reviews by movie_id
-      const reviewsUrl = `http://localhost:8000/reviews/movie/${movie_id}`;
+      const reviewsUrl = `${baseUrl}/reviews/movie/${movie_id}`;
       const reviewsResponse = await fetch(reviewsUrl);
       if (reviewsResponse.ok) {
         const reviewsData = await reviewsResponse.json();
@@ -61,23 +56,22 @@ export default function MovieDetails() {
   }, [movie_id, fetchMovieData]);
 
   useEffect(() => {
+    const fetchUsername = async () => {
+      const tokenUrl = `${baseUrl}/token`;
+      const response = await fetch(tokenUrl, { credentials: "include" });
+      if (response.ok) {
+        const data = await response.json();
+        setWatchlistId(data.watchlist_id);
+        setUsername(data.account.username);
+      }
+    }
     fetchUsername();
   }, []);
-
-  const fetchUsername = async () => {
-    const tokenUrl = 'http://localhost:8000/token';
-    const response = await fetch(tokenUrl, { credentials: "include" });
-    if (response.ok) {
-      const data = await response.json();
-      setWatchlistId(data.watchlist_id);
-      setUsername(data.account.username);
-    }
-  }
 
   const submitBtnHandler = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/reviews', {
+      const response = await fetch(`${baseUrl}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +80,6 @@ export default function MovieDetails() {
         body: JSON.stringify({ username, rating, review, movie_id })
       })
       if (response.ok) {
-        // const data = await response.json()
         navigate(`/movies/${movie_id}`)
         // refresh component
         fetchMovieData();
@@ -106,7 +99,7 @@ export default function MovieDetails() {
   const handleWatchlistAdd = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/movies', {
+      const response = await fetch(`${baseUrl}/movie`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +107,7 @@ export default function MovieDetails() {
         body: JSON.stringify(postTmdb)
       })
       if (response.ok) {
-        const response = await fetch(`http://localhost:8000/users/${username}/watchlist/${watchlistId}?watched=false&movie_id=${movie_id}`, {
+        const response = await fetch(`${baseUrl}/users/${username}/watchlist/${watchlistId}?watched=false&movie_id=${movie_id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -132,20 +125,6 @@ export default function MovieDetails() {
       console.error('Error adding movie to watchlist:', error)
     }
   }
-
-
-    // try {
-    //   const response = await fetch(`http://localhost:8000/users/${username}/watchlist/${watchlistId}`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${token}`
-    //     },
-    //     body: JSON.stringify({ movie_id })
-    //   })
-    //   if (response.ok) {
-
-
 
 
   const closeModal = () => {

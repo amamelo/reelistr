@@ -24,6 +24,7 @@ api-unit-tests-job:
     - cd api
     - pip install -r requirements.txt
     - export DATABASE_URL='postgresql://reelistr:secret@postgres/reelistr_db'
+    - export SIGNING_KEY='6Ed*32F3Vzk@qAvVJR6o'
     - export FAST_API_TMDB_API_KEY='a73b6583b5092ec6f24d58ef1dc88a6e'
     - python -m pytest
 
