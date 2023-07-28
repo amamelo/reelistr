@@ -24,7 +24,6 @@ api-unit-tests-job:
     - cd api
     - pip install -r requirements.txt
     - export DATABASE_URL='postgresql://reelistr:secret@postgres/reelistr_db'
-    - export SIGNING_KEY='6Ed*32F3Vzk@qAvVJR6o'
     - export FAST_API_TMDB_API_KEY='a73b6583b5092ec6f24d58ef1dc88a6e'
     - python -m pytest
 
@@ -33,7 +32,7 @@ build-api-image:
   stage: build
   image: docker:git
   variables:
-    GITLAB_IMAGE: ${CI_REGISTRY_IMAGE}/fastapi
+    GITLAB_IMAGE: ${CI_REGISTRY_IMAGE}/api
   before_script:
     # $CI_JOB_TOKEN is variable automatically added by Gitlab: see https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#variables-reference
     - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token registry.gitlab.com --password-stdin
