@@ -14,6 +14,7 @@ import Trending from "./components/Trending.js";
 import Reviews from "./components/Reviews.js";
 import CollectionDetail from "./pages/CollectionDetail";
 import CreateCollection from "./components/CreateCollection";
+import Movie from "./components/MovieSearch";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Nav />
         <div>
           <Routes>
+            <Route path="/movie/:title" element={<Movie />} />
             <Route path="/createcollection" element={<CreateCollection />} />
             <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
@@ -52,4 +54,3 @@ function App() {
 }
 
 export default App;
-
