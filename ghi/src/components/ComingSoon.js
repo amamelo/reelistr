@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom';
 
 function ComingSoonApi() {
   const [movies, setMovies] = useState([]);
+  const baseUrl = process.env.REACT_APP_API_HOST
 
   const fetchComingSoon = async () => {
-    const response = await fetch(`http://localhost:8000/upcoming/`);
+    const response = await fetch(`${baseUrl}/upcoming/`);
     if (response.ok) {
       const data = await response.json();
       setMovies(data);
