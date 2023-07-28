@@ -9,21 +9,20 @@ import { Link } from 'react-router-dom';
 
 function ComingSoonApi() {
   const [movies, setMovies] = useState([]);
-
-  const fetchComingSoon = async () => {
-    const response = await fetch(`http://localhost:8000/upcoming/`);
-    if (response.ok) {
-      const data = await response.json();
-      setMovies(data);
-      return data;
-    }
-    throw new Error("Failed to fetch movie details");
-  };
-
+  const baseUrl = process.env.REACT_APP_API_HOST
 
   useEffect(() => {
+    const fetchComingSoon = async () => {
+      const response = await fetch(`${baseUrl}/upcoming/`);
+      if (response.ok) {
+        const data = await response.json();
+        setMovies(data);
+        return data;
+      }
+      throw new Error("Failed to fetch movie details");
+    };
     fetchComingSoon();
-  }, []);
+  }, [baseUrl]);
 
   return (
     <div>

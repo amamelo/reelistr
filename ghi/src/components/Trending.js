@@ -8,20 +8,30 @@ import { Link } from 'react-router-dom';
 
 function TrendingApi() {
   const [movies, setMovies] = useState([]);
+  const baseUrl = process.env.REACT_APP_API_HOST
+
 
   const fetchTrending = async () => {
     const response = await fetch(`http://localhost:8000/trending/`);
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       return setMovies(data);
     }
     throw new Error("Failed to fetch movie details");
   };
 
   useEffect(() => {
+    const fetchTrending = async () => {
+      const response = await fetch(`${baseUrl}/trending/`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        return setMovies(data);
+      }
+      throw new Error("Failed to fetch movie details");
+    };
     fetchTrending();
-  }, []);
+  }, [baseUrl]);
 
   return (
     <div>
