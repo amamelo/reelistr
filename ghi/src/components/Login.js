@@ -14,10 +14,10 @@ const LoginForm = () => {
 
     return (
         <div className="container mt-5 pt-5">
-            <div className="card text-bg-light mb-3">
-                <h5 className="card-header">Login</h5>
+            <div className="offset-3 col-6">
                 <div className="card-body">
-                    <form onSubmit={(e) => handleSubmit(e)}>
+                    <form className="signup-form" onSubmit={(e) => handleSubmit(e)}>
+                        <h1>Log In</h1>
                         <div className="mb-3">
                             <label className="form-label">Username:</label>
                             <input
@@ -37,7 +37,7 @@ const LoginForm = () => {
                             />
                         </div>
                         <div>
-                            <input className="btn btn-primary" type="submit" value="Login" />
+                            <button type="submit" value="Login">Login </button>
                         </div>
                     </form>
                 </div>

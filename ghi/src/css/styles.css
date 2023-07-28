@@ -183,10 +183,11 @@ h1 {
 /* homepage */
 
 .homepage-container{
-  padding:40px 0px 40px 0px;
+  padding:30px 0px 40px 0px;
   /* background-color: #242121; */
   background-image: linear-gradient( #00686a,rgb(70, 148, 117));
   border-radius: 10px;
+  text-align: center;
 }
 .homepage-container h1 {
   text-align: center;
@@ -198,21 +199,45 @@ h1 {
   width: 70px;
   position: right;
 }
+.homepage-container button {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #349f0d;
+  color:#f9f9f9;
+  border-style: none;
+  margin: 20px;
+}
 
 
 /* user profile */
 .profile-container{
-  padding:100px 0px 0px 0px;
+  padding:20px 0px 0px 0px; 
+  margin-bottom: 30px;;
 }
 
 .user-container{
-  padding: 20px 0px 20px 0px;
+  padding: 20px 0px 30px 0px; 
   background-color: #242121;
+  /* background-image: linear-gradient(180deg, #FF5F05,#ff61054d, #ff610504); */
+  background-image: linear-gradient(180deg, #00034d, #05075073, #04075d82, #00034d4d, #03033070);
   border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .user-container h1{
   text-align: left;
+  
+}
+.user-container button{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #349f0d;
+  color:#f9f9f9;
+  border-style: none;
+  text-align: center;
+  margin: 10px;
 }
 .profile-image{
   width: 70px;
@@ -286,8 +311,9 @@ h1 {
 
 }
 
+/* signup and login form */
 .signup-form{
-  background-color: #e9e0db;
+  background-color: #ffffff;
   border-radius: 10px;
   padding: 20px 20px 20px 20px;
   text-align: center;
@@ -297,8 +323,9 @@ h1 {
   color: black;
 }
 .signup-form button{
+  padding: 10px;
   border-radius: 10px;
-  background-color: #FF5F05;
+  background-color: #349f0d;
   color:#f9f9f9;
   border-style: none;
   text-align: center;
@@ -306,7 +333,15 @@ h1 {
 
 .signup-form input{
   border-radius: 10px;
-  background-color: #e7cbba;
+  background-color: #afcbca;
+  color:#f9f9f9;
+  border-style: none;
+  border-radius: 10px;
+}
+
+.form-control{
+  border-radius: 10px;
+  background-color: #442c1d;
   color:#f9f9f9;
   border-style: none;
   border-radius: 10px;

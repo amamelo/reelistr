@@ -56,54 +56,31 @@ export default function Watchlist() {
         }
     }, [username, watchlist_id, token, fetchMovies]);
 
-    // useEffect(() => {
-    //     if (username !== '') {
-    //         const fetchMovies = async () => {
-    //             const watchlistUrl = `http://localhost:8000/users/${username}/watchlist/${watchlist_id}/`;
-    //             const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setMovies(data)
-
-
-    //                 // extract movie IDs
-    //                 const movieIds = data.map(movie => movie.movie_id);
-
-    //                 // fetch movie details for each movie
-    //                 const posterPaths = []
-    //                 for (const movieId of movieIds) {
-    //                     const movieUrl = `http://localhost:8000/movies/details/${movieId}`;
-    //                     const movieResponse = await fetch(movieUrl);
-    //                     if (movieResponse.ok) {
-    //                         const data = await movieResponse.json();
-    //                         posterPaths.push(data.poster_path)
-    //                     }
-    //                 }
-    //                 setPosterPaths(posterPaths)
-    //             } else {
-    //                 throw new Error("Failed to retrieve movies watched")
-    //             }
-    //         };
-    //         fetchMovies();
-    //     }
-    // }, [username, watchlist_id, token]);
 
     useEffect(() => {
         fetchUsername();
     }, []);
 
     return (
-        <div>
-            <br />
-            <br />
-            <br />
-            <h1>Watchlist</h1>
+        <div className="profile-container">
+            <Container className="user-container">
+                <Row>
+                    <Col>
+                    </Col>
+                    <Col xs={6}>
+                        <h1>Watchlist</h1>
+                        <Link to="/addmovie"><button>+ Add Movie</button></Link>
+                    </Col>
+                    <Col>
+                    </Col>
+                </Row>
+            </Container>
             <Container className="p-4">
                 <Row xs={1} md={3} lg={4} className="g-3 justify-content-md-center">
                     {movies.map((movie, index) => {
                         return (
                             <Col key={movie.id} xs='4'>
-                                <Card style={{ width: '80%', height: '80%' }} className="flex-fill">
+                                <Card className="flex-fill custom-card">
                                     <Link to={'/movies/' + movie.movie_id}>
                                         <Card.Img variant='top' src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${posterPaths[index]}`}
                                             alt={movie.title}

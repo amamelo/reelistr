@@ -11,6 +11,14 @@ function TrendingApi() {
   const baseUrl = process.env.REACT_APP_API_HOST
 
 
+  const fetchTrending = async () => {
+    const response = await fetch(`http://localhost:8000/trending/`);
+    if (response.ok) {
+      const data = await response.json();
+      return setMovies(data);
+    }
+    throw new Error("Failed to fetch movie details");
+  };
 
   useEffect(() => {
     const fetchTrending = async () => {
