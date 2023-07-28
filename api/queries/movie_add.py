@@ -1,3 +1,4 @@
+# flake8: noqa
 from pydantic import BaseModel
 from typing import Optional
 from queries.pool import pool

@@ -1,6 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'https://fonts.googleapis.com/css2?family=Abril+Fatface&family=League+Spartan:wght@100;400;700&display=swap';
-@import
 
 * {
   margin: 0;
@@ -221,12 +220,12 @@ h1 {
 
 /* user profile */
 .profile-container{
-  padding:20px 0px 0px 0px; 
+  padding:20px 0px 0px 0px;
   margin-bottom: 30px;;
 }
 
 .user-container{
-  padding: 20px 0px 30px 0px; 
+  padding: 20px 0px 30px 0px;
   background-color: #242121;
   /* background-image: linear-gradient(180deg, #FF5F05,#ff61054d, #ff610504); */
   background-image: linear-gradient(180deg, #00034d, #05075073, #04075d82, #00034d4d, #03033070);
@@ -238,7 +237,7 @@ h1 {
 
 .user-container h1{
   text-align: left;
-  
+
 }
 .user-container button{
   padding: 10px;

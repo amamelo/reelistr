@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import '../css/styles.css'
+const baseUrl = process.env.REACT_APP_API_HOST
 
 export default function Signup() {
   const [username, setUsername] = useState('')
@@ -14,7 +15,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/api/accounts', {
+      const response = await fetch(`${baseUrl}/api/accounts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -22,8 +23,6 @@ export default function Signup() {
         body: JSON.stringify({ username, password, email })
       })
       if (response.ok) {
-        const data = await response.json()
-        console.log('Sign-up Successful!', data)
         navigate('/user/profile')
       } else {
         const errorData = await response.json();

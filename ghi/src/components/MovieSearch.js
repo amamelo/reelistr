@@ -5,33 +5,22 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_API_HOST
 
 const Movie = () => {
   const { title } = useParams();
   const [movieData, setMovieData] = useState([]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetchMovieDetails(title);
-  //     if (response) {
-  //       setMovieData(response);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching movie details:", error);
-  //   }
-  // };
-
-  const fetchMovieDetails = async (title) => {
-    const response = await fetch(`http://localhost:8000/tmdb/movies/${encodeURIComponent(title)}`);
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    }
-    throw new Error("Failed to fetch movie details");
-  };
 
   useEffect(() => {
+    const fetchMovieDetails = async (title) => {
+      const response = await fetch(`${baseUrl}/tmdb/movies/${encodeURIComponent(title)}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+      throw new Error("Failed to fetch movie details");
+    };
     fetchMovieDetails(title).then((data) => {
       if (data) {
         setMovieData(data);
@@ -69,10 +58,3 @@ const Movie = () => {
 };
 
 export default Movie;
-
-          // <div className="shadow-lg card bg-light mb-3">
-          //   <h1 className="card-header">{movie.title}</h1>
-          //   <p className="card-body">
-          //   {movie.poster_path && <img src={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/" + movie.poster_path} alt="Movie Poster" />}
-          //   {movie.overview && <p>{movie.overview}</p>}
-          //   </p>

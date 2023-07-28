@@ -6,10 +6,10 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_API_HOST
 
 function ComingSoonApi() {
   const [movies, setMovies] = useState([]);
-  const baseUrl = process.env.REACT_APP_API_HOST
 
   useEffect(() => {
     const fetchComingSoon = async () => {
@@ -22,7 +22,7 @@ function ComingSoonApi() {
       throw new Error("Failed to fetch movie details");
     };
     fetchComingSoon();
-  }, [baseUrl]);
+  }, []);
 
   return (
     <div>
