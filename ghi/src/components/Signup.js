@@ -23,7 +23,7 @@ export default function Signup() {
         body: JSON.stringify({ username, password, email })
       })
       if (response.ok) {
-        navigate('/')
+        navigate('/user/profile')
       } else {
         const errorData = await response.json();
         setError(errorData.message);
