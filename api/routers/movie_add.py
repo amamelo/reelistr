@@ -9,7 +9,7 @@ from queries.movie_add import (
 router = APIRouter()
 
 
-@router.post("/movies", response_model=MovieOut)
+@router.post("/movies", response_model=MovieOut | bool)
 def add_movie_to_db(
     movie: MovieIn,
     response: Response,

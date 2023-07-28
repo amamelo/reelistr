@@ -11,9 +11,11 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom"
 import ReactModal from 'react-modal'
 
+
 export default function MovieDetails() {
   const [movie, setMovie] = useState([]);
   const [username, setUsername] = useState('');
+  const [watchlistId, setWatchlistId] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState('');
@@ -22,6 +24,16 @@ export default function MovieDetails() {
   const navigate = useNavigate();
   const { token } = useToken();
   let { movie_id } = useParams()
+  const movieInt = parseInt(movie_id)
+  const postTmdb = {
+    "tmdb_movie_id": movieInt
+  };
+  const addToWatchlist = {
+    "watched": false,
+    "watchlist_id": watchlistId,
+    "movie_id": movieInt,
+  };
+
 
   const fetchMovieData = useCallback(async () => {
 
@@ -57,6 +69,7 @@ export default function MovieDetails() {
     const response = await fetch(tokenUrl, { credentials: "include" });
     if (response.ok) {
       const data = await response.json();
+      setWatchlistId(data.watchlist_id);
       setUsername(data.account.username);
     }
   }
@@ -89,6 +102,51 @@ export default function MovieDetails() {
       console.error('Error creating review:', error)
     }
   }
+
+  const handleWatchlistAdd = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:8000/movies', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postTmdb)
+      })
+      if (response.ok) {
+        const response = await fetch(`http://localhost:8000/users/${username}/watchlist/${watchlistId}?watched=false&movie_id=${movie_id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (response.ok) {
+          navigate(`/watchlist`)
+        }
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      console.error('Error adding movie to watchlist:', error)
+    }
+  }
+
+
+    // try {
+    //   const response = await fetch(`http://localhost:8000/users/${username}/watchlist/${watchlistId}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${token}`
+    //     },
+    //     body: JSON.stringify({ movie_id })
+    //   })
+    //   if (response.ok) {
+
+
+
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -133,6 +191,7 @@ export default function MovieDetails() {
                 <Card.Text>{movie.popularity}</Card.Text>
                 <Card.Text>{movie.vote_average}</Card.Text>
                 <Card.Text>{movie.vote_count}</Card.Text>
+                <button className="watchlist-button" onClick={handleWatchlistAdd}><i className="bi bi-eye"></i></button>
               </Card>
             </Col>
           </Row>

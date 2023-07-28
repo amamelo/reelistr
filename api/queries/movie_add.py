@@ -24,20 +24,23 @@ class MovieRepository:
                     """
                     INSERT INTO movies
                     (tmdb_movie_id)
-                    VALUES
-                    (%s)
+                    SELECT %s
+                    WHERE NOT EXISTS (SELECT tmdb_movie_id FROM movies WHERE tmdb_movie_id = %s)
                     RETURNING id, tmdb_movie_id
                     """,
                     [
-                        movie.tmdb_movie_id
+                        movie.tmdb_movie_id, movie.tmdb_movie_id
                     ]
                 )
                 mov = result.fetchone()
-                movie = MovieOut(
-                    id=mov[0],
-                    tmdb_movie_id=mov[1]
-                )
-                return movie
+                if mov:
+                    movie = MovieOut(
+                        id=mov[0],
+                        tmdb_movie_id=mov[1]
+                    )
+                    return movie
+                else:
+                    return True
 
     def get_movie_from_db(self, id: int) -> Optional[MovieOut]:
         with pool.connection() as conn:

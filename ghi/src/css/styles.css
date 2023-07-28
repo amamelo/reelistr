@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'https://fonts.googleapis.com/css2?family=Abril+Fatface&family=League+Spartan:wght@100;400;700&display=swap';
+@import
 
 * {
   margin: 0;
@@ -14,7 +15,7 @@ h1 {
 }
 .container-fluid {
   font-family: 'League Spartan', sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
   color: white;
 }
@@ -28,6 +29,15 @@ h1 {
 
 .custom-navbar {
   background: linear-gradient(60deg, #00034d, #00686a);
+}
+
+.bi-eye {
+  font-size: 40px;
+}
+
+.watchlist-button {
+  border: none;
+  background: none;
 }
 
 .navbar-container {
