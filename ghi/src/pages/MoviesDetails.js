@@ -98,13 +98,14 @@ export default function MovieDetails() {
   const handleWatchlistAdd = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${baseUrl}/movie`, {
+      const response = await fetch(`${baseUrl}/movies`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(postTmdb)
       })
+      console.log(response)
       if (response.ok) {
         const response = await fetch(`${baseUrl}/users/${username}/watchlist/${watchlistId}?watched=false&movie_id=${movie_id}`, {
           method: 'POST',

@@ -1,141 +1,61 @@
-# Module3 Project Gamma
 
-## Getting started
+## Reelistr
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+* Rey Xeka
+* Lucas Haskell
+* Angelica Melo
+* Daniel Barker
 
-## Install Extensions
+Reelistr - Unleash the Magic of Cinema with Reelistr: Your Personal Film Database!
 
-- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+Reelistr makes use of [The Movie Database API](https://developer.themoviedb.org/docs)
 
-## Deliverables
 
-- [ ] Wire-frame diagrams
-- [ ] API documentation
-- [ ] Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
-- [ ] GitLab issue board is setup and in use (or project management tool of choice)
-- [ ] Journals
+## Design
+[table Design](https://gitlab.com/BarkMulcher/module3-project-gamma/-/tree/main/docs?ref_type=heads)
 
-## Project layout
+[Wireframes](https://gitlab.com/BarkMulcher/module3-project-gamma/-/tree/main/docs?ref_type=heads)
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+[Reelistr Prototype](https://www.figma.com/proto/qettrCnGJDA0eKdWO0bZ94/Reelistr?node-id=1-3&starting-point-node-id=1%3A3&mode=design&t=LzJjCRK9t9dadCk3-1)
 
-### Directories
+## Intended Market
+Reelistr caters to a wide range of users, from casual movie watchers to hardcore film critics.
+Whether you’re a movie buff looking to keep track of the millions of movies you’ve watched and those you want to watch or you’re simply looking to decide what to watch next. 
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+## Functionality
 
-The other directories, `ghi` and `api`, are services, that
-you can start building off of.
+MVP: 
+* Users can view upcoming and trending films.
+* Users can search for a movie and see the movie details
+* Users can create an account to get access to more customized features
+* Members can write reviews on specific movies and read reviews other users have left.
+* Once an account is created, Members automatically have access to a Wathclist. the Wathclist is a list of movies they want to watch. 
+* Members can create a custom Collection of films based on various themes, genres, directors, or any criteria they choose. 
+* Members have access to their user profile in which they can see their Watchlist, Collections, and Reviews. 
+* Members can add movies to their watchlist by clicking a button
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+Future Functionality: 
+* Members can add movies to their collections by clicking a button
+* Members who come to Reelistr can keep track of all the films they've watched using the library functionality and give them ratings (0 to 5 stars)
 
-Inside of `api` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+## Project initialization
 
-Also in `api` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+To run this project you must follow the following steps:
 
-The Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+* Clone repository to your local machine
+* Navigate into the local directory in your terminal
+* Create a .env file inside the top level directory with the following format:
+```
+REACT_APP_API_HOST=http://localhost:8000
+SIGNING_KEY={Your signing key here}
+TMDB_API_KEY={Your TMDB API key here}
 
-### Other files
+```
+* TMDB API key can be attained for free directly from TMDB
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+* Run docker volume create postgres-db
+* Run docker volume create pg-admin
+* Build the docker images and containers with the command 'docker compose build'
+* Finally, start the project with the command 'docker compose up'
 
-- `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-- `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to CapRover. We will learn much more about this file.
-- `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
-- `.env.sample`: This file is a template to copy when
-  creating environment variables for your team. Create a
-  copy called `.env` and put your own passwords in here
-  without fear of it being committed to git (see `.env`
-  listed in `.gitignore`). You can also put team related
-  environment variables in here, things like api and signing
-  keys that shouldn't be committed; these should be
-  duplicated in your deployed environments.
-
-## How to complete the initial deploy
-
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
-
-### Setup GitLab repo/project
-
-- make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-- remove the fork relationship: In GitLab go to:
-
-  Settings -> General -> Advanced -> Remove fork relationship
-
-- add these GitLab CI/CD variables:
-  - PUBLIC_URL : this is your gitlab pages URL
-  - REACT_APP_API_HOST: enter "blank" for now
-
-#### Your GitLab pages URL
-
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
-
-If this is your project URL
-
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
-
-then your GitLab pages URL will be
-
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
-
-### Initialize CapRover
-
-1. Attain IP address and domain from an instructor
-1. Follow the steps in the CD Cookbook in Learn.
-
-### Update GitLab CI/CD variables
-
-Copy the service URL for your CapRover service and then paste
-that into the value for the REACT_APP_API_HOST CI/CD variable
-in GitLab.
-
-### Deploy it
-
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+Enjoy!
