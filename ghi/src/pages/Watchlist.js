@@ -16,7 +16,7 @@ export default function Watchlist() {
 
 
     const fetchMovies = useCallback(async () => {
-        const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}/`;
+        const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}`;
         const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
         if (response.ok) {
             const data = await response.json();

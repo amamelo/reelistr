@@ -8,7 +8,7 @@ function Reviews() {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const response = await fetch(`${baseUrl}/reviews/`);
+      const response = await fetch(`${baseUrl}/reviews`);
       if (response.ok) {
         const data = await response.json();
         setReviews(data);

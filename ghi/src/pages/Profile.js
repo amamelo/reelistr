@@ -32,7 +32,6 @@ export default function Profile(props) {
             const response = await fetch(tokenUrl, { credentials: "include" });
             if (response.ok) {
                 const data = await response.json();
-                console.log("dataaaaaaaaaaaaaaaaaaaaaa", data)
                 setUserName(data.account.username);
                 setWatchlistId(data.watchlist_id);
                 setUserEmail(data.account.email);
@@ -45,7 +44,7 @@ export default function Profile(props) {
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
-                const collectionsUrl = `${baseUrl}/${username}/collections/`;
+                const collectionsUrl = `${baseUrl}/${username}/collections`;
                 const response = await fetch(collectionsUrl, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -62,7 +61,7 @@ export default function Profile(props) {
             }
 
             const fetchMovies = async () => {
-                const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}/`;
+                const watchlistUrl = `${baseUrl}/users/${username}/watchlist/${watchlist_id}`;
                 const response = await fetch(watchlistUrl, { headers: { Authorization: `Bearer ${token}` }, })
                 if (response.ok) {
                     const data = await response.json();
