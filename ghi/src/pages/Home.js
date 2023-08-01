@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
 
     const fetchComingSoon = async () => {
-      const response = await fetch(`${baseUrl}/upcoming/`);
+      const response = await fetch(`${baseUrl}/upcoming`);
       if (response.ok) {
         const data = await response.json();
         setUpcomingMovies(data);
@@ -28,7 +28,7 @@ export default function Home() {
     fetchComingSoon();
 
     const fetchTrending = async () => {
-      const response = await fetch(`${baseUrl}/trending/`);
+      const response = await fetch(`${baseUrl}/trending`);
       if (response.ok) {
         const data = await response.json();
         return setTrendingMovies(data);
