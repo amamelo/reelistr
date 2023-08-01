@@ -14,7 +14,7 @@ from routers import (
 
 origins = [
     os.environ.get("CORS_HOST"),
-    "https://localhost:3000",
+    "http://localhost:3000",
     'https://barkmulcher.gitlab.io/module3-project-gamma',
     'https://mar-2-et-reelistr.mod3projects.com'
 ]
