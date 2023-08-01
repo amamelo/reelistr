@@ -12,7 +12,7 @@ function TrendingApi() {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const response = await fetch(`${baseUrl}/trending/`);
+      const response = await fetch(`${baseUrl}/trending`);
       if (response.ok) {
         const data = await response.json();
         return setMovies(data);

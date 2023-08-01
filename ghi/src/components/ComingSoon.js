@@ -13,7 +13,7 @@ function ComingSoonApi() {
 
   useEffect(() => {
     const fetchComingSoon = async () => {
-      const response = await fetch(`${baseUrl}/upcoming/`);
+      const response = await fetch(`${baseUrl}/upcoming`);
       if (response.ok) {
         const data = await response.json();
         setMovies(data);
