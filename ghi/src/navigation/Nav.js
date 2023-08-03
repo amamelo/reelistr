@@ -18,10 +18,8 @@ function Nav() {
     const fetchUserInfo = async () => {
       const tokenUrl = `${baseUrl}/token`;
       const response = await fetch(tokenUrl, { credentials: "include" });
-      console.log(response)
       if (response.ok) {
         const data = await response.json();
-        console.log('DATAAAAAA', data)
         setUsername(data.account.username);
       }
     }
@@ -47,7 +45,6 @@ function Nav() {
     })
       .then((response) => {
         if (response.ok) {
-          console.log(token)
           setIsLoggedIn(false)
           navigate('/')
         } else {

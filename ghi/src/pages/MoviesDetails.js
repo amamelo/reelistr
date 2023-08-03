@@ -61,7 +61,9 @@ export default function MovieDetails() {
       if (response.ok) {
         const data = await response.json();
         setWatchlistId(data.watchlist_id);
+        console.log(data.watchlist_id)
         setUsername(data.account.username);
+        console.log(data.account.username)
       }
     }
     fetchUsername();
@@ -114,6 +116,7 @@ export default function MovieDetails() {
             'Authorization': `Bearer ${token}`
           }
         })
+        console.log(response)
         if (response.ok) {
           navigate(`/user/${username}/watchlist`)
         }
