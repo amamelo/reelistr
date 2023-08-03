@@ -4,14 +4,29 @@ import "../css/styles.css";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+const baseUrl = process.env.REACT_APP_API_HOST
 
 
 function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState("");
+  const [username, setUsername] = useState('')
   const { token } = useToken();
   const navigate = useNavigate();
-  const { logout } = useToken();
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const tokenUrl = `${baseUrl}/token`;
+      const response = await fetch(tokenUrl, { credentials: "include" });
+      console.log(response)
+      if (response.ok) {
+        const data = await response.json();
+        console.log('DATAAAAAA', data)
+        setUsername(data.account.username);
+      }
+    }
+    fetchUserInfo();
+  }, [token]);
 
   useEffect(() => {
     if (token) {
@@ -25,16 +40,30 @@ function Nav() {
     setSearch("");
   };
 
-  function userlogout() {
-    setIsLoggedIn(false);
-    logout();
+  function userLogout() {
+    fetch(`${baseUrl}/token`, {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(token)
+          setIsLoggedIn(false)
+          navigate('/')
+        } else {
+          console.error('failed to log out!')
+        }
+      })
+      .catch((error) => {
+        console.error('error occurred during log out:', error)
+      })
   }
 
 
   return (
     <nav className="navbar custom-navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <NavLink className="navbar-brand logo" to="/"><div className="logo">reelister</div></NavLink>
+        <NavLink className="navbar-brand logo" to="/"><div className="logo">reelistr</div></NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -58,15 +87,15 @@ function Nav() {
                   Profile
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><NavLink className="dropdown-item" to="/user/profile">My Profile</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="/user/collections">Collections</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="/user/library">Library</NavLink></li>
+                  <li><NavLink className="dropdown-item" to={`/user/${username}/profile`}>My Profile</NavLink></li>
+                  <li><NavLink className="dropdown-item" to={`/user/${username}/collections`}>Collections</NavLink></li>
+                  <li><NavLink className="dropdown-item" to={`/user/${username}/library`}>Library</NavLink></li>
                 </ul>
               </li>
             ) : null}
             {isLoggedIn ? (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/watchlist">Watchlist</NavLink>
+                <NavLink className="nav-link" to={`user/${username}/watchlist`}>Watchlist</NavLink>
               </li>
             ) : null}
           </ul>
@@ -74,7 +103,7 @@ function Nav() {
           {isLoggedIn ? (
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" onClick={userlogout} to="/">Logout</NavLink>
+                <NavLink className="nav-link" onClick={userLogout} to="#">Logout</NavLink>
               </li>
             </ul>
           ) : (

@@ -31,7 +31,6 @@ function App() {
           <Routes>
             <Route path="/movie/:title" element={<Movie />} />
             <Route path="/createcollection" element={<CreateCollection />} />
-            <Route path="watchlist" element={<Watchlist />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/movies">
@@ -40,10 +39,11 @@ function App() {
               <Route path="/movies/trending" element={<Trending />} />
             </Route>
             <Route path="/signup" element={<SignUpForm />} />
-            <Route path="user" >
+            <Route path="user/:username" >
               <Route path="collections" element={<CollectionList />} />
               <Route path=":collection_id" element={<CollectionDetail />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="watchlist" element={<Watchlist />} />
             </Route>
             <Route path="/reviews" element={<Reviews />} />
           </Routes>

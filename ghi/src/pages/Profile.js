@@ -32,7 +32,6 @@ export default function Profile(props) {
             const response = await fetch(tokenUrl, { credentials: "include" });
             if (response.ok) {
                 const data = await response.json();
-                console.log("dataaaaaaaaaaaaaaaaaaaaaa", data)
                 setUserName(data.account.username);
                 setWatchlistId(data.watchlist_id);
                 setUserEmail(data.account.email);

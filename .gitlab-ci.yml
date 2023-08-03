@@ -23,7 +23,7 @@ api-unit-tests-job:
   script:
     - cd api
     - pip install -r requirements.txt
-    - export DATABASE_URL='postgresql://reelistr:secret@postgres/db'
+    - export DATABASE_URL='postgresql://reelistr:secret@mar-2-et-reelistr-db-service.default.svc.cluster.local/reelistr-db'
     - export SIGNING_KEY='6Ed*32F3Vzk@qAvVJR6o'
     - export FAST_API_TMDB_API_KEY='a73b6583b5092ec6f24d58ef1dc88a6e'
     - python -m pytest
@@ -56,6 +56,7 @@ build-front-end-job:
     # CI/CD variables, that value will override the value here.
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
+    # CHANGE FOR GROUP REPO:
     PUBLIC_URL: https://barkmulcher.gitlab.io/module3-project-gamma
     REACT_APP_API_HOST: https://mar-2-et-reelistr.mod3projects.com
   script:

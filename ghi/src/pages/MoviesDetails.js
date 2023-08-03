@@ -115,7 +115,7 @@ export default function MovieDetails() {
           }
         })
         if (response.ok) {
-          navigate(`/watchlist`)
+          navigate(`/user/${username}/watchlist`)
         }
       } else {
         const errorData = await response.json();
