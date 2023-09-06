@@ -91,7 +91,7 @@ class CollectionRespository:
                 )
                 return collection
 
-    def get_all_collections(self) -> Optional[CollectionOut]:
+    def get_all_collections(self, username: str) -> Optional[CollectionOut]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -99,7 +99,9 @@ class CollectionRespository:
                     SELECT
                     *
                     FROM movie_collection
+                    WHERE username = %s
                     """,
+                    [username]
                 )
                 collections = []
                 for coll in result:

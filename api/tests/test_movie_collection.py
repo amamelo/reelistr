@@ -36,10 +36,12 @@ def test_get_all_collections():
     # Arrange
     app.dependency_overrides[CollectionRespository] = EmptyMovieCollection
     app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data   # noqa
+    username = "Gandalf"
 
-# Act
-    response = client.get("/{username}/collections/")
+    # Act
+    response = client.get(f"/user/{username}/collections/")
     print("response", response)
+
     # clean up
     app.dependency_overrides = {}
 

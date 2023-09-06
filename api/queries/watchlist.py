@@ -56,7 +56,9 @@ class MovieWatchlistRepo:
                 result = db.execute(
                     """
                     SELECT * FROM movies_to_watchlist
+                    WHERE watchlist_id = %s
                     """,
+                    [watchlist_id]
                 )
                 movies = []
                 for film in result:

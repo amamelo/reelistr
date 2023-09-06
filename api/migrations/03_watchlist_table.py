@@ -2,7 +2,7 @@ steps = [
      [
          """
          CREATE TABLE watchlists (
-            id SERIAL PRIMARY KEY NOT NULL, 
+            id SERIAL PRIMARY KEY NOT NULL,
             username VARCHAR(50) NOT NULL REFERENCES accounts(username)
          );
 
