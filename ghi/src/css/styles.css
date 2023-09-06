@@ -37,6 +37,7 @@ h1 {
 .watchlist-button {
   border: none;
   background: none;
+  align-items: left;
 }
 
 .navbar-container {
@@ -299,6 +300,38 @@ h1 {
   scroll-snap-align: start;
 }
 
+.review-container{
+  padding: 20px;
+}
+.review-form{
+  background-color: #ffffff37;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  text-align: left;
+  color: rgb(6, 6, 6);
+}
+.review-form h1{
+  color: black;
+  font-size: 18px;
+}
+.review-form input{
+  border-radius: 10px;
+  background-color: #dae4e4;
+  color:#f9f9f9;
+  border-style: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+.review-form button{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #349f0d;
+  color:#f9f9f9;
+  border-style: none;
+  text-align: center;
+}
 
 .review-card{
   background-color: #544f4f2f;

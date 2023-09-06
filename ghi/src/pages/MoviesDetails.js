@@ -135,6 +135,18 @@ export default function MovieDetails() {
     setError('')
   }
 
+  function renderStars(rating) {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<FaStar key={i} color="gold" />);
+      } else {
+        stars.push(<FaStar key={i} color="gray" />);
+      }
+    }
+    return stars;
+  }
+
   return (
     <div>
       <br />
@@ -170,13 +182,16 @@ export default function MovieDetails() {
             </Col>
             <Col className="text-center">
               <Card>
-                <Card.Text>{movie.popularity}</Card.Text>
-                <Card.Text>{movie.vote_average}</Card.Text>
-                <Card.Text>{movie.vote_count}</Card.Text>
-                <button className="watchlist-button" onClick={handleWatchlistAdd}><i className="bi bi-eye"></i></button>
+                <Card.Text><i className="bi bi-hand-thumbs-up-fill"></i> {movie.popularity}</Card.Text>
+                <Card.Text><i className="bi bi-heart-fill"></i> {movie.vote_average}</Card.Text>
+                <button className="watchlist-button" onClick={handleWatchlistAdd}><i className="bi bi-bookmark-fill"></i>Add to watchlist</button>
+                <button className="watchlist-button" ><i className="bi bi-plus-circle-fill"></i>Add to collection</button>
+
               </Card>
             </Col>
           </Row>
+        </Container>
+        <Container className="review-container">
           <Row>
             {reviews.map((review) => {
               return (
@@ -189,21 +204,19 @@ export default function MovieDetails() {
             })}
           </Row>
         </Container>
-        <Container>
-          <Form onSubmit={submitBtnHandler}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Review:</Form.Label>
-              <Form.Control type="text" placeholder="Review" value={review} onChange={(e) => setReview(e.target.value)} />
-              <Form.Text className="text-muted">
-                Share your thoughts.
-              </Form.Text>
-              <Form.Label>Rating:</Form.Label>
-              <Form.Control type="text" placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} />
-            </Form.Group>
-            <Button variant="info" type='submit'>
-              Submit
-            </Button>
-          </Form>
+        <Container className="review-container">
+          <form className="review-form" onSubmit={submitBtnHandler}>
+            <h1>Leave A Review</h1>
+            <div>
+              <label htmlFor="">Review:</label>
+              <input className="form-control" placeholder="review" type="text" id="review" value={review} onChange={(e) => setReview(e.target.value)} />
+            </div>
+            <div>
+              <label htmlFor="">Rating:</label>
+              <input className="form-control" placeholder="rating" type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
           <ReactModal
             isOpen={isModalOpen}
             onRequestClose={closeModal}

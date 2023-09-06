@@ -24,15 +24,23 @@ export default function Signup() {
         },
         body: JSON.stringify({ username, password, email })
       })
+
+      const responseData = await response.json();
+
       if (response.ok) {
         login(username, password);
         navigate('/user/profile')
       } else {
-        const errorData = await response.json();
-        setError(errorData.message);
+        console.log(responseData)
+        if (responseData.detail === "Email already exists") {
+          setError("Email already exists");
+        } else if (responseData.detail === "Username already exists") {
+          setError("Username already exists")
+        } else {
+          setError("An unknown error occurred");
+        }
         setIsModalOpen(true);
       }
-
     } catch (error) {
       console.error('Error signing up:', error)
     }
