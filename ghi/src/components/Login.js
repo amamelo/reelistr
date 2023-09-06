@@ -13,7 +13,7 @@ const LoginForm = () => {
         e.preventDefault();
         login(username, password);
         e.target.reset();
-        navigate('/user/profile')
+        navigate(`/user/${username}/profile`)
     };
 
     return (
