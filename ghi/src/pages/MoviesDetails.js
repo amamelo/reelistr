@@ -4,8 +4,6 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom"
 import ReactModal from 'react-modal'
@@ -139,9 +137,9 @@ export default function MovieDetails() {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
-        stars.push(<FaStar key={i} color="gold" />);
+        stars.push(<i className="star-rating bi bi-star-fill"></i>);
       } else {
-        stars.push(<FaStar key={i} color="gray" />);
+        stars.push(<i className="bi bi-star"></i>);
       }
     }
     return stars;
@@ -180,14 +178,15 @@ export default function MovieDetails() {
               <h3>{movie.release_date}</h3>
               <h5>{movie.overview}</h5>
             </Col>
-            <Col className="text-center">
-              <Card>
-                <Card.Text><i className="bi bi-hand-thumbs-up-fill"></i> {movie.popularity}</Card.Text>
-                <Card.Text><i className="bi bi-heart-fill"></i> {movie.vote_average}</Card.Text>
-                <button className="watchlist-button" onClick={handleWatchlistAdd}><i className="bi bi-bookmark-fill"></i>Add to watchlist</button>
-                <button className="watchlist-button" ><i className="bi bi-plus-circle-fill"></i>Add to collection</button>
-
-              </Card>
+            <Col>
+              <div className="details-container">
+                <Card>
+                  <Card.Text><i className="bi bi-hand-thumbs-up-fill"></i> {movie.popularity}</Card.Text>
+                  <Card.Text><i className="bi bi-heart-fill"></i> {movie.vote_average}</Card.Text>
+                  <button className="watchlist-button" onClick={handleWatchlistAdd}><i className="bi bi-bookmark-fill"></i>Add to watchlist</button>
+                  <button className="watchlist-button" ><i className="bi bi-plus-circle-fill"></i>Add to collection</button>
+                </Card>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -195,10 +194,10 @@ export default function MovieDetails() {
           <Row>
             {reviews.map((review) => {
               return (
-                <Card key={review.id}>
+                <Card className="review-card" key={review.id}>
                   <Card.Text>{review.username}</Card.Text>
-                  <Card.Text>{review.rating}</Card.Text>
-                  <Card.Text>{review.review}</Card.Text>
+                  <Card.Text>{renderStars(review.rating)}</Card.Text>
+                  <Card.Text className="review-text">{review.review}</Card.Text>
                 </Card>
               )
             })}

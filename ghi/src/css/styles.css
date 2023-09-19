@@ -23,23 +23,33 @@ h1 {
   background: rgb(12, 12, 33);
   color: white;
   font-family:'league spartan', sans-serif;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .custom-navbar {
   background: linear-gradient(60deg, #00034d, #00686a);
 }
+ /* movie-details */
 
+.details-container{
+  padding: 20px;
+  align-items: left;
+}
 .bi-eye {
   font-size: 40px;
+
 }
 
 .watchlist-button {
   border: none;
   background: none;
-  align-items: left;
+ 
 }
 
+.details-container p.card-text{
+  font-size: 10pt;
+  font-style: normal;
+}
 .navbar-container {
   display: flex;
   align-items: center;
@@ -300,6 +310,8 @@ h1 {
   scroll-snap-align: start;
 }
 
+/* reviews */
+
 .review-container{
   padding: 20px;
 }
@@ -351,6 +363,19 @@ h1 {
   padding: 20px 0px 20px 0px;
 
 
+}
+
+.review-text{
+  padding: 20px 0px 20px 0px;
+  font-size: 12pt;
+  font-style: normal;
+}
+
+.star-rating {
+  font-size: 20px;
+  color: #ff9500;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 /* signup and login form */
