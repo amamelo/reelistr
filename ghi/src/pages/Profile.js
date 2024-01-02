@@ -142,7 +142,7 @@ export default function Profile(props) {
                 </Row>
             </Container>
             <Container className="profile-container">
-                <Link to="/watchlist" className="profile-link">
+                <Link to="/user/:username/watchlist" className="profile-link">
                     <h1>Watchlist</h1>
                 </Link>
                 <Container className="media-scroller snaps-inline">
@@ -162,7 +162,7 @@ export default function Profile(props) {
                 </Container>
             </Container >
             <Container className="profile-container">
-                <Link to="/user/collections" className="profile-link" >
+                <Link to="/user/:username/collections" className="profile-link" >
                     <h1>My Movie Collections</h1>
                 </Link>
                 <Container className="media-scroller snaps-inline">
@@ -170,7 +170,7 @@ export default function Profile(props) {
                         return (
                             <div key={collection.collection_id}>
                                 <div className="media-element">
-                                    <Link to={"/user/" + collection.collection_id} className="profile-link" >
+                                    <Link to={`/user/${username}/` + collection.collection_id} className="profile-link" >
                                         <Image src={reelistr_logo} thumbnail />
                                     </Link>
                                     <p className="title">{collection.collection_name}</p>

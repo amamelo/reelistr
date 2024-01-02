@@ -70,7 +70,7 @@ export default function CollectionList() {
                             <Col key={collection.collection_id} xs='4'>
                                 <Card className="flex-fill custom-card">
                                     <Card.Header style={{ fontSize: '26px' }}>{collection.collection_name}</Card.Header>
-                                    <a href={'/user/${username}' + collection.collection_id}>
+                                    <a href={'/user/:username/collections' + collection.collection_id}>
                                         <Card.Img variant='top' src={reelistr_logo}
                                             alt={collection.collection_name} />
                                     </a>

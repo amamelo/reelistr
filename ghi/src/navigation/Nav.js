@@ -86,7 +86,7 @@ function Nav() {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><NavLink className="dropdown-item" to={`/user/${username}/profile`}>My Profile</NavLink></li>
                   <li><NavLink className="dropdown-item" to={`/user/${username}/collections`}>Collections</NavLink></li>
-                  <li><NavLink className="dropdown-item" to={`/user/${username}/library`}>Library</NavLink></li>
+
                 </ul>
               </li>
             ) : null}
