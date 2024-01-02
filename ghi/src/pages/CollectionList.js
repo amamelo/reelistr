@@ -16,7 +16,7 @@ export default function CollectionList() {
     useEffect(() => {
         if (token && username) {
             const fetchCollections = async () => {
-                const collectionsUrl = `${baseUrl}/${username}/collections`;
+                const collectionsUrl = `${baseUrl}/user/${username}/collections`;
                 const response = await fetch(collectionsUrl, {
                     headers: {
                         'Content-Type': 'application/json',

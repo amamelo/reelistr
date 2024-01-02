@@ -16,8 +16,7 @@ from queries.movies_to_collection import (
 router = APIRouter()
 
 
-@router.post("/users/{username}/collections/{collection_id}",
-             response_model=MovieToCollectionOut | Error)
+@router.post("/users/{username}/collections/{collection_id}", response_model=MovieToCollectionOut | Error) # noqa
 async def add_movie_to_collection(
     username: str,
     movie_id: int,
@@ -43,8 +42,7 @@ async def get_all_movies_in_collection(
 
 
 # delete router
-@router.delete("/users/{username}/collections/{collection_id}/{movie_id}",
-               response_model=bool | Error)
+@router.delete("/users/{username}/collections/{collection_id}/{movie_id}", response_model=bool | Error) # noqa 
 async def delete_movie_from_collection(
     username: str,
     collection_id: int,

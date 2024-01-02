@@ -16,7 +16,6 @@ class MyAuthenticator(Authenticator):
         self,
         accounts: AccountRepo = Depends(),
     ):
-
         return accounts
 
     def get_hashed_password(self, account: AccountOutWithPassword):

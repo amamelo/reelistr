@@ -10,15 +10,15 @@ from routers.authenticator import authenticator
 router = APIRouter()
 
 
-@router.post("/user/{user_id}/collections", response_model=CollectionOut)
+@router.post("/user/{username}/collections", response_model=CollectionOut)
 def create_collection(
-    user_id: str,
+    username: str,
     collection: CollectionIn,
     response: Response,
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: CollectionRespository = Depends(),
 ):
-    return repo.create_collection(collection, user_id)
+    return repo.create_collection(collection, username)
 
 
 @router.get("/user/collections/{collection_id}",

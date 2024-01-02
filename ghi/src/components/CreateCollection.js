@@ -46,7 +46,7 @@ const CreateCollection = () => {
             });
 
             if (response.ok) {
-                navigate('/user/collections');
+                navigate(`/user/${username}/collections`);
             } else {
                 throw new Error('Network response was not ok');
             }
